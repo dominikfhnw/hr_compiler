@@ -22,6 +22,10 @@ public class main {
             super(errorMessage);
         }
     }
+    public static void debug(String msg){
+        System.out.println(msg);
+    }
+
     public static void scan(CharSequence cs) throws LexicalError {
         // precondition: last character (if it exists) is a newline
         assert cs.length() == 0 || cs.charAt(cs.length() - 1) == '\n';
@@ -37,6 +41,7 @@ public class main {
                         state = 2;
                         int digit = Character.digit(c, 10);
                         numAccu = digit;
+                        debug("0->2 digit "+numAccu);
                     }
                 case 2:
                     if (Character.isDigit(c)) {
@@ -44,13 +49,14 @@ public class main {
                         int digit = Character.digit(c, 10);
                         numAccu = numAccu * 10 + digit;
                         System.out.print("DIGITS "); System.out.println(numAccu);
-
+                        debug("2 digit "+numAccu);
                         if (numAccu > Integer.MAX_VALUE) {
                             //throw new LexicalError("Integer literal too large!");
                         }
                     } else {
                         state = 0;
                         i = i - 1; // one back for next lexeme
+                        debug("2->0 "+state);
                         // l.add(new IToken.Literal(new Value.IntVal((int) numAccu)));
                     }
                     break;
