@@ -35,6 +35,7 @@ public class main {
         long numAccu = 0L; // for constructing the literal value
         for (int i = 0; i < cs.length(); i++) {
             char c = cs.charAt(i);
+            debug("char "+c);
             switch (state) {
                 case 0:
                     if (Character.isDigit(c)) {
@@ -43,6 +44,7 @@ public class main {
                         numAccu = digit;
                         debug("0->2 digit "+numAccu);
                     }
+                    break;
                 case 2:
                     if (Character.isDigit(c)) {
                         state = 2;
