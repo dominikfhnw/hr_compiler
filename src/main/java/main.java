@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 public class main {
     public static void main(String[] args) {
@@ -24,6 +25,12 @@ public class main {
     }
     public static void debug(String msg){
         System.out.println(msg);
+    }
+
+    public static boolean isSpecial(char c){
+        return
+                Arrays.asList('(', ',', ')', ':', ';', '=', '/', '\\', '/', '<', '>', '+', '-', '*', '~', '!').
+                        contains(c);
     }
 
     public static void scan(CharSequence cs) throws LexicalError {
@@ -51,7 +58,10 @@ public class main {
                         //debug("0->1 alpha "+lexAccu);
                     } else if (Character.isWhitespace(c)) {
                         // ignore
-                    } else if (Character.is)
+                    } else if (isSpecial(c)) {
+                        state = 3;
+                        lexAccu = new StringBuffer(1024);
+                        lexAccu.append(c);
                     } else {
                         throw new LexicalError("illegal char: "+c);
                     }
@@ -81,6 +91,16 @@ public class main {
                         i = i - 1; // one back for next lexeme
                         debug("LITERAL "+numAccu);
                         // l.add(new IToken.Literal(new Value.IntVal((int) numAccu)));
+                    }
+                    break;
+                case 3:
+                    if (isSpecial(c)){
+                        state = 3;
+                        lexAccu.append(c);
+                    } else {
+                        state = 0;
+                        i = i - 1;
+                        debug("OP "+lexAccu);
                     }
                     break;
                 default:
