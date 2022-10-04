@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class Main {
+public class main {
     public static void main(String[] args) {
         System.out.println("hello world");
         Path filePath = Path.of("test.txt");
