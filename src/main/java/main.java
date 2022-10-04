@@ -5,8 +5,11 @@ import java.util.Arrays;
 
 public class main {
     public static void main(String[] args) {
-        System.out.println("hello world");
-        Path filePath = Path.of("test.txt");
+        String file = "test.txt";
+        if(args.length > 0){
+            file = args[0];
+        }
+        Path filePath = Path.of(file);
         System.out.println(filePath.toAbsolutePath());
         String content;
         try {
