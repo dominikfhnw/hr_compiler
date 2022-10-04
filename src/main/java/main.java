@@ -35,7 +35,7 @@ public class main {
         long numAccu = 0L; // for constructing the literal value
         for (int i = 0; i < cs.length(); i++) {
             char c = cs.charAt(i);
-            debug("char "+c);
+            //debug("char "+c);
             switch (state) {
                 case 0:
                     if (Character.isDigit(c)) {
@@ -44,20 +44,38 @@ public class main {
                         numAccu = digit;
                         debug("0->2 digit "+numAccu);
                     }
+                    if (Character.isAlphabetic(c)) {
+                        state = 1;
+                        lexAccu = new StringBuffer(1024);
+                        lexAccu.append(c);
+
+                        debug("0->1 alpha "+lexAccu);
+                    }
+                    break;
+                case 1:
+                    if (Character.isLetterOrDigit(c)){
+                        state = 1;
+                        //debug("1 digit "+lexAccu);
+                        lexAccu.append(c);
+                    } else {
+                        state = 0;
+                        i = i - 1;
+                        debug("1->0 "+lexAccu);
+                    }
                     break;
                 case 2:
                     if (Character.isDigit(c)) {
                         state = 2;
                         int digit = Character.digit(c, 10);
                         numAccu = numAccu * 10 + digit;
-                        debug("2 digit "+numAccu);
+                        //debug("2 digit "+numAccu);
                         if (numAccu > Integer.MAX_VALUE) {
                             //throw new LexicalError("Integer literal too large!");
                         }
                     } else {
                         state = 0;
                         i = i - 1; // one back for next lexeme
-                        debug("2->0 "+state);
+                        debug("2->0 "+numAccu);
                         // l.add(new IToken.Literal(new Value.IntVal((int) numAccu)));
                     }
                     break;
