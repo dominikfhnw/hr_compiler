@@ -4,7 +4,7 @@ public class IToken {
         private final Terminals terminal;
         private final Operators operator;
 
-        // private final Ident ident;
+        //private final Ident ident;
 
         // private final Literal literal;
 
@@ -22,38 +22,119 @@ public class IToken {
             // this.literal = null;
         }
 
-        public String StringtoString() {
-            return terminal.toString();
+        @Override
+        public String toString() {
+            if (isTerminal()) {
+                return terminal.toString();
+            } else if (isOperator()){
+                return operator.toString();
+            }
+            return "null";
         }
 
         static class Ident extends Base {
             private final String ident;
-            Ident (String ident) {
-                super(Terminals.IDENT);
+            Ident (String ident, Terminals terminal) {
+                super(terminal);
                 this.ident = ident;
             }
+            public String getIdent() {
+                return ident;
+            }
+
         }
 
         static class Literal extends Base {
 
             private final int value;
 
-            Literal (int value) {
-                super(Terminals.LITERAL);
+            Literal (int value, Terminals terminal) {
+                super(terminal);
                 this.value = value;
             }
-        }
 
-        public class AddOpr extends Base {
-
-            private final Operators opr;
-
-            AddOpr (Operators opr) {
-                super(Operators.ADD);
-                this.opr = opr;
+            public int getValue(){
+                return value;
             }
         }
 
+        static class AddOpr extends Base {
+
+            private final Operators operator;
+
+            AddOpr (Operators operator) {
+                super(Operators.PLUS);
+                this.operator = operator;
+            }
+        }
+
+        static class RelOpr extends Base {
+
+            private final Operators operator;
+
+            RelOpr (Operators operator) {
+                super(Operators.EQ);
+                this.operator = operator;
+            }
+        }
+
+        static class ChangeMode extends Base {
+
+            public enum ChangeModes {
+                VAR,
+                CONST
+            }
+
+            private final ChangeModes changemode;
+
+            public ChangeMode(Terminals terminal, ChangeModes changemode) {
+                super(terminal);
+                this.changemode = changemode;
+            }
+
+            public ChangeModes getChangeMode() {
+                return changemode;
+            }
+        }
+
+        static class FlowMode extends Base {
+
+            public enum FlowModes {
+                IN,
+                INOUT,
+                OUT
+            }
+
+            private final FlowModes flowmode;
+
+            public FlowMode(Terminals terminal, FlowModes flowmode) {
+                super(terminal);
+                this.flowmode = flowmode;
+            }
+
+            public FlowModes getFlowMode() {
+                return flowmode;
+            }
+        }
+
+        public static class MechMode extends Base {
+
+            public enum MechModes {
+                COPY,
+                REF
+            }
+
+            private final MechModes mechmode;
+
+            public MechMode(Terminals terminal, MechModes mechmode) {
+                super(terminal);
+                this.mechmode = mechmode;
+            }
+
+            public MechModes getMechMode() {
+                return mechmode;
+            }
+        }
         public Terminals getTerminal() {
             return terminal;
         }
@@ -62,27 +143,71 @@ public class IToken {
             return terminal != null;
         }
 
-        @Override
-        public String toString() {
-            if (isTerminal()) {
-                return terminal.toString();
-            }
-            return "null";
+        public boolean isOperator() {
+            return operator != null;
         }
 
         public enum Terminals {
 
-            LITERAL,
-            IDENT,
-            PLUS,
-            MINUS,
-            TIMES,
-            DIVIDE,
-            LPAREN,
-            RPAREN,
-            SENTINEL,
-            EOF,
-            ERROR;
+            IDENT("IDENT"),
+            LITERAL("LITERAL"),
+            TYPE("TYPE"),
+
+            // Operators
+            ADDOPR("ADDOPR"),
+            BOOLOPR("BOOLOPR"),
+            MULTOPR("MULTOPR"),
+            RELOPR("RELOPR"),
+
+
+            // Symbols
+            BECOMES(":="),
+            COLON(":"),
+            COMMA(","),
+            LPAREN("("),
+            RPAREN(")"),
+            SEMICOLON(";"),
+
+            // Modes
+            CHANGEMODE("CHANGEMODE"),
+            FLOWMODE("FLOWMODE"),
+            MECHMODE("MECHMODE"),
+
+            // Keywords
+            CALL("CALL"),
+            CASE("CASE"),
+            DEBUGIN("DEBUGIN"),
+            DEBUGOUT("DEBUGOUT"),
+            DEFAULT("DEFAULT"),
+            DO("DO"),
+            ENDFUN("ENDFUN"),
+            ENDIF("ENDIF"),
+            ENDPROC("ENDPROC"),
+            ENDPROGRAM("ENDPROGRAM"),
+            ENDSWITCH("ENDSWITCH"),
+            ENDWHILE("ENDWHILE"),
+            ELSE("ELSE"),
+            ELSEIF("ELSEIF"),
+            FUN("FUN"),
+            GLOBAL("GLOBAL"),
+            IF("IF"),
+            INIT("INIT"),
+            LOCAL("LOCAL"),
+            NOT("NOT"),
+            PROC("PROC"),
+            PROGRAM("PROGRAM"),
+            RETURNS("RETURNS"),
+            SENTINEL("SENTINEL"),
+            SKIP("SKIP"),
+            SWITCH("SWITCH"),
+            THEN("THEN"),
+            WHILE("WHILE");
+
+            private final String name;
+
+            Terminals(String name) {
+                this.name = name;
+            }
 
             @Override
             public String toString() {
@@ -92,41 +217,59 @@ public class IToken {
 
         public enum Operators {
 
-            ASSIGN, EQ, NE, LT, LE, GT, GE, ADD, SUB, MUL, DIV, MOD, NOT, AND, OR;
+            AND,
+            ASSIGN,
+            CAND,
+            COR,
+            DIVE,
+            EQ,
+            GE,
+            GT,
+            LE,
+            LT,
+            MINUS,
+            MODE,
+            NE,
+            NOT,
+            OR,
+            PLUS,
+            TIMES;
 
             public static Operators getOperator(String text) {
 
                 switch (text) {
-                case "=":
+                case "/\\":
+                    return AND;
+                case ":=":
                     return ASSIGN;
+                case "/\\?":
+                    return CAND;
+                case "\\/?":
+                    return COR;
+                case "divE":
+                    return DIVE;
                 case "==":
                     return EQ;
-                case "!=":
-                    return NE;
-                case "<":
-                    return LT;
-                case "<=":
-                    return LE;
-                case ">":
-                    return GT;
                 case ">=":
                     return GE;
-                case "+":
-                    return ADD;
+                case ">":
+                    return GT;
+                case "<=":
+                    return LE;
+                case "<":
+                    return LT;
                 case "-":
-                    return SUB;
-                case "*":
-                    return MUL;
-                case "/":
-                    return DIV;
-                case "%":
-                    return MOD;
-                case "!":
+                    return MINUS;
+                case "modT":
+                    return MODE;
+                case "!=":
+                    return NE;
+                case "~":
                     return NOT;
-                case "&&":
-                    return AND;
-                case "||":
-                    return OR;
+                case "+":
+                    return PLUS;
+                case "*":
+                    return TIMES;
                 default:
                     return null;
                 }

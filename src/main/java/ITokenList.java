@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public interface ITokenList {
 
     //for constructing the token list by the scanner
