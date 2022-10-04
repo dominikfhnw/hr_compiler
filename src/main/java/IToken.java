@@ -28,12 +28,10 @@ public class IToken {
 
         static class Ident extends Base {
             private final String ident;
-
             Ident (String ident) {
                 super(Terminals.IDENT);
                 this.ident = ident;
             }
-
         }
 
         static class Literal extends Base {
