@@ -32,7 +32,7 @@ public class main {
 
     public static boolean isSpecial(char c){
         return
-                Arrays.asList('(', ',', ')', ':', ';', '=', '/', '\\', '/', '<', '>', '+', '-', '*', '~', '!').
+                Arrays.asList('(', ',', ')', ':', ';', '=', '/', '\\', '/', '<', '>', '+', '-', '*', '~', '!', '?').
                         contains(c);
     }
 
