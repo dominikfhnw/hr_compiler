@@ -50,7 +50,6 @@ public class main {
                         state = 2;
                         int digit = Character.digit(c, 10);
                         numAccu = numAccu * 10 + digit;
-                        System.out.print("DIGITS "); System.out.println(numAccu);
                         debug("2 digit "+numAccu);
                         if (numAccu > Integer.MAX_VALUE) {
                             //throw new LexicalError("Integer literal too large!");
