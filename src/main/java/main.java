@@ -17,7 +17,7 @@ public class main {
             e.printStackTrace();
         }
     }
-    public class LexicalError extends Exception {
+    public static class LexicalError extends Exception {
         public LexicalError(String errorMessage) {
             super(errorMessage);
         }
@@ -42,14 +42,17 @@ public class main {
                         state = 2;
                         int digit = Character.digit(c, 10);
                         numAccu = digit;
-                        debug("0->2 digit "+numAccu);
-                    }
-                    if (Character.isAlphabetic(c)) {
+                        //debug("0->2 digit "+numAccu);
+                    } else if (Character.isAlphabetic(c)) {
                         state = 1;
                         lexAccu = new StringBuffer(1024);
                         lexAccu.append(c);
 
-                        debug("0->1 alpha "+lexAccu);
+                        //debug("0->1 alpha "+lexAccu);
+                    } else if (Character.isWhitespace(c)) {
+                        // ignore
+                    } else {
+                        throw new LexicalError("illegal char: "+c);
                     }
                     break;
                 case 1:
@@ -60,7 +63,7 @@ public class main {
                     } else {
                         state = 0;
                         i = i - 1;
-                        debug("1->0 "+lexAccu);
+                        debug("IDENT "+lexAccu);
                     }
                     break;
                 case 2:
@@ -70,12 +73,12 @@ public class main {
                         numAccu = numAccu * 10 + digit;
                         //debug("2 digit "+numAccu);
                         if (numAccu > Integer.MAX_VALUE) {
-                            //throw new LexicalError("Integer literal too large!");
+                            throw new LexicalError("Integer literal too large!");
                         }
                     } else {
                         state = 0;
                         i = i - 1; // one back for next lexeme
-                        debug("2->0 "+numAccu);
+                        debug("LITERAL "+numAccu);
                         // l.add(new IToken.Literal(new Value.IntVal((int) numAccu)));
                     }
                     break;
