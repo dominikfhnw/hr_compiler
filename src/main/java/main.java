@@ -51,6 +51,7 @@ public class main {
                         //debug("0->1 alpha "+lexAccu);
                     } else if (Character.isWhitespace(c)) {
                         // ignore
+                    } else if (Character.is)
                     } else {
                         throw new LexicalError("illegal char: "+c);
                     }
@@ -82,6 +83,8 @@ public class main {
                         // l.add(new IToken.Literal(new Value.IntVal((int) numAccu)));
                     }
                     break;
+                default:
+                    throw new LexicalError("strange case entered: "+state);
             }
         }
 
