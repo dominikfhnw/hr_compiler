@@ -17,13 +17,8 @@ public class main {
         try {
             content = Files.readString(filePath);
             Scanner.scan(content);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (LexicalError e) {
+        } catch (IOException | LexicalError e) {
             e.printStackTrace();
         }
     }
-
-
-
 }
