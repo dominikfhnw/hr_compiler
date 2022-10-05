@@ -88,7 +88,7 @@ public class Scanner {
         }
 
         assert state == 0;
-        //l.add(new IToken.Base(Terminals.SENTINEL));
+        //l.add(new IToken.Base(enums.Terminals.SENTINEL));
         //return l;
 
     }
