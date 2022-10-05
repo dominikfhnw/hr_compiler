@@ -1,6 +1,5 @@
 package enums;
-
-public enum Terminals implements IToken {
+public enum Terminals { // implements IToken
 
     IDENT("IDENT"),
     LITERAL("LITERAL"),
