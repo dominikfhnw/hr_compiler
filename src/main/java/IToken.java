@@ -33,12 +33,17 @@ public class IToken {
                 return ident;
             }
 
+            @Override
+            public String toString() {
+                return "(" + super.toString() + "," + ident + ")";
+            }
         }
 
         static class Literal extends Base {
 
             private final int value;
 
+            // Literal-Constructor needs to be specified for different types (INT32, INT64, INT1024, BOOL)
             Literal (int value, Terminals terminal) {
                 super(terminal);
                 this.value = value;
@@ -47,67 +52,87 @@ public class IToken {
             public int getValue(){
                 return value;
             }
+
+            @Override
+            public String toString() {
+                return "(" + super.toString() + "," + value + ")";
+            }
         }
 
         static class ChangeMode extends Base {
 
-            public enum ChangeModes {
+            enum ChangeModes {
                 VAR,
                 CONST
             }
 
-            private final ChangeModes changemode;
+            private final ChangeModes changeMode;
 
-            public ChangeMode(Terminals terminal, ChangeModes changemode) {
+            ChangeMode(Terminals terminal, ChangeModes changeMode) {
                 super(terminal);
-                this.changemode = changemode;
+                this.changeMode = changeMode;
             }
 
             public ChangeModes getChangeMode() {
-                return changemode;
+                return changeMode;
+            }
+
+            @Override
+            public String toString() {
+                return "(" + getTerminal() + "," + changeMode + ")";
             }
         }
 
         static class FlowMode extends Base {
 
-            public enum FlowModes {
+            enum FlowModes {
                 IN,
                 INOUT,
                 OUT
             }
 
-            private final FlowModes flowmode;
+            private final FlowModes flowMode;
 
-            public FlowMode(Terminals terminal, FlowModes flowmode) {
+            FlowMode(Terminals terminal, FlowModes flowMode) {
                 super(terminal);
-                this.flowmode = flowmode;
+                this.flowMode = flowMode;
             }
 
             public FlowModes getFlowMode() {
-                return flowmode;
+                return flowMode;
+            }
+
+            @Override
+            public String toString() {
+                return "(" + getTerminal() + "," + flowMode + ")";
             }
         }
 
         public static class MechMode extends Base {
 
-            public enum MechModes {
+            enum MechModes {
                 COPY,
                 REF
             }
 
-            private final MechModes mechmode;
+            private final MechModes mechMode;
 
-            public MechMode(Terminals terminal, MechModes mechmode) {
+            MechMode(Terminals terminal, MechModes mechMode) {
                 super(terminal);
-                this.mechmode = mechmode;
+                this.mechMode = mechMode;
             }
 
             public MechModes getMechMode() {
-                return mechmode;
+                return mechMode;
+            }
+
+            @Override
+            public String toString() {
+                return "(" + getTerminal() + "," + mechMode + ")";
             }
         }
 
-        public enum Terminals {
+        enum Terminals {
 
             IDENT("IDENT"),
             LITERAL("LITERAL"),
@@ -195,161 +220,165 @@ public class IToken {
             PLUS,
             TIMES;
 
-        static class Operator extends Base {
+            static class Operator extends Base {
 
-            private final Operators operator;
+                private final Operators operator;
 
-            public Operator(Terminals terminal, Operators operator){
-                super(terminal);
-                this.operator = operator;
-            }
-
-            public Operators getOperator(){
-                return operator;
-            }
-
-        }
-
-        static class AddOpr extends Operator {
-
-            public enum AddOperators {
-                PLUS,
-                MINUS
-            }
-
-            AddOpr (Terminals terminal, AddOperators addOpr) {
-                super(terminal, toOperator(addOpr));
-            }
-
-            private static Operators toOperator(AddOperators addOperator){
-                if(addOperator == AddOperators.PLUS){
-                    return Operators.PLUS;
-                } else {
-                    return Operators.MINUS;
+                public Operator(Terminals terminal, Operators operator) {
+                    super(terminal);
+                    this.operator = operator;
                 }
-            }
-        }
 
-        static class BoolOpr extends Operator {
-
-            public enum BoolOperators{
-                AND,
-                OR,
-                CAND,
-                COR
-            }
-
-            public BoolOpr(Terminals terminal, BoolOperators boolOpr){
-                super(terminal, toOperator(boolOpr));
-            }
-
-            private static Operators toOperator(BoolOperators boolOperator){
-                if (boolOperator == BoolOperators.AND) {
-                    return Operators.AND;
-                } else if (boolOperator == BoolOperators.OR) {
-                    return Operators.OR;
-                } else if (boolOperator == BoolOperators.CAND) {
-                    return Operators.CAND;
-                } else {
-                    return Operators.COR;
+                public Operators getOperator() {
+                    return operator;
                 }
-            }
-        }
 
-        static class MultOpr extends Operator {
-
-            public enum MultOperators{
-                TIMES,
-                DIVE,
-                MODE
-            }
-
-            public MultOpr(Terminals terminal, MultOperators multOpr){
-                super(terminal, toOperator(multOpr));
-            }
-
-            private static Operators toOperator(MultOperators multOperator){
-                if (multOperator == MultOperators.DIVE) {
-                    return Operators.DIVE;
-                } else if (multOperator == MultOperators.MODE) {
-                    return Operators.MODE;
-                } else {
-                    return Operators.TIMES;
+                @Override
+                public String toString() {
+                    return "(" + super.toString() + "," + getOperator() + ")";
                 }
-            }
-        }
 
-        static class RelOpr extends Operator {
-
-            public enum RelOperators {
-                EQ,
-                GE,
-                GT,
-                LT,
-                NE,
-                LE
             }
 
-            RelOpr (Terminals terminal, RelOperators relOpr) {
-                super(terminal, toOperator(relOpr));
-            }
+            static class AddOpr extends Operator {
 
-            private static Operators toOperator(RelOperators relOperator){
-                if (relOperator == RelOperators.EQ) {
-                    return Operators.EQ;
-                } else if (relOperator == RelOperators.GE) {
-                    return Operators.GE;
-                } else if (relOperator == RelOperators.GT) {
-                    return Operators.GT;
-                } else if (relOperator == RelOperators.LE) {
-                    return Operators.LE;
-                } else if (relOperator == RelOperators.LT) {
-                    return Operators.LT;
-                } else {
-                    return Operators.NE;
+                public enum AddOperators {
+                    PLUS,
+                    MINUS
                 }
-            }
-        }
 
-                public static Operators getOperator(String text) {
+                AddOpr(Terminals terminal, AddOperators addOpr) {
+                    super(terminal, toOperator(addOpr));
+                }
 
-                    switch (text) {
-                    case "/\\":
-                        return AND;
-                    case ":=":
-                        return ASSIGN;
-                    case "/\\?":
-                        return CAND;
-                    case "\\/?":
-                        return COR;
-                    case "divE":
-                        return DIVE;
-                    case "==":
-                        return EQ;
-                    case ">=":
-                        return GE;
-                    case ">":
-                        return GT;
-                    case "<=":
-                        return LE;
-                    case "<":
-                        return LT;
-                    case "-":
-                        return MINUS;
-                    case "modT":
-                        return MODE;
-                    case "!=":
-                        return NE;
-                    case "~":
-                        return NOT;
-                    case "+":
-                        return PLUS;
-                    case "*":
-                        return TIMES;
-                    default:
-                        return null;
+                private static Operators toOperator(AddOperators addOperator) {
+                    if (addOperator == AddOperators.PLUS) {
+                        return Operators.PLUS;
+                    } else {
+                        return Operators.MINUS;
                     }
                 }
+            }
+
+            static class BoolOpr extends Operator {
+
+                public enum BoolOperators {
+                    AND,
+                    OR,
+                    CAND,
+                    COR
+                }
+
+                public BoolOpr(Terminals terminal, BoolOperators boolOpr) {
+                    super(terminal, toOperator(boolOpr));
+                }
+
+                private static Operators toOperator(BoolOperators boolOperator) {
+                    if (boolOperator == BoolOperators.AND) {
+                        return Operators.AND;
+                    } else if (boolOperator == BoolOperators.OR) {
+                        return Operators.OR;
+                    } else if (boolOperator == BoolOperators.CAND) {
+                        return Operators.CAND;
+                    } else {
+                        return Operators.COR;
+                    }
+                }
+            }
+
+            static class MultOpr extends Operator {
+
+                public enum MultOperators {
+                    TIMES,
+                    DIVE,
+                    MODE
+                }
+
+                public MultOpr(Terminals terminal, MultOperators multOpr) {
+                    super(terminal, toOperator(multOpr));
+                }
+
+                private static Operators toOperator(MultOperators multOperator) {
+                    if (multOperator == MultOperators.DIVE) {
+                        return Operators.DIVE;
+                    } else if (multOperator == MultOperators.MODE) {
+                        return Operators.MODE;
+                    } else {
+                        return Operators.TIMES;
+                    }
+                }
+            }
+
+            static class RelOpr extends Operator {
+
+                public enum RelOperators {
+                    EQ,
+                    GE,
+                    GT,
+                    LT,
+                    NE,
+                    LE
+                }
+
+                RelOpr(Terminals terminal, RelOperators relOpr) {
+                    super(terminal, toOperator(relOpr));
+                }
+
+                private static Operators toOperator(RelOperators relOperator) {
+                    if (relOperator == RelOperators.EQ) {
+                        return Operators.EQ;
+                    } else if (relOperator == RelOperators.GE) {
+                        return Operators.GE;
+                    } else if (relOperator == RelOperators.GT) {
+                        return Operators.GT;
+                    } else if (relOperator == RelOperators.LE) {
+                        return Operators.LE;
+                    } else if (relOperator == RelOperators.LT) {
+                        return Operators.LT;
+                    } else {
+                        return Operators.NE;
+                    }
+                }
+            }
+
+            public static Operators getOperator(String text) {
+                switch (text) {
+                case "/\\":
+                    return AND;
+                case ":=":
+                    return ASSIGN;
+                case "/\\?":
+                    return CAND;
+                case "\\/?":
+                    return COR;
+                case "divE":
+                    return DIVE;
+                case "==":
+                    return EQ;
+                case ">=":
+                    return GE;
+                case ">":
+                    return GT;
+                case "<=":
+                    return LE;
+                case "<":
+                    return LT;
+                case "-":
+                    return MINUS;
+                case "modT":
+                    return MODE;
+                case "!=":
+                    return NE;
+                case "~":
+                    return NOT;
+                case "+":
+                    return PLUS;
+                case "*":
+                    return TIMES;
+                default:
+                    return null;
+                }
+            }
         }
 
         public static class Type extends Base {
@@ -369,6 +398,10 @@ public class IToken {
 
             public Types getType() {
                 return type;
+            }
+
+            public String toString() {
+                return "(" + getTerminal() + "," + type + ")";
             }
         }
 
