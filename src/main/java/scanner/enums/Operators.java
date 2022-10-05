@@ -1,4 +1,4 @@
-package enums;
+package scanner.enums;
 
 public enum Operators {
 

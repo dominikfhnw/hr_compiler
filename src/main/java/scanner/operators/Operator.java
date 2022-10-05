@@ -1,5 +1,8 @@
-import enums.Operators;
-import enums.Terminals;
+package scanner.operators;
+
+import scanner.enums.Operators;
+import scanner.enums.Terminals;
+import scanner.Base;
 
 public class Operator extends Base {
     private final Operators operator;

@@ -1,5 +1,7 @@
-import enums.Terminals;
+package scanner.modes;
+import scanner.enums.Terminals;
 
+import scanner.Base;
 public class ChangeMode extends Base {
     enum ChangeModes {
             VAR,

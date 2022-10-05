@@ -1,5 +1,8 @@
-import java.util.Arrays;
+package scanner;
 
+import errors.LexicalError;
+
+import java.util.Arrays;
 public class Scanner {
 
     public static void debug(String msg){
@@ -15,7 +18,7 @@ public class Scanner {
     public static void scan(CharSequence cs) throws LexicalError {
         // precondition: last character (if it exists) is a newline
         assert cs.length() == 0 || cs.charAt(cs.length() - 1) == '\n';
-        //ITokenList l= new TokenList();
+        //scanner.interfaces.ITokenList l= new TokenList();
         int state = 0;
         StringBuffer lexAccu = null; // for constructing the identifier
         long numAccu = 0L; // for constructing the literal value
@@ -69,7 +72,7 @@ public class Scanner {
                         state = 0;
                         i = i - 1; // one back for next lexeme
                         debug("LITERAL "+numAccu);
-                        // l.add(new IToken.Literal(new Value.IntVal((int) numAccu)));
+                        // l.add(new scanner.interfaces.IToken.scanner.Literal(new Value.IntVal((int) numAccu)));
                     }
                     break;
                 case 3:
@@ -88,7 +91,7 @@ public class Scanner {
         }
 
         assert state == 0;
-        //l.add(new IToken.Base(enums.Terminals.SENTINEL));
+        //l.add(new scanner.interfaces.IToken.scanner.Base(scanner.enums.Terminals.SENTINEL));
         //return l;
 
     }

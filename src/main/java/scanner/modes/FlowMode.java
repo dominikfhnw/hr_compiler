@@ -1,6 +1,9 @@
-import enums.Terminals;
+package scanner.modes;
 
-public class FlowMode extends Base{
+import scanner.enums.Terminals;
+import scanner.Base;
+
+public class FlowMode extends Base {
     enum FlowModes {
         IN,
         INOUT,

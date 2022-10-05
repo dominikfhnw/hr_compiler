@@ -1,3 +1,6 @@
+package scanner.interfaces;
+
+import scanner.interfaces.IToken;
 public interface ITokenList {
 
     //for constructing the token list by the scanner

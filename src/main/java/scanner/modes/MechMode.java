@@ -1,4 +1,7 @@
-import enums.Terminals;
+package scanner.modes;
+
+import scanner.enums.Terminals;
+import scanner.Base;
 
 public class MechMode extends Base {
 

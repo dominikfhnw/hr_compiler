@@ -1,9 +1,12 @@
-import enums.Terminals;
+package scanner;
+
+import scanner.enums.Terminals;
+import scanner.Base;
 
 public class Literal extends Base {
     private final int value;
 
-    // Literal-Constructor needs to be specified for different types (INT32, INT64, INT1024, BOOL)
+    // scanner.Literal-Constructor needs to be specified for different types (INT32, INT64, INT1024, BOOL)
 
     Literal (Terminals terminal) {
         super(terminal);

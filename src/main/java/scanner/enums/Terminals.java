@@ -1,11 +1,14 @@
-package enums;
-public enum Terminals { // implements IToken
+package scanner.enums;
+
+import scanner.interfaces.IToken;
+
+public enum Terminals implements IToken {
 
     IDENT("IDENT"),
     LITERAL("LITERAL"),
     TYPE("TYPE"),
 
-    // enums.Operators
+    // scanner.enums.Operators
     ADDOPR("ADDOPR"),
     BOOLOPR("BOOLOPR"),
     MULTOPR("MULTOPR"),

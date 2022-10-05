@@ -1,5 +1,7 @@
-import enums.Operators;
-import enums.Terminals;
+package scanner.operators;
+
+import scanner.enums.Operators;
+import scanner.enums.Terminals;
 
 public class AddOpr extends Operator {
 

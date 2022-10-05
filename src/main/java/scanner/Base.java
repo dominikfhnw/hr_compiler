@@ -1,10 +1,13 @@
-import enums.Terminals;
+package scanner;
+
+import scanner.enums.Terminals;
+import scanner.interfaces.IToken;
 
 public class Base implements IToken {
 
     private final Terminals terminal;
 
-    Base (Terminals terminal) {
+    public Base (Terminals terminal) {
         this.terminal = terminal;
     }
 

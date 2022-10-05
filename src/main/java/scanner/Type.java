@@ -1,4 +1,7 @@
-import enums.Terminals;
+package scanner;
+
+import scanner.enums.Terminals;
+import scanner.Base;
 
 public class Type extends Base {
 
