@@ -2,32 +2,23 @@ public class IToken {
 
     static class Base {
         private final Terminals terminal;
-        private final Operators operator;
-
-        //private final Ident ident;
-
-        // private final Literal literal;
 
         Base (Terminals terminal) {
             this.terminal = terminal;
-            this.operator = null;
-            // this.ident = null;
-            // this.literal = null;
         }
 
-        Base (Operators operator) {
-            this.terminal = null;
-            this.operator = operator;
-            // this.ident = null;
-            // this.literal = null;
+        public Terminals getTerminal() {
+            return terminal;
+        }
+
+        public boolean isTerminal() {
+            return terminal != null;
         }
 
         @Override
         public String toString() {
             if (isTerminal()) {
                 return terminal.toString();
-            } else if (isOperator()){
-                return operator.toString();
             }
             return "null";
         }
@@ -55,26 +46,6 @@ public class IToken {
 
             public int getValue(){
                 return value;
-            }
-        }
-
-        static class AddOpr extends Base {
-
-            private final Operators operator;
-
-            AddOpr (Operators operator) {
-                super(Operators.PLUS);
-                this.operator = operator;
-            }
-        }
-
-        static class RelOpr extends Base {
-
-            private final Operators operator;
-
-            RelOpr (Operators operator) {
-                super(Operators.EQ);
-                this.operator = operator;
             }
         }
 
@@ -134,17 +105,6 @@ public class IToken {
             public MechModes getMechMode() {
                 return mechmode;
             }
-        }
-        public Terminals getTerminal() {
-            return terminal;
-        }
-
-        public boolean isTerminal() {
-            return terminal != null;
-        }
-
-        public boolean isOperator() {
-            return operator != null;
         }
 
         public enum Terminals {
@@ -235,44 +195,186 @@ public class IToken {
             PLUS,
             TIMES;
 
-            public static Operators getOperator(String text) {
+        static class Operator extends Base {
 
-                switch (text) {
-                case "/\\":
-                    return AND;
-                case ":=":
-                    return ASSIGN;
-                case "/\\?":
-                    return CAND;
-                case "\\/?":
-                    return COR;
-                case "divE":
-                    return DIVE;
-                case "==":
-                    return EQ;
-                case ">=":
-                    return GE;
-                case ">":
-                    return GT;
-                case "<=":
-                    return LE;
-                case "<":
-                    return LT;
-                case "-":
-                    return MINUS;
-                case "modT":
-                    return MODE;
-                case "!=":
-                    return NE;
-                case "~":
-                    return NOT;
-                case "+":
-                    return PLUS;
-                case "*":
-                    return TIMES;
-                default:
-                    return null;
+            private final Operators operator;
+
+            public Operator(Terminals terminal, Operators operator){
+                super(terminal);
+                this.operator = operator;
+            }
+
+            public Operators getOperator(){
+                return operator;
+            }
+
+        }
+
+        static class AddOpr extends Operator {
+
+            public enum AddOperators {
+                PLUS,
+                MINUS
+            }
+
+            AddOpr (Terminals terminal, AddOperators addOpr) {
+                super(terminal, toOperator(addOpr));
+            }
+
+            private static Operators toOperator(AddOperators addOperator){
+                if(addOperator == AddOperators.PLUS){
+                    return Operators.PLUS;
+                } else {
+                    return Operators.MINUS;
                 }
+            }
+        }
+
+        static class BoolOpr extends Operator {
+
+            public enum BoolOperators{
+                AND,
+                OR,
+                CAND,
+                COR
+            }
+
+            public BoolOpr(Terminals terminal, BoolOperators boolOpr){
+                super(terminal, toOperator(boolOpr));
+            }
+
+            private static Operators toOperator(BoolOperators boolOperator){
+                if (boolOperator == BoolOperators.AND) {
+                    return Operators.AND;
+                } else if (boolOperator == BoolOperators.OR) {
+                    return Operators.OR;
+                } else if (boolOperator == BoolOperators.CAND) {
+                    return Operators.CAND;
+                } else {
+                    return Operators.COR;
+                }
+            }
+        }
+
+        static class MultOpr extends Operator {
+
+            public enum MultOperators{
+                TIMES,
+                DIVE,
+                MODE
+            }
+
+            public MultOpr(Terminals terminal, MultOperators multOpr){
+                super(terminal, toOperator(multOpr));
+            }
+
+            private static Operators toOperator(MultOperators multOperator){
+                if (multOperator == MultOperators.DIVE) {
+                    return Operators.DIVE;
+                } else if (multOperator == MultOperators.MODE) {
+                    return Operators.MODE;
+                } else {
+                    return Operators.TIMES;
+                }
+            }
+        }
+
+        static class RelOpr extends Operator {
+
+            public enum RelOperators {
+                EQ,
+                GE,
+                GT,
+                LT,
+                NE,
+                LE
+            }
+
+            RelOpr (Terminals terminal, RelOperators relOpr) {
+                super(terminal, toOperator(relOpr));
+            }
+
+            private static Operators toOperator(RelOperators relOperator){
+                if (relOperator == RelOperators.EQ) {
+                    return Operators.EQ;
+                } else if (relOperator == RelOperators.GE) {
+                    return Operators.GE;
+                } else if (relOperator == RelOperators.GT) {
+                    return Operators.GT;
+                } else if (relOperator == RelOperators.LE) {
+                    return Operators.LE;
+                } else if (relOperator == RelOperators.LT) {
+                    return Operators.LT;
+                } else {
+                    return Operators.NE;
+                }
+            }
+        }
+
+                public static Operators getOperator(String text) {
+
+                    switch (text) {
+                    case "/\\":
+                        return AND;
+                    case ":=":
+                        return ASSIGN;
+                    case "/\\?":
+                        return CAND;
+                    case "\\/?":
+                        return COR;
+                    case "divE":
+                        return DIVE;
+                    case "==":
+                        return EQ;
+                    case ">=":
+                        return GE;
+                    case ">":
+                        return GT;
+                    case "<=":
+                        return LE;
+                    case "<":
+                        return LT;
+                    case "-":
+                        return MINUS;
+                    case "modT":
+                        return MODE;
+                    case "!=":
+                        return NE;
+                    case "~":
+                        return NOT;
+                    case "+":
+                        return PLUS;
+                    case "*":
+                        return TIMES;
+                    default:
+                        return null;
+                    }
+                }
+        }
+
+        public static class Type extends Base {
+
+            public enum Types {
+                BOOL,
+                INT32,
+                INT64,
+                INT1024
+            }
+
+            private final Types type;
+            public Type(Terminals terminal, Types type) {
+                super(terminal);
+                this.type = type;
+            }
+
+            public Types getType() {
+                return type;
+            }
+        }
+
+        static class Sentinel extends Base {
+            public Sentinel(Terminals terminal) {
+                super(terminal);
             }
         }
     }
