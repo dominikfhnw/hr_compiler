@@ -5,9 +5,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class main {
+public class Test {
+
     public static void main(String[] args) {
-        String file = "test.txt";
+        String file = "src/main/resources/grossmutter.txt";
         if(args.length > 0){
             file = args[0];
         }
