@@ -4,9 +4,9 @@ import scanner.enums.Terminals;
 import scanner.Base;
 public class ChangeMode extends Base {
     enum ChangeModes {
-            VAR,
-            CONST
-        }
+        CONST,
+        VAR
+    }
     private final ChangeModes changeMode;
 
     ChangeMode(ChangeModes changeMode) {

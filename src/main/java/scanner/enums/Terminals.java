@@ -8,7 +8,7 @@ public enum Terminals implements IToken {
     LITERAL("LITERAL"),
     TYPE("TYPE"),
 
-    // scanner.enums.Operators
+    // Operators
     ADDOPR("ADDOPR"),
     BOOLOPR("BOOLOPR"),
     MULTOPR("MULTOPR"),

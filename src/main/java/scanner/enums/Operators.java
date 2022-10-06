@@ -6,14 +6,18 @@ public enum Operators {
     ASSIGN,
     CAND,
     COR,
-    DIVE,
+    DIV_E,
+    DIV_F,
+    DIV_T,
     EQ,
     GE,
     GT,
     LE,
     LT,
     MINUS,
-    MODE,
+    MOD_E,
+    MOD_F,
+    MOD_T,
     NE,
     NOT,
     OR,
@@ -32,7 +36,11 @@ public enum Operators {
         case "\\/?":
             return COR;
         case "divE":
-            return DIVE;
+            return DIV_E;
+        case "divF":
+            return DIV_F;
+        case "divT":
+            return DIV_T;
         case "==":
             return EQ;
         case ">=":
@@ -45,8 +53,12 @@ public enum Operators {
             return LT;
         case "-":
             return MINUS;
+        case "modE":
+            return MOD_E;
+        case "modF":
+            return MOD_F;
         case "modT":
-            return MODE;
+            return MOD_T;
         case "!=":
             return NE;
         case "~":

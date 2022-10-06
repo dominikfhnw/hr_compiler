@@ -9,15 +9,15 @@ public class MechMode extends Base {
         COPY,
         REF
     }
-    private final MechModes mechmode;
+    private final MechModes mechMode;
 
     MechMode(MechModes mechMode) {
         super(Terminals.MECHMODE);
-        this.mechmode = mechMode;
+        this.mechMode = mechMode;
     }
 
     public MechModes getMechMode() {
-        return mechmode;
+        return mechMode;
     }
 
     public String toString() {
