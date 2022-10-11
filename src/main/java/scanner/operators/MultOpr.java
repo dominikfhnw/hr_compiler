@@ -5,10 +5,6 @@ import scanner.enums.Terminals;
 
 public class MultOpr extends Operator {
 
-    /**
-     * TO BE DONE: Spec for different mod- and div-types (MOD_F, MOD_T, DIV_F, DIV_T)
-     */
-
     public enum MultOperators {
         TIMES,
         DIV_E,
@@ -26,8 +22,16 @@ public class MultOpr extends Operator {
     private static Operators toOperator(MultOperators multOperator) {
         if (multOperator == MultOperators.DIV_E) {
             return Operators.DIV_E;
+        } else if (multOperator == MultOperators.DIV_F) {
+            return Operators.DIV_F;
+        } else if (multOperator == MultOperators.DIV_T) {
+            return Operators.DIV_T;
         } else if (multOperator == MultOperators.MOD_E) {
             return Operators.MOD_E;
+        } else if (multOperator == MultOperators.MOD_F) {
+            return Operators.MOD_F;
+        } else if (multOperator == MultOperators.MOD_T) {
+            return Operators.MOD_T;
         } else {
             return Operators.TIMES;
         }
