@@ -38,10 +38,8 @@ public class Scanner {
                         //debug("0 -> 1 alphabetic " + lexAccu);
                     } else if (isSpecial(c)) {
                         state = 3;
-                        // symAccu = new StringBuffer(1024);
-                        // symAccu.append(c);
-                        lexAccu = new StringBuffer(1024); // should work with symAccu
-                        lexAccu.append(c); // should work with symAccu
+                        symAccu = new StringBuffer(1024);
+                        symAccu.append(c);
                     } else if (Character.isWhitespace(c)) {
                         // ignore whitespace (stay in state 0 and do nothing)
                     } else {
@@ -78,16 +76,16 @@ public class Scanner {
                     }
                     break;
                 case 3: // state 3 = scan symbol
-                    if (isSpecial(c) && isSubsequentSymbol(c, lexAccu)){ // should be symAccu
+                    if (isSpecial(c) && isSubsequentSymbol(c, symAccu)){
                     state = 0;
-                    lexAccu.append(c); // should be symAccu
-                    IToken token = Terminals.valueOf(String.valueOf(lexAccu)); // should be symAccu
+                    symAccu.append(c);
+                    IToken token = Terminals.valueOf(String.valueOf(symAccu));
                     list.add(token);
                     } else {
                         state = 0;
                         i = i - 1;
-                        debug("OP " + lexAccu);
-                        // IToken token = Terminals.valueOf(String.valueOf(lexAccu));
+                        debug("OP " + symAccu);
+                        // IToken token = Terminals.valueOf(String.valueOf(symAccu));
                         // list.add(token);
                     }
                     break;
