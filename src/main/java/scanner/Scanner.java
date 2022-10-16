@@ -12,15 +12,20 @@ public class Scanner {
         System.out.println(msg);
     }
 
+    /**
+     * Converts a sequence of characters to tokens.
+     * @param cs charSequence
+     * @return List of tokens
+     */
     public static ITokenList scan(CharSequence cs) throws LexicalError {
         // precondition: last character (if it exists) is a newline
         assert cs.length() == 0 || cs.charAt(cs.length() - 1) == '\n';
 
         ITokenList list = new ITokenList();
         int state = 0;
-        StringBuffer lexAccu = null; // for constructing the identifier
-        StringBuffer symAccu = null; // for constructing the special symbol
-        long numAccu = 0L; // for constructing the literal value
+        StringBuffer lexAccu = null;    // for constructing the identifier
+        StringBuffer symAccu = null;    // for constructing the special symbol
+        long numAccu = 0L;              // for constructing the literal value
 
         for (int i = 0; i < cs.length(); i++) {
             char c = cs.charAt(i);
@@ -57,7 +62,7 @@ public class Scanner {
                             IToken token = Terminals.valueOf(String.valueOf(lexAccu));
                             list.add(token);
                         }
-                        debug("IDENT " + lexAccu);
+                        debug("IDENT " + "\t" + "\t" + lexAccu);
                     }
                     break;
                 case 2: // state 2 = scan literal
@@ -71,7 +76,7 @@ public class Scanner {
                     } else {
                         state = 0;
                         i = i - 1; // one back for next lexeme
-                        debug("LITERAL " + numAccu);
+                        debug("LITERAL " + "\t" + numAccu);
                         list.add(new Literal(Terminals.LITERAL, (int) numAccu));
                     }
                     break;
@@ -83,8 +88,8 @@ public class Scanner {
                     list.add(token);
                     } else {
                         state = 0;
-                        i = i - 1;
-                        debug("OP " + symAccu);
+                        i = i - 1; // one back for next lexeme
+                        debug("OP " + "\t" + "\t" + "\t" + symAccu);
                         // IToken token = Terminals.valueOf(String.valueOf(symAccu));
                         // list.add(token);
                     }
@@ -98,17 +103,33 @@ public class Scanner {
         return list;
     }
 
+    /**
+     * Checks if char is a non-alphabetic symbol.
+     * @param c current char
+     * @return True if char is a non-alphabetic symbol.
+     */
+
     public static boolean isSpecial(char c){
         return Arrays.stream(Terminals.values()).anyMatch(terminals -> terminals.getSymbol() == c) ||
             Arrays.stream(Operators.values()).anyMatch(operators -> operators.getSymbol() == c);
     }
+
+    /**
+     * Checks if String is keyword of IML.
+     * @param lexeme current String
+     * @return True if String is a keyword of IML.
+     */
 
     public static boolean isKeyword(String lexeme){
         return Arrays.stream(Terminals.values()).anyMatch(terminals -> terminals.getLexeme().equals(lexeme)) ||
             Arrays.stream(Operators.values()).anyMatch(operators -> operators.getLexeme().equals(lexeme));
     }
 
-    // checks if char is a subsequent part of the previous symbol
+    /**
+     * Checks if char is a subsequent symbol.
+     * @param c Character to check
+     * @return True if char is a subsequent symbol which follows a previous symbol.
+     */
 
     private static boolean isSubsequentSymbol(char c, StringBuffer previous) {
         assert previous != null;
