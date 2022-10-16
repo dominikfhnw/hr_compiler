@@ -20,6 +20,26 @@ public class Base implements IToken {
     }
 
     @Override
+    public boolean isLexeme() {
+        return terminal.isLexeme();
+    }
+
+    @Override
+    public boolean isSymbol() {
+        return terminal.isSymbol();
+    }
+
+    @Override
+    public String getLexeme() {
+        return terminal.getLexeme();
+    }
+
+    @Override
+    public char getSymbol() {
+        return terminal.getSymbol();
+    }
+
+    @Override
     public String toString() {
         return getTerminal().toString();
     }

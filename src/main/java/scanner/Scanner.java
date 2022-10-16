@@ -11,8 +11,8 @@ public class Scanner {
     }
 
     public static boolean isSpecial(char c){
-        return Arrays.stream(Terminals.values()).anyMatch(terminals -> terminals.getCharValue() == c) ||
-            Arrays.stream(Operators.values()).anyMatch(operators -> operators.getCharValue() == c);
+        return Arrays.stream(Terminals.values()).anyMatch(terminals -> terminals.getSymbol() == c) ||
+            Arrays.stream(Operators.values()).anyMatch(operators -> operators.getSymbol() == c);
         // return Arrays.asList('(', ',', ')', ':', ';', '=', '/', '\\', '/', '<', '>', '+', '-', '*', '~', '!', '?').contains(c); // has been replaced by line 14/15
     }
 
@@ -94,4 +94,26 @@ public class Scanner {
         list.add(new Base(Terminals.SENTINEL));
         return list;
     }
+
+    public boolean isKeyword(String lexeme){
+        return Arrays.stream(Terminals.values()).anyMatch(terminals -> terminals.getLexeme().equals(lexeme)) ||
+            Arrays.stream(Operators.values()).anyMatch(operators -> operators.getLexeme().equals(lexeme));
+    }
+
+    private boolean isSymbol(char c) {
+        return Arrays.stream(Terminals.values()).anyMatch(terminals -> terminals.getSymbol() == c) ||
+            Arrays.stream(Operators.values()).anyMatch(operators -> operators.getSymbol() == c);
+    }
+
+    // checks if char is a subsequent part of the previous symbol
+
+    private boolean isSubsequentSymbol(char c, StringBuffer previous) {
+        return switch (previous.toString()) {
+            case "/", ">", "<", ":", "!" -> c == '=';
+            case "&" -> c == '&';
+            case "|" -> c == '|';
+            default -> false;
+        };
+    }
+
 }

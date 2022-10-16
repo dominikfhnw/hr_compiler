@@ -13,37 +13,54 @@ public enum Operators implements IToken {
     DIV_T("divT"),
     EQ("=="),
     GE(">="),
-    GT(">", '>'),
+    GT(">"),
     LE("<="),
-    LT("<", '<'),
-    MINUS("-", '-'),
+    LT("<"),
+    MINUS("-"),
     MOD_E("modE"),
     MOD_F("modF"),
     MOD_T("modT"),
     NE("!="),
-    NOT("~", '~'),
+    NOT("~"),
     OR("\\/"),
-    PLUS("+", '+'),
-    TIMES("*", '*');
+    PLUS("+"),
+    TIMES("*");
 
     final String stringValue;
     char charValue;
-
 
     Operators(String stringValue) {
         this.stringValue = stringValue;
     }
 
-    Operators(String stringValue, char charValue) {
-        this.stringValue = stringValue;
-        this.charValue = charValue;
+    public boolean isLexeme() {
+        char [] lexeme = stringValue.toCharArray();
+        int numberOfLetters = 0;
+        for (char letter : lexeme) {
+            if (Character.isLetter(letter)) {
+                numberOfLetters++;
+            }
+        }
+        return numberOfLetters == stringValue.length();
     }
-
-    public String getStringValue() {
+    @Override
+    public String getLexeme() {
+        if (isLexeme()) {
+            return stringValue;
+        }
         return stringValue;
     }
 
-    public char getCharValue() {
+    @Override
+    public boolean isSymbol() {
+        return stringValue.length() == 1 && !isLexeme();
+    }
+
+    @Override
+    public char getSymbol() {
+        if (isSymbol()) {
+            charValue = stringValue.charAt(0);
+        }
         return charValue;
     }
 
