@@ -2,6 +2,8 @@
 
     import scanner.interfaces.IToken;
 
+    import java.util.Arrays;
+
     public enum Terminals implements IToken {
 
         IDENT("ident"),
@@ -97,6 +99,10 @@
         public char getSymbol() {
             isSymbol();
             return charValue = stringValue.charAt(0);
+        }
+
+        public static boolean isKeyword(String lexeme){
+            return Arrays.stream(Terminals.values()).anyMatch(terminals -> terminals.getLexeme().equals(lexeme));
         }
 
         @Override

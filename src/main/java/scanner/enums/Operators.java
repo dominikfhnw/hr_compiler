@@ -2,6 +2,8 @@ package scanner.enums;
 
 import scanner.interfaces.IToken;
 
+import java.util.Arrays;
+
 public enum Operators implements IToken {
 
     AND("/\\"),
@@ -59,6 +61,31 @@ public enum Operators implements IToken {
     public char getSymbol() {
         isSymbol();
         return charValue = stringValue.charAt(0);
+    }
+
+    /**
+     * Checks if the lexeme is a keyword.
+     * @param lexeme the current lexeme to be checked
+     * @return True if the lexeme is a keyword of IML.
+     */
+    public static boolean isKeyword(String lexeme){
+        return Arrays.stream(Operators.values()).anyMatch(operators -> operators.getLexeme().equals(lexeme));
+    }
+
+    /**
+     * Checks if char is a subsequent symbol.
+     * @param c Character to check
+     * @return True if char is a subsequent symbol which follows a previous symbol.
+     */
+
+    public static boolean isSubsequentSymbol(char c, StringBuffer previous) {
+        assert previous != null;
+        return switch (previous.toString()) {
+            case "/", ">", "<", ":", "!" -> c == '=';
+            case "&" -> c == '&';
+            case "|" -> c == '|';
+            default -> false;
+        };
     }
 
     @Override

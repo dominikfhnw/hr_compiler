@@ -6,6 +6,7 @@ import scanner.enums.Terminals;
 import scanner.interfaces.IToken;
 
 import java.util.Arrays;
+
 public class Scanner {
 
     public static void debug(String msg){
@@ -58,7 +59,7 @@ public class Scanner {
                     } else {
                         state = 0;
                         i = i - 1;
-                        if(isKeyword(String.valueOf(lexAccu))){
+                        if(Terminals.isKeyword(String.valueOf(lexAccu)) || Operators.isKeyword(String.valueOf(lexAccu))){
                             IToken token = Terminals.valueOf(String.valueOf(lexAccu));
                             list.add(token);
                         }
@@ -81,7 +82,7 @@ public class Scanner {
                     }
                     break;
                 case 3: // state 3 = scan symbol
-                    if (isSpecial(c) && isSubsequentSymbol(c, symAccu)){
+                    if (isSpecial(c) && Operators.isSubsequentSymbol(c, symAccu)){
                     state = 0;
                     symAccu.append(c);
                     IToken token = Terminals.valueOf(String.valueOf(symAccu));
@@ -103,6 +104,7 @@ public class Scanner {
         return list;
     }
 
+
     /**
      * Checks if char is a non-alphabetic symbol.
      * @param c current char
@@ -110,34 +112,8 @@ public class Scanner {
      */
 
     public static boolean isSpecial(char c){
-        return Arrays.stream(Terminals.values()).anyMatch(terminals -> terminals.getSymbol() == c) ||
-            Arrays.stream(Operators.values()).anyMatch(operators -> operators.getSymbol() == c);
+        return Arrays.stream(Operators.values()).anyMatch(operators -> operators.getSymbol() == c) ||
+            Arrays.stream(Terminals.values()).anyMatch(terminals -> terminals.getSymbol() == c);
     }
 
-    /**
-     * Checks if String is keyword of IML.
-     * @param lexeme current String
-     * @return True if String is a keyword of IML.
-     */
-
-    public static boolean isKeyword(String lexeme){
-        return Arrays.stream(Terminals.values()).anyMatch(terminals -> terminals.getLexeme().equals(lexeme)) ||
-            Arrays.stream(Operators.values()).anyMatch(operators -> operators.getLexeme().equals(lexeme));
-    }
-
-    /**
-     * Checks if char is a subsequent symbol.
-     * @param c Character to check
-     * @return True if char is a subsequent symbol which follows a previous symbol.
-     */
-
-    private static boolean isSubsequentSymbol(char c, StringBuffer previous) {
-        assert previous != null;
-        return switch (previous.toString()) {
-            case "/", ">", "<", ":", "!" -> c == '=';
-            case "&" -> c == '&';
-            case "|" -> c == '|';
-            default -> false;
-        };
-    }
 }
