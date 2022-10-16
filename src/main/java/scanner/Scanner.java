@@ -10,9 +10,7 @@ public class Scanner {
     }
 
     public static boolean isSpecial(char c){
-        return
-                Arrays.asList('(', ',', ')', ':', ';', '=', '/', '\\', '/', '<', '>', '+', '-', '*', '~', '!', '?').
-                        contains(c);
+        return Arrays.asList('(', ',', ')', ':', ';', '=', '/', '\\', '/', '<', '>', '+', '-', '*', '~', '!', '?').contains(c);
     }
 
     public static void scan(CharSequence cs) throws LexicalError {
@@ -29,8 +27,7 @@ public class Scanner {
                 case 0:
                     if (Character.isDigit(c)) {
                         state = 2;
-                        int digit = Character.digit(c, 10);
-                        numAccu = digit;
+                        numAccu = Character.digit(c, 10);
                         //debug("0->2 digit "+numAccu);
                     } else if (Character.isAlphabetic(c)) {
                         state = 1;
