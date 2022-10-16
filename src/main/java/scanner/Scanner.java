@@ -30,12 +30,12 @@ public class Scanner {
                     if (Character.isDigit(c)) {
                         state = 2;
                         numAccu = Character.digit(c, 10);
-                        //debug("0->2 digit "+numAccu);
+                        //debug("0 -> 2 digit " + numAccu);
                     } else if (Character.isAlphabetic(c)) {
                         state = 1;
                         lexAccu = new StringBuffer(1024);
                         lexAccu.append(c);
-                        //debug("0->1 alpha "+lexAccu);
+                        //debug("0 -> 1 alphabetic " + lexAccu);
                     } else if (Character.isWhitespace(c)) {
                         // ignore
                     } else if (isSpecial(c)) {
@@ -48,7 +48,7 @@ public class Scanner {
                     break;
                 case 1:
                     if (Character.isLetterOrDigit(c)){
-                        //debug("1 digit "+lexAccu);
+                        //debug("1 digit " + lexAccu);
                         lexAccu.append(c);
                     } else {
                         state = 0;
@@ -60,14 +60,14 @@ public class Scanner {
                     if (Character.isDigit(c)) {
                         int digit = Character.digit(c, 10);
                         numAccu = numAccu * 10 + digit;
-                        //debug("2 digit "+numAccu);
+                        //debug("2 digit " + numAccu);
                         if (numAccu > Integer.MAX_VALUE) {
                             throw new LexicalError("Integer literal too large!");
                         }
                     } else {
                         state = 0;
                         i = i - 1; // one back for next lexeme
-                        debug("LITERAL "+numAccu);
+                        debug("LITERAL " + numAccu);
                         list.add(new Literal(Terminals.LITERAL, (int) numAccu));
                     }
                     break;

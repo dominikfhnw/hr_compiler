@@ -4,15 +4,15 @@ import scanner.interfaces.IToken;
 
 public enum Terminals implements IToken {
 
-    IDENT("IDENT"),
-    LITERAL("LITERAL"),
-    TYPE("TYPE"),
+    IDENT("ident"),
+    LITERAL("literal"),
+    TYPE("type"),
 
     // Operators
-    ADDOPR("ADDOPR"),
-    BOOLOPR("BOOLOPR"),
-    MULTOPR("MULTOPR"),
-    RELOPR("RELOPR"),
+    ADDOPR("addOpr"),
+    BOOLOPR("boolOpr"),
+    MULTOPR("multOpr"),
+    RELOPR("relOpr"),
 
     // Symbols
     BECOMES(":="),
@@ -23,46 +23,40 @@ public enum Terminals implements IToken {
     SEMICOLON(";"),
 
     // Modes
-    CHANGEMODE("CHANGEMODE"),
-    FLOWMODE("FLOWMODE"),
-    MECHMODE("MECHMODE"),
+    CHANGEMODE("changeMode"),
+    FLOWMODE("flowMode"),
+    MECHMODE("mechMode"),
 
     // Keywords
-    CALL("CALL"),
-    CASE("CASE"),
-    DEBUGIN("DEBUGIN"),
-    DEBUGOUT("DEBUGOUT"),
-    DEFAULT("DEFAULT"),
-    DO("DO"),
-    ENDFUN("ENDFUN"),
-    ENDIF("ENDIF"),
-    ENDPROC("ENDPROC"),
-    ENDPROGRAM("ENDPROGRAM"),
-    ENDSWITCH("ENDSWITCH"),
-    ENDWHILE("ENDWHILE"),
-    ELSE("ELSE"),
-    ELSEIF("ELSEIF"),
-    FUN("FUN"),
-    GLOBAL("GLOBAL"),
-    IF("IF"),
-    INIT("INIT"),
-    LOCAL("LOCAL"),
-    NOT("NOT"),
-    PROC("PROC"),
-    PROGRAM("PROGRAM"),
-    RETURNS("RETURNS"),
-    SENTINEL("SENTINEL"),
-    SKIP("SKIP"),
-    SWITCH("SWITCH"),
-    THEN("THEN"),
-    WHILE("WHILE");
+    CALL("call"),
+    CASE("case"),
+    DEBUGIN("debugin"),
+    DEBUGOUT("debugout"),
+    DEFAULT("default"),
+    DO("do"),
+    ENDFUN("endfun"),
+    ENDIF("endif"),
+    ENDPROC("endproc"),
+    ENDPROGRAM("endprogram"),
+    ENDSWITCH("endswitch"),
+    ENDWHILE("endwhile"),
+    ELSE("else"),
+    ELSEIF("elseif"),
+    FUN("fun"),
+    GLOBAL("global"),
+    IF("if"),
+    INIT("init"),
+    LOCAL("local"),
+    NOT("not"),
+    PROC("proc"),
+    PROGRAM("program"),
+    RETURNS("returns"),
+    SENTINEL("sentinel"),
+    SKIP("skip"),
+    SWITCH("switch"),
+    THEN("then"),
+    WHILE("while");
 
     Terminals(String name) {
     }
-
-    @Override
-    public String toString() {
-        return name().toLowerCase();
-    }
-
 }
