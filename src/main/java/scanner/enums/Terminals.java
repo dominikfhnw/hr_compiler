@@ -84,9 +84,7 @@
         }
         @Override
         public String getLexeme() {
-            if (isLexeme()) {
-                return stringValue;
-            }
+            isLexeme(); //
             return stringValue;
         }
 
@@ -97,11 +95,10 @@
 
         @Override
         public char getSymbol() {
-            if (isSymbol()) {
-                charValue = stringValue.charAt(0);
-            }
-            return charValue;
+            isSymbol();
+            return charValue = stringValue.charAt(0);
         }
+
         @Override
         public String toString() {
             return name();
