@@ -59,11 +59,14 @@ public class Scanner {
                     } else {
                         state = 0;
                         i = i - 1;
-                        if(Terminals.isKeyword(String.valueOf(lexAccu)) || Operators.isKeyword(String.valueOf(lexAccu))){
+                        debug("IDENT " + "\t" + "\t" + lexAccu);
+                        if(Terminals.isKeyword(String.valueOf(lexAccu))){
                             IToken token = Terminals.valueOf(String.valueOf(lexAccu));
                             list.add(token);
+                        } else if (Operators.isKeyword(String.valueOf(lexAccu))){
+                            IToken token = Operators.valueOf(String.valueOf(lexAccu));
+                            list.add(token);
                         }
-                        debug("IDENT " + "\t" + "\t" + lexAccu);
                     }
                     break;
                 case 2: // state 2 = scan literal
