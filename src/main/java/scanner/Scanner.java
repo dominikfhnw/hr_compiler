@@ -1,7 +1,7 @@
 package scanner;
 
 import errors.LexicalError;
-
+import scanner.enums.Terminals;
 import java.util.Arrays;
 public class Scanner {
 
@@ -13,16 +13,18 @@ public class Scanner {
         return Arrays.asList('(', ',', ')', ':', ';', '=', '/', '\\', '/', '<', '>', '+', '-', '*', '~', '!', '?').contains(c);
     }
 
-    public static void scan(CharSequence cs) throws LexicalError {
+    public static ITokenList scan(CharSequence cs) throws LexicalError {
         // precondition: last character (if it exists) is a newline
         assert cs.length() == 0 || cs.charAt(cs.length() - 1) == '\n';
-        //scanner.interfaces.ITokenList l= new TokenList();
+
+        ITokenList list = new ITokenList();
         int state = 0;
         StringBuffer lexAccu = null; // for constructing the identifier
         long numAccu = 0L; // for constructing the literal value
+
         for (int i = 0; i < cs.length(); i++) {
             char c = cs.charAt(i);
-            //debug("char "+c);
+            // debug("char " + c);
             switch (state) {
                 case 0:
                     if (Character.isDigit(c)) {
@@ -33,7 +35,6 @@ public class Scanner {
                         state = 1;
                         lexAccu = new StringBuffer(1024);
                         lexAccu.append(c);
-
                         //debug("0->1 alpha "+lexAccu);
                     } else if (Character.isWhitespace(c)) {
                         // ignore
@@ -42,23 +43,21 @@ public class Scanner {
                         lexAccu = new StringBuffer(1024);
                         lexAccu.append(c);
                     } else {
-                        throw new LexicalError("illegal char: "+c);
+                        throw new LexicalError("illegal char: " + c);
                     }
                     break;
                 case 1:
                     if (Character.isLetterOrDigit(c)){
-                        state = 1;
                         //debug("1 digit "+lexAccu);
                         lexAccu.append(c);
                     } else {
                         state = 0;
                         i = i - 1;
-                        debug("IDENT "+lexAccu);
+                        debug("IDENT " + lexAccu);
                     }
                     break;
                 case 2:
                     if (Character.isDigit(c)) {
-                        state = 2;
                         int digit = Character.digit(c, 10);
                         numAccu = numAccu * 10 + digit;
                         //debug("2 digit "+numAccu);
@@ -69,27 +68,24 @@ public class Scanner {
                         state = 0;
                         i = i - 1; // one back for next lexeme
                         debug("LITERAL "+numAccu);
-                        // l.add(new scanner.interfaces.IToken.scanner.Literal(new Value.IntVal((int) numAccu)));
+                        list.add(new Literal(Terminals.LITERAL, (int) numAccu));
                     }
                     break;
                 case 3:
                     if (isSpecial(c)){
-                        state = 3;
                         lexAccu.append(c);
                     } else {
                         state = 0;
                         i = i - 1;
-                        debug("OP "+lexAccu);
+                        debug("OP " + lexAccu);
                     }
                     break;
                 default:
-                    throw new LexicalError("strange case entered: "+state);
+                    throw new LexicalError("strange case entered: " + state);
             }
         }
-
         assert state == 0;
-        //l.add(new scanner.interfaces.IToken.scanner.Base(scanner.enums.Terminals.SENTINEL));
-        //return l;
-
+        list.add(new Base(Terminals.SENTINEL));
+        return list;
     }
 }
