@@ -46,7 +46,7 @@ public class Scanner {
                         symAccu = new StringBuffer(1024);
                         symAccu.append(c);
                     } else if (Character.isWhitespace(c)) {
-                        // ignore whitespace (stay in state 0 and do nothing)
+                        "".isBlank(); // ignore whitespace (stay in state 0 and do nothing)
                     } else {
                         throw new LexicalError("illegal char: " + c);
                     }

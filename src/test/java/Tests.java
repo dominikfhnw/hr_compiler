@@ -51,5 +51,4 @@ public class Tests {
         assertEquals("divE", Operators.DIV_E.getLexeme());
         assertEquals("literal", Terminals.LITERAL.getLexeme());
     }
-
 }

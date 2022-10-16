@@ -50,21 +50,21 @@
         WHILE("while"),
 
         // Symbols
+        AMPERSAND("&"),
+        BACKSLASH("\\"),
         COLON(":"),
         COMMA(","),
+        EXCL("!"),
+        LBRACE("{"),
+        LBRACKET("["),
         LPAREN("("),
+        RBRACE("}"),
+        RBRACKET("]"),
         RPAREN(")"),
         SEMICOLON(";"),
-        LBRACKET("["),
-        RBRACKET("]"),
-        LBRACE("{"),
-        RBRACE("}"),
-        EXCL("!"),
-        QUEST("?"),
+        SEPARATOR("|"),
         SLASH("/"),
-        BACKSLASH("\\"),
-        AMPERSAND("&"),
-        SEPARATOR("|");
+        QUEST("?");
 
         final String stringValue;
         char charValue;
