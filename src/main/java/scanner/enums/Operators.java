@@ -13,20 +13,38 @@ public enum Operators implements IToken {
     DIV_T("divT"),
     EQ("=="),
     GE(">="),
-    GT(">"),
+    GT(">", '>'),
     LE("<="),
-    LT("<"),
-    MINUS("-"),
+    LT("<", '<'),
+    MINUS("-", '-'),
     MOD_E("modE"),
     MOD_F("modF"),
     MOD_T("modT"),
     NE("!="),
-    NOT("~"),
+    NOT("~", '~'),
     OR("\\/"),
-    PLUS("+"),
-    TIMES("*");
+    PLUS("+", '+'),
+    TIMES("*", '*');
 
-    Operators(String name) {
+    final String stringValue;
+    char charValue;
+
+
+    Operators(String stringValue) {
+        this.stringValue = stringValue;
+    }
+
+    Operators(String stringValue, char charValue) {
+        this.stringValue = stringValue;
+        this.charValue = charValue;
+    }
+
+    public String getStringValue() {
+        return stringValue;
+    }
+
+    public char getCharValue() {
+        return charValue;
     }
 
     @Override

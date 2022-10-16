@@ -1,5 +1,6 @@
 import errors.LexicalError;
 import org.junit.Test;
+import scanner.Literal;
 import scanner.Scanner;
 
 import java.io.IOException;

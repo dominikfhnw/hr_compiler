@@ -1,6 +1,7 @@
 package scanner;
 
 import errors.LexicalError;
+import scanner.enums.Operators;
 import scanner.enums.Terminals;
 import java.util.Arrays;
 public class Scanner {
@@ -10,7 +11,9 @@ public class Scanner {
     }
 
     public static boolean isSpecial(char c){
-        return Arrays.asList('(', ',', ')', ':', ';', '=', '/', '\\', '/', '<', '>', '+', '-', '*', '~', '!', '?').contains(c);
+        return Arrays.stream(Terminals.values()).anyMatch(terminals -> terminals.getCharValue() == c) ||
+            Arrays.stream(Operators.values()).anyMatch(operators -> operators.getCharValue() == c);
+        // return Arrays.asList('(', ',', ')', ':', ';', '=', '/', '\\', '/', '<', '>', '+', '-', '*', '~', '!', '?').contains(c); // has been replaced by line 14/15
     }
 
     public static ITokenList scan(CharSequence cs) throws LexicalError {
@@ -20,6 +23,7 @@ public class Scanner {
         ITokenList list = new ITokenList();
         int state = 0;
         StringBuffer lexAccu = null; // for constructing the identifier
+        // StringBuffer symAccu = null; // for constructing the special symbol
         long numAccu = 0L; // for constructing the literal value
 
         for (int i = 0; i < cs.length(); i++) {
@@ -36,12 +40,14 @@ public class Scanner {
                         lexAccu = new StringBuffer(1024);
                         lexAccu.append(c);
                         //debug("0 -> 1 alphabetic " + lexAccu);
-                    } else if (Character.isWhitespace(c)) {
-                        // ignore
                     } else if (isSpecial(c)) {
                         state = 3;
+                        // symAccu = new StringBuffer();
+                        // symAccu.append(c);
                         lexAccu = new StringBuffer(1024);
                         lexAccu.append(c);
+                    } else if (Character.isWhitespace(c)) {
+                        // ignore whitespace (stay in state 0 and do nothing)
                     } else {
                         throw new LexicalError("illegal char: " + c);
                     }

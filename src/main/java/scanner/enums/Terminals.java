@@ -14,14 +14,6 @@ public enum Terminals implements IToken {
     MULTOPR("multOpr"),
     RELOPR("relOpr"),
 
-    // Symbols
-    BECOMES(":="),
-    COLON(":"),
-    COMMA(","),
-    LPAREN("("),
-    RPAREN(")"),
-    SEMICOLON(";"),
-
     // Modes
     CHANGEMODE("changeMode"),
     FLOWMODE("flowMode"),
@@ -55,8 +47,46 @@ public enum Terminals implements IToken {
     SKIP("skip"),
     SWITCH("switch"),
     THEN("then"),
-    WHILE("while");
+    WHILE("while"),
 
-    Terminals(String name) {
+    // Symbols
+    COLON(":", ':'),
+    COMMA(",", ','),
+    LPAREN("(", '('),
+    RPAREN(")", ')'),
+    SEMICOLON(";", ';'),
+    LBRACKET("[", '['),
+    RBRACKET("]", ']'),
+    LBRACE("{", '{'),
+    RBRACE("}", '}'),
+    EXCL("!", '!'),
+    QUEST("?", '?'),
+    SLASH("/", '/'),
+    BACKSLASH("\\", '\\'),
+    AMPERSAND("&", '&'),
+    SEPARATOR("|", '|');
+
+    final String stringValue;
+    char charValue;
+
+    Terminals(String stringValue) {
+        this.stringValue = stringValue;
+    }
+
+    Terminals(String stringValue, char charValue) {
+        this.stringValue = stringValue;
+        this.charValue = charValue;
+    }
+
+    public String getStringValue() {
+        return stringValue;
+    }
+
+    public char getCharValue() {
+        return charValue;
+    }
+    @Override
+    public String toString() {
+        return name();
     }
 }
