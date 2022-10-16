@@ -40,8 +40,8 @@ public class Scanner {
                         state = 3;
                         // symAccu = new StringBuffer(1024);
                         // symAccu.append(c);
-                        lexAccu = new StringBuffer(1024);
-                        lexAccu.append(c);
+                        lexAccu = new StringBuffer(1024); // should work with symAccu
+                        lexAccu.append(c); // should work with symAccu
                     } else if (Character.isWhitespace(c)) {
                         // ignore whitespace (stay in state 0 and do nothing)
                     } else {
@@ -78,18 +78,16 @@ public class Scanner {
                     }
                     break;
                 case 3: // state 3 = scan symbol
-                    //if (isSubsequentSymbol(c, symAccu)){
-                    //state = 0;
-                    //symAccu.append(c);
-                    //IToken token = Terminals.valueOf(String.valueOf(symAccu));
-                    //list.add(token);
-                    if (isSpecial(c)){
-                        lexAccu.append(c);
+                    if (isSpecial(c) && isSubsequentSymbol(c, lexAccu)){ // should be symAccu
+                    state = 0;
+                    lexAccu.append(c); // should be symAccu
+                    IToken token = Terminals.valueOf(String.valueOf(lexAccu)); // should be symAccu
+                    list.add(token);
                     } else {
                         state = 0;
                         i = i - 1;
                         debug("OP " + lexAccu);
-                        // IToken token = Terminals.valueOf(String.valueOf(symAccu));
+                        // IToken token = Terminals.valueOf(String.valueOf(lexAccu));
                         // list.add(token);
                     }
                     break;
@@ -115,9 +113,7 @@ public class Scanner {
     // checks if char is a subsequent part of the previous symbol
 
     private static boolean isSubsequentSymbol(char c, StringBuffer previous) {
-        if (previous == null) {
-            return false;
-        }
+        assert previous != null;
         return switch (previous.toString()) {
             case "/", ">", "<", ":", "!" -> c == '=';
             case "&" -> c == '&';
