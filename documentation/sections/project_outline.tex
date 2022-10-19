@@ -1,0 +1,41 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Projektskizze}
+
+\vspace{10pt}
+
+Der Einfachheit wegen spezifizieren wir alle benutzerdefinierten Operatoren mit der gleichen Präzedenz wie jener der Multiplikation ($\langle$ multopr $\rangle$). Der Lexer weist allen unbekannten Folgen von Spezialzeichen ($\langle$ special $\rangle$ +) dem Token MULTOPR zu. \\ 
+
+\underline{Beispiel:} \\
+
+\dq a ** b\dq ergibt [(IDENT, \dq a\dq ), (MULTOPR, "**"), (IDENT,"b")] \\
+
+Benutzerdefinierte Operatoren mit alphanumerischen Namen (wie z. B.: \dq divE\dq) sind nicht vorgesehen. \\ 
+
+Der Parser prüft bei jedem MULTOPR-Token zuerst, ob bereits eine Funktion namens "custom\_multopr\_XX" definiert ist, wobei "XX" dem Hexadezimalwert des Attributs entspricht. In unserem Beispiel (MULTOPR, "**") prüft der Parser also, ob die Funktion \dq custom\_multopr\_2A2A\dq existiert. \\ 
+
+Falls sie bereits existiert, wird die Funktion aufgerufen. Andernfalls wird die Liste mit vordefinierten Operatoren durchsucht ("*", \dq divE\dq, etc). \\ 
+
+Der Vorteil von zwei Listen ist, dass wir bestehende Operatoren, wie beispielsweise den MULTOPR, neu definieren können. \\
+
+\underline{Pseudo-Code für eine Exponentialfunktion:} \\ 
+
+fun custom\_multopr\_2A2A(a:int32, b:int32) returns result:int32 \\
+\hspace*{4mm}local \\
+\hspace*{6mm} var i:int32 \\
+\hspace*{4mm}do \\
+\hspace*{6mm} i init := 0; \\
+\hspace*{6mm} result init := a; \\ 
+\hspace*{4mm} while (i $\langle$ b) do \\
+\hspace*{6mm}  result := result * a; \\ 
+\hspace*{6mm}  i := i + 1; \\
+\hspace*{4mm} endwhile \\
+endfun; \\
+
+\underline{In der Verwendung:} \\
+
+ b := 2 ** 8 
+
+\end{document}

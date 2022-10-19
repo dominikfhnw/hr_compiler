@@ -1,0 +1,60 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{relsize}
+\usepackage{geometry} 
+\usepackage[utf8]{inputenc}
+\usepackage{authblk}
+\usepackage{lmodern}
+\usepackage{comment}
+\usepackage[normalem]{ulem}
+\usepackage[naustrian]{babel} 
+\usepackage{textcomp}
+\usepackage{sectsty}
+\usepackage{graphicx} 
+\usepackage{wrapfig}
+\usepackage{listings}
+\usepackage{tabulary}
+\usepackage{subfiles}
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{beramono}
+\usepackage{amsmath,amssymb}  
+\usepackage{bm}  
+\usepackage[pdftex,bookmarks,colorlinks=true,linkcolor =black,breaklinks]{hyperref}
+\hypersetup{linktoc=all}
+\usepackage{memhfixc} 
+\usepackage{pdfsync}  
+\usepackage{tocloft}
+\usepackage[nopostdot, acronym, toc]{glossaries}
+\usepackage[nottoc, notlot, notlof]{tocbibind}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\parindent}{0em}
+
+\title {\textrm{Zwischenbericht \\ Benutzerdefinierte Operatoren}}
+\author{Yasmin Hrdina \footnote{yasmin.hrdina@students.fhnw.ch}, Dominik Russenberger\footnote{dominik.russenberger@students.fhnw.ch}}
+\affil{Fachhochschule Nordwestschweiz}
+\date{18. Oktober 2022}
+
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\begin{document}
+
+	\pagenumbering{roman}
+
+	\begin{titlepage}
+		\maketitle
+		\vfill
+	\end{titlepage}
+
+	\tableofcontents
+
+	\newpage 
+
+	\pagenumbering{arabic}
+
+	\subfile{sections/project_outline}
+
+	\newpage
+
+	\subfile{sections/potential_extensions}
+
+\end{document}

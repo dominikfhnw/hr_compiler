@@ -107,7 +107,6 @@ public class Scanner {
         return list;
     }
 
-
     /**
      * Checks if char is a non-alphabetic symbol.
      * @param c current char

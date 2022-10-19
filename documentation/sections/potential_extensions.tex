@@ -1,0 +1,25 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Erweiterungsmöglichkeiten}
+
+\vspace{10pt}
+
+Eine mögliche Erweiterung wären benutzerdefinierte Operatoren für andere Präzedenzen. Dazu müssten wir dem Lexer im Voraus mitteilen, dass eine gewisse Folge von Spezialzeichen einer bestimmten Operatoren-Klasse zugeordnet ist. \\
+
+\vspace{10pt}
+
+\underline{Beispiel:} \\
+
+Der Operator \dq\&\dq soll ein ADDOPR sein. Nun können wir folgenden Token erstellen: \\ 
+
+(ADDOPR, \dq\&\dq) \\
+
+Der Parser sucht nun nach einer Funktion "custom\_addopr\_26", analog zu dem zuvor beschriebenen MULTOPR. \\ 
+
+Ein Weg, dem Lexer benutzerdefinierte Operatoren mitzuteilen, wäre eine Compiler-Direktive am Anfang des Quelltextes in der Form \dq//custom addopr \&\dq. \\ 
+
+Die Direktive wird aufgrund der Notation in Form eines Kommentars von IML-Compilern, welche dieses Feature nicht unterstützen, ignoriert. 
+
+\end{document}
