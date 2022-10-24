@@ -1,8 +1,11 @@
 package parser;
+import concreteSyntaxTree.interfaces.IProgram;
 import errors.GrammarError;
 
 public interface IParser {
 
-    // ConcSyn.IProgram parse() throws GrammarError;
+    private IProgram parse() throws GrammarError {
+        return null;
+    }
 
 }
