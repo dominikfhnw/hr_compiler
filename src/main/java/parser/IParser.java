@@ -3,6 +3,6 @@ import errors.GrammarError;
 
 public interface IParser {
 
-    ConcSyn.IProgram parse() throws GrammarError;
+    // ConcSyn.IProgram parse() throws GrammarError;
 
 }
