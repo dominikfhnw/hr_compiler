@@ -1,4 +1,4 @@
-package scanner.modes;
+package scanner.modesAndTypes;
 
 import scanner.enums.Terminals;
 import scanner.Base;
