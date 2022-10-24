@@ -3,7 +3,6 @@ package parser;
 import scanner.Base;
 import scanner.ITokenList;
 import scanner.enums.Terminals;
-import scanner.interfaces.IToken;
 
 public class Parser implements IParser {
 
