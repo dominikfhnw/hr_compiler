@@ -9,17 +9,17 @@ public class ITokenList {
     private int position = 0;
 
     //for constructing the token list by the scanner
-    void add(IToken token) {
+    public void add(IToken token) {
         tokenList.add(token);
     }
 
     // for reading the token list by the parser
-    void reset() {
+    public void reset() {
         position = 0;
     }
 
     // for reading the token list by the parser
-    IToken nextToken() {
+    public IToken nextToken() {
         return tokenList.get(position++);
     }
 
