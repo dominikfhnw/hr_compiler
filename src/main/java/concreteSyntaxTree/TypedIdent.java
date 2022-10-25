@@ -6,18 +6,18 @@ import scanner.modesAndTypes.Type;
 import scanner.interfaces.IToken;
 
 public class TypedIdent extends Production implements ITypedIdent {
-    private final IToken ident;
-    private final IToken colon;
-    private final IToken type;
+    private final IToken T_ident;
+    private final IToken T_colon;
+    private final IToken T_type;
 
-    public TypedIdent(IToken ident, IToken colon, IToken type) {
-        this.ident = ident;
-        this.colon = colon;
-        this.type = type;
+    public TypedIdent(IToken T_ident, IToken T_colon, IToken T_type) {
+        this.T_ident = T_ident;
+        this.T_colon = T_colon;
+        this.T_type = T_type;
     }
 
     @Override
     public abstractSyntaxTree.TypedIdent toAbstractSyntax() {
-        return new abstractSyntaxTree.TypedIdent((Ident) ident, ((Type) type).getType());
+        return new abstractSyntaxTree.TypedIdent((Ident) T_ident, ((Type) T_type).getType());
     }
 }

@@ -7,16 +7,16 @@ import scanner.interfaces.IToken;
 
 public class FactorIdent extends Production implements IFactor {
 
-    private final IToken ident;
-    private final IFactorNTS factorNTS;
+    private final IToken T_ident;
+    private final IFactorNTS N_factorNTS;
 
-    public FactorIdent(IToken ident, IFactorNTS factorNTS) {
-        this.ident = ident;
-        this.factorNTS = factorNTS;
+    public FactorIdent(IToken T_ident, IFactorNTS N_factorNTS) {
+        this.T_ident = T_ident;
+        this.N_factorNTS = N_factorNTS;
     }
 
     @Override
     public abstractSyntaxTree.interfaces.IFactor toAbstractSyntax() {
-        return factorNTS.toAbstractSyntax((Ident) ident);
+        return N_factorNTS.toAbstractSyntax((Ident) T_ident);
     }
 }

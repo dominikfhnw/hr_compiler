@@ -6,17 +6,17 @@ import concreteSyntaxTree.interfaces.ITerm2;
 
 public class Term1 extends Production implements ITerm1 {
 
-    private final ITerm2 term2;
-    private final ITerm1NTS term1NTS;
+    private final ITerm2 N_term2;
+    private final ITerm1NTS N_term1NTS;
 
-    public Term1(ITerm2 term2, ITerm1NTS term1NTS) {
-        this.term2 = term2;
-        this.term1NTS = term1NTS;
+    public Term1(ITerm2 N_term2, ITerm1NTS N_term1NTS) {
+        this.N_term2 = N_term2;
+        this.N_term1NTS = N_term1NTS;
     }
 
     @Override
     public abstractSyntaxTree.interfaces.IExpression toAbstractSyntax() {
-        return term1NTS.toAbstractSyntax(term2.toAbstractSyntax());
+        return N_term1NTS.toAbstractSyntax(N_term2.toAbstractSyntax());
     }
 
 }
