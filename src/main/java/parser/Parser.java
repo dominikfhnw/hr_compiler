@@ -12,19 +12,17 @@ public class Parser implements IParser {
     private Base currentToken;
     private Terminals currentTerminal;
 
-    // private IConcSyn concSyn;
-
     public Parser(ITokenList tokenList) {
         this.tokenList = tokenList;
         this.tokenList.reset();
         getNextToken();
-        // conSyn = new ConSyn();
     }
 
     private void getNextToken() {
         this.currentToken = (Base) tokenList.nextToken();
         this.currentTerminal = currentToken.getTerminal();
     }
+
     private IToken consume(Terminals expectedTerminal) throws GrammarError {
         if (currentTerminal == expectedTerminal) {
             IToken consumedTerminal = currentToken;
