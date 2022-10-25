@@ -5,8 +5,8 @@ import scanner.enums.Types;
 
 public interface IExpression {
 
-    public Types getType();
-    public LRValue getLRValue();
-    public void doTypeCast(Types type);
+    Types getType();
+    LRValue getLRValue();
+    void doTypeCast(Types type);
 
 }

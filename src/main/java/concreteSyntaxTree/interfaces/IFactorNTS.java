@@ -4,6 +4,6 @@ import scanner.Ident;
 
 public interface IFactorNTS extends IProduction {
 
-    public IFactor toAbstractSyntax(Ident ident);
+    IFactor toAbstractSyntax(Ident ident);
 
 }

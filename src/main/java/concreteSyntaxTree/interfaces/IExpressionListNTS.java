@@ -5,6 +5,6 @@ import java.util.ArrayList;
 
 public interface IExpressionListNTS extends IProduction {
 
-    public ArrayList<IExpression> toAbstractSyntax(ArrayList<IExpression> expressionList);
+    ArrayList<IExpression> toAbstractSyntax(ArrayList<IExpression> expressionList);
 
 }
