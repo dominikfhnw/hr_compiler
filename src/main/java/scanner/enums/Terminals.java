@@ -18,7 +18,6 @@
 
         // Modes
         CHANGEMODE("changeMode"),
-        FLOWMODE("flowMode"),
         MECHMODE("mechMode"),
 
         // Keywords
@@ -37,11 +36,10 @@
         ELSE("else"),
         ELSEIF("elseif"),
         FUN("fun"),
-        GLOBAL("global"),
         IF("if"),
         INIT("init"),
         LOCAL("local"),
-        NOT("not"),
+        NOTOPR("not"),
         PROC("proc"),
         PROGRAM("program"),
         RETURNS("returns"),
@@ -67,6 +65,42 @@
         SEPARATOR("|"),
         SLASH("/"),
         QUEST("?");
+        /*
+        CHANGEMODE_NTS(""),
+        CMD(""),
+        CPSCMD(""),
+        CPSCMD_NTS(""),
+        CPSDECL(""),
+        CPSDECL_NTS(""),
+        CPSSTODECL(""),
+        CPSSTODECL_NTS(""),
+        DECL(""),
+        EXPR(""),
+        EXPR_NTS(""),
+        EXPRLIST(""),
+        EXPRLIST_NTS(""),
+        EXPRLISTLPAREN_NTS(""),
+        FACTOR(""),
+        FACTOR_NTS(""),
+        FUNDECL(""),
+        FUNDECL_NTS(""),
+        IFELSE_NTS(""),
+        MECHMODE_NTS(""),
+        MONADICOPR(""),
+        PARAM(""),
+        PARAM_NTS(""),
+        PARAMLIST(""),
+        PARAMLIST_NTS(""),
+        PROCDECL(""),
+        PROCDECL_NTS(""),
+        TERM1(""),
+        TERM1_NTS(""),
+        TERM2(""),
+        TERM2_NTS(""),
+        TERM3(""),
+        TERM3_NTS(""),
+        TODECL(""),
+        TYPEDIDENT("");*/
 
         final String stringValue;
         char charValue;
@@ -86,7 +120,7 @@
         }
         @Override
         public String getLexeme() {
-            isLexeme(); //
+            isLexeme();
             return stringValue;
         }
 

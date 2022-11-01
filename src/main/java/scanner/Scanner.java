@@ -47,7 +47,7 @@ public class Scanner {
                         symAccu = new StringBuffer(1024);
                         symAccu.append(c);
                     } else if (Character.isWhitespace(c)) {
-                        "".isBlank(); // ignore whitespace (stay in state 0 and do nothing)
+                        // "".isBlank(); // ignore whitespace (stay in state 0 and do nothing)
                     } else {
                         throw new LexicalError("illegal char: " + c);
                     }
@@ -85,7 +85,7 @@ public class Scanner {
                     }
                     break;
                 case 3: // state 3 = scan symbol
-                    if (isSpecial(c) && Operators.isSubsequentSymbol(c, symAccu)){
+                    if (isSpecial(c) && Operators.isSubsequentSymbol(c, symAccu) ){
                     state = 0;
                     symAccu.append(c);
                     IToken token = Terminals.valueOf(String.valueOf(symAccu));

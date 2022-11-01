@@ -7,9 +7,7 @@ public class Type extends Base {
 
     public enum Types {
         BOOL,
-        INT32,
-        INT64,
-        INT1024
+        INT32
     }
 
     private final Types type;
