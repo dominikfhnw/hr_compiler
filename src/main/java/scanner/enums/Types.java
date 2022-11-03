@@ -4,11 +4,8 @@ import scanner.interfaces.IToken;
 
 public enum Types implements IToken {
 
-    INT,
     BOOL,
-    INT32,
-    INT64,
-    INT1024;
+    INT32;
 
     @Override
     public String getLexeme() {

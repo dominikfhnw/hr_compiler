@@ -26,7 +26,7 @@ public class Tests {
 
     @Test
     public void testIsLexeme() {
-        assertTrue(Operators.MOD_E.isLexeme());
+        assertTrue(Operators.MOD_T.isLexeme());
         assertFalse(Operators.COR.isLexeme());
         assertTrue(Terminals.LITERAL.isLexeme());
         assertFalse(Terminals.EXCL.isLexeme());
@@ -34,7 +34,7 @@ public class Tests {
 
     @Test
     public void testIsSymbol() {
-        assertFalse(Operators.MOD_E.isSymbol());
+        assertFalse(Operators.MOD_T.isSymbol());
         assertTrue(Operators.MINUS.isSymbol());
         assertFalse(Terminals.LITERAL.isSymbol());
         assertTrue(Terminals.EXCL.isSymbol());
@@ -48,7 +48,7 @@ public class Tests {
 
     @Test
     public void testGetLexeme() {
-        assertEquals("divE", Operators.DIV_E.getLexeme());
+        assertEquals("divT", Operators.DIV_T.getLexeme());
         assertEquals("literal", Terminals.LITERAL.getLexeme());
     }
 }

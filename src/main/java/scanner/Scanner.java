@@ -85,7 +85,7 @@ public class Scanner {
                     }
                     break;
                 case 3: // state 3 = scan symbol
-                    if (isSpecial(c) && Operators.isSubsequentSymbol(c, symAccu)){
+                    if (isSpecial(c) && Operators.isSubsequentSymbol(c, symAccu) ){
                     state = 0;
                     symAccu.append(c);
                     IToken token = Terminals.valueOf(String.valueOf(symAccu));

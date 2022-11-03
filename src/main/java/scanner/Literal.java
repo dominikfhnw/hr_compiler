@@ -6,10 +6,6 @@ import scanner.Type.Types;
 
 public class Literal extends Base {
 
-    /**
-     * TO BE DONE: Spec for other int-types (INT64, INT1024)
-     */
-
     private final int value;
     private final boolean isBoolean;
     private Types castType;
