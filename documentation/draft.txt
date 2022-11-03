@@ -4,15 +4,21 @@ Weise neue infix-Operatoren definiert werden können. Wir zeigen auf mit welchen
 am Lexer, Parser und der Grammatik eine solche Erweiterung implementiert werden kann.
 
 Idee:
+Wir erweitern IML um eine Möglichkeit benutzerdefinierte Operatoren hinzuzufügen. Neue Operatoren
+müssen im Deklarationsteil des IML-Programms angegeben werden (zB "infix ** 3", wobei 3 für die gewählte Präzedenz steht), und werden anschliessend in einer Funktion namens "operator**" definiert, 
+Anschliessend kann der neue Operator wie jeder andere Infix-Operator verwendet werden.
+
+Vergleich mit anderen Programmiersprachen:
+Uns ist keine andere Programmiersprache bekannt in der komplett neue Operatoren definiert werden können. C++ bietet eine Möglichkeit an, bestehende Operatoren für neue Objekte zu definieren ("overload"). Wir haben die gleiche Namensgebung für unsere neuen Operatoren wie für Overloads in C++ gewählt, mit der Absicht dass 
 
 Lexikalische Syntax:
 Erweiterung von "⟨ident⟩" um "⟨special⟩"-Charaktere zu erlauben: 
 ⟨ident⟩ ::= (⟨letter⟩(⟨letter⟩ | ⟨digit⟩ | ⟨special⟩ | ‘_’ | ‘’’)∗)⟨reservedid⟩
 
+Ausserdem wird "⟨symbol⟩" um die neu definierten Operatoren erweitert. Um dies zu erreichen muss das Programm eventuell in zwei Phasen gelext und geparst werden.
 
 Grammatikalische Syntax:
 Um neue Operatoren und ihre Präzedenz zu definieren erweitern wir die Grammatik wie folgt:
-
 
 Definition eines neuen Operators "⟨ident⟩" mit Präzedenz "⟨literal⟩":
 ⟨decl⟩ ::= ⟨stoDecl⟩
@@ -22,25 +28,28 @@ Definition eines neuen Operators "⟨ident⟩" mit Präzedenz "⟨literal⟩":
 
 ⟨operDecl⟩ ::= infix {⟨special⟩} ⟨literal⟩   
 
-Ausserdem
+Ausserdem wird, je nach Präzedenz, einer der Grammatikregeln ⟨relopr⟩, ⟨addopr⟩ oder ⟨multopr⟩ mit dem neuen Operator ergänzt.
 
 Anhang: IML Testprogramm
 program CustomOperator()
 global
   infix ** 3
 
-// TODO: handgeschriebene verbesserung von Dr. Lederer aufnehmen
-fun operator**(a:int32, b:int32) returns result:int32
-local
-  var i:int32
+  // TODO: handgeschriebene verbesserung von Dr. Lederer aufnehmen
+  fun operator**(a:int32, b:int32) returns result:int32
+  local
+    var i:int32
+  do
+   i init := 0;
+   result init := a;
+   while i < b do
+    result := result * a;  
+    i := i + 1;
+   endwhile
+  endfun;
 do
- i init := 0;
- result init := a;
- while i < b do
-  result := result * a;  
-  i := i + 1;
- endwhile
-endfun;
+  debugout 2 ** 8
+endprogram
 
 Und in der Verwendung:
  b := base_number ** call fib(2)
