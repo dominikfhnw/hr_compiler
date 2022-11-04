@@ -1,15 +1,19 @@
 Abstract:
 Wir schlagen eine Erweiterung für die Programmiersprache IML vor, mit der auf einfache
-Weise neue infix-Operatoren definiert werden können. Wir zeigen auf mit welchen Änderungen
+Weise neue Infix-Operatoren definiert werden können. Wir zeigen auf mit welchen Änderungen
 am Lexer, Parser und der Grammatik eine solche Erweiterung implementiert werden kann.
 
 Idee:
 Wir erweitern IML um eine Möglichkeit benutzerdefinierte Operatoren hinzuzufügen. Neue Operatoren
 müssen im Deklarationsteil des IML-Programms angegeben werden (zB "infix ** 3", wobei 3 für die gewählte Präzedenz steht), und werden anschliessend in einer Funktion namens "operator**" definiert, 
-Anschliessend kann der neue Operator wie jeder andere Infix-Operator verwendet werden.
+Anschliessend kann der neue Operator wie jeder andere Infix-Operator verwendet werden, zum Beispiel:
+ b := base_number ** fib(2)
+
+Kontext- und Typeinschränkungen:
+Das Verwenden der neuen Operatoren ist nur erlaubt nachdem sie bereits vorher im Programm definiert worden sind. Bei den unterstützten Typen beschränken wir uns auf int32 (TODO: wir werden wohl sowieso nur das reduzierte IML implementieren)
 
 Vergleich mit anderen Programmiersprachen:
-Uns ist keine andere Programmiersprache bekannt in der komplett neue Operatoren definiert werden können. C++ bietet eine Möglichkeit an, bestehende Operatoren für neue Objekte zu definieren ("overload"). Wir haben die gleiche Namensgebung für unsere neuen Operatoren wie für Overloads in C++ gewählt, mit der Absicht dass 
+Uns ist keine andere Programmiersprache bekannt in der komplett neue Operatoren definiert werden können. C++ bietet eine Möglichkeit an, bestehende Operatoren für neue Objekte zu definieren ("overload"). Wir haben die gleiche Namensgebung für die implementierende Funktion unserer neuen Operatoren wie für Overloads in C++ gewählt ("operator**"). Dies mit der Absicht dass C++-Programmierer schon möglichst vertraut mit der Syntax sind.
 
 Lexikalische Syntax:
 Erweiterung von "⟨ident⟩" um "⟨special⟩"-Charaktere zu erlauben: 
@@ -30,29 +34,29 @@ Definition eines neuen Operators "⟨ident⟩" mit Präzedenz "⟨literal⟩":
 
 Ausserdem wird, je nach Präzedenz, einer der Grammatikregeln ⟨relopr⟩, ⟨addopr⟩ oder ⟨multopr⟩ mit dem neuen Operator ergänzt.
 
+Entwurfsalternativen:
+In unserer ersten Spezifikation wollten wir die Deklaration zuerst im Stile von C und C++ mit Kompilerpragmas in Form von Kommentaren implementieren. Nach Rückmeldung haben wir uns entschlossen dass eine Deklaration im "global"-Block sauberer ist. 
+Auch die Idee, den Operator in der Deklaration in Hexadezimal zu schreiben haben wir uns aus Gründen der Lesbarkeit verworfen.
+
 Anhang: IML Testprogramm
 program CustomOperator()
 global
   infix ** 3
-
-  // TODO: handgeschriebene verbesserung von Dr. Lederer aufnehmen
   fun operator**(a:int32, b:int32) returns result:int32
   local
     var i:int32
   do
    i init := 0;
-   result init := a;
+   result init := 1;
    while i < b do
     result := result * a;  
-    i := i + 1;
+    i := i + 1
    endwhile
-  endfun;
+  endfun
 do
   debugout 2 ** 8
 endprogram
 
-Und in der Verwendung:
- b := base_number ** call fib(2)
 
 
 ===========================================================
@@ -64,11 +68,11 @@ Und in der Verwendung:
 • überprüft von Fix&Foxi
 • Kontext- und Typeinschränkungen
 • Codeerzeugung
-– erst im Schlussbericht
+  – erst im Schlussbericht
 • Vergleich mit anderen Programmiersprachen
 • Entwurfsalternativen
 • Anhang: IML Testprogramme
-– zum Test aller relevanten Eigenschaften der Erweiterung, insbesondere der Kontext- und Typeinschränkungen
-– keine Einschränkung der Länge dieses Anhangs
+  – zum Test aller relevanten Eigenschaften der Erweiterung, insbesondere der Kontext- und Typeinschränkungen
+  – keine Einschränkung der Länge dieses Anhangs
 • das Gewicht auf den einzelnen Punkten hängt stark vom gewählten Thema ab
 • Schwerpunkt der Berichte ist die gewählte Erweiterung und ihre Einbindung in IML, nicht IML selbst
