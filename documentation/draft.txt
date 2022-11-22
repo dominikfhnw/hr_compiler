@@ -1,65 +1,146 @@
+Tailor-made Operators
+
+Zwischenbericht V3
+
+Dominik Russenberger, Yasmin Hrdina
+
+Compilerbau, HS 2022, Team HR
+
 Abstract:
-Wir schlagen eine Erweiterung für die Programmiersprache IML vor, mit der auf einfache
-Weise neue Infix-Operatoren definiert werden können. Wir zeigen auf mit welchen Änderungen
-am Lexer, Parser und der Grammatik eine solche Erweiterung implementiert werden kann.
+
+Wir schlagen eine Erweiterung für die Programmiersprache IML vor, mit der benutzerdefinierte Infix-Operatoren auf
+einfache Art und Weise definiert werden können. Wir zeigen auf, mit welchen Änderungen an Lexer, Parser und Grammatik
+eine solche Erweiterung implementiert werden kann.
 
 Idee:
-Wir erweitern IML um eine Möglichkeit benutzerdefinierte Operatoren hinzuzufügen. Neue Operatoren
-müssen im Deklarationsteil des IML-Programms angegeben werden (zB "infix ** 3", wobei 3 für die gewählte Präzedenz steht), und werden anschliessend in einer Funktion namens "operator**" definiert, 
-Anschliessend kann der neue Operator wie jeder andere Infix-Operator verwendet werden, zum Beispiel:
- b := base_number ** fib(2)
 
-Kontext- und Typeinschränkungen:
-Das Verwenden der neuen Operatoren ist nur erlaubt nachdem sie bereits vorher im Programm definiert worden sind. Bei den unterstützten Typen beschränken wir uns auf int32 (TODO: wir werden wohl sowieso nur das reduzierte IML implementieren)
+Wir erweitern IML um eine Möglichkeit, benutzerdefinierte Operatoren hinzuzufügen. Neue Operatoren werden im
+Deklarationsteil des IML-Programms angegeben, z. B.: "**". Von der ursprünglichen Idee, die Präzedenz wählen zu
+können und spezifizieren zu müssen sowie das Keyword infix zu verwenden, z. B.: in der Form "infix ** 3", haben wir
+uns mittlerweile distanziert (siehe Abschnitt "Grammatikalische Syntax"). Der neue Operator wird in einer Funktion
+namens "**" definiert. Anschliessend kann dieser wie jeder andere Infix-Operator verwendet werden, wie das folgende
+Beispiel zeigt:
+
+b := base_number ** fib(2)
 
 Vergleich mit anderen Programmiersprachen:
-Uns ist keine andere Programmiersprache bekannt in der komplett neue Operatoren definiert werden können. C++ bietet eine Möglichkeit an, bestehende Operatoren für neue Objekte zu definieren ("overload"). Wir haben die gleiche Namensgebung für die implementierende Funktion unserer neuen Operatoren wie für Overloads in C++ gewählt ("operator**"). Dies mit der Absicht dass C++-Programmierer schon möglichst vertraut mit der Syntax sind.
+
+Leider konnten wir uns noch nicht im Detail mit der Umsetzung von benutzerdefinierten Operatoren in Haskell
+auseinandersetzen.
 
 Lexikalische Syntax:
-Erweiterung von "⟨ident⟩" um "⟨special⟩"-Charaktere zu erlauben: 
-⟨ident⟩ ::= (⟨letter⟩(⟨letter⟩ | ⟨digit⟩ | ⟨special⟩ | ‘_’ | ‘’’)∗)⟨reservedid⟩
 
-Ausserdem wird "⟨symbol⟩" um die neu definierten Operatoren erweitert. Um dies zu erreichen muss das Programm eventuell in zwei Phasen gelext und geparst werden.
+Da wir weder infix noch operator als Keyword verwenden, erweitern wir die Reserved Identifier entgegen unserem
+Vorhaben in Version 2 des Zwischenberichtes nicht. Da nicht alle ⟨special⟩-Characters für benutzerdefinierte
+Operatoren verwendet werden dürfen, erweitern wir die regulären Definitionen für "Printable Characters" mit
+⟨oprChar⟩ wie folgt:
+
+⟨oprChar⟩ ::= ⟨special⟩ \ {‘(’, ‘)’, ‘,’, ‘;’, ‘:’, ‘.’, ‘[’, ‘]’, ‘{’, ‘}’, ‘"’, ‘’’, ‘‘’}
+
+Ein Overload bestehender Operatoren ist nicht erlaubt. Der Anwender erhält im Falle eines Overloads einen
+Compile-Time-Error. Anders als in Version 1 unseres Zwischenberichtes angedacht, werden wir den bestehenden
+Identifier ⟨ident⟩ so belassen wie er spezifiziert wurde und die regulären Definitionen der Literale und
+Identifier mit einem Identifier für benutzerdefinierte Operatoren ⟨custopr⟩ wie folgt erweitern:
+
+⟨custopr⟩ ::= ⟨oprChar⟩+
+
+Demzufolge erweitern wir auch die reguläre Definition der Lexeme wie folgt:
+
+⟨lexeme⟩ ::= ⟨reservedid⟩ | ⟨symbol⟩ | ⟨literal⟩ | ⟨ident⟩ | ⟨custopr⟩ | ⟨whitespace⟩
 
 Grammatikalische Syntax:
-Um neue Operatoren und ihre Präzedenz zu definieren erweitern wir die Grammatik wie folgt:
 
-Definition eines neuen Operators "⟨ident⟩" mit Präzedenz "⟨literal⟩":
-⟨decl⟩ ::= ⟨stoDecl⟩
-       | ⟨funDecl ⟩
-       | ⟨procDecl ⟩
-       | ⟨operDecl ⟩
+Die Präzedenz eines benutzerdefinierten Operators ist mit einer höchsten Präzedenz festgelegt, die um eins höher
+ist als jene der Multiplikationsoperatoren. Die Assoziativität von benutzerdefinierten Operatoren wird im Sinne
+der Simplizität als Linksassoziativität festgelegt. Die Überlegung dahinter ist, dass eine variable Assoziativität
+benutzerdefinierter Operatoren in Kombination mit einer einzigen Präzedenz problematisch sein kann, wenn man zwei
+Operatoren definiert, wobei einer linksassoziativ und der andere rechtassoziativ ist. Die Operatoren werden mit
+⟨custopr⟩ erweitert. Die Liste der Expressions in IML lautet dann wie folgt:
 
-⟨operDecl⟩ ::= infix {⟨special⟩} ⟨literal⟩   
+            Präzedenz           Assoziativität
+CUSTOPR     4 (= höchste)       Links
+MULTOPR     3                   Links
+ADDOPR      2                   Links
+RELOPR      1                   Keine
+BOOLOPR     0                   Rechts
 
-Ausserdem wird, je nach Präzedenz, einer der Grammatikregeln ⟨relopr⟩, ⟨addopr⟩ oder ⟨multopr⟩ mit dem neuen Operator ergänzt.
+Die Expressions werden aus Spezifikationssicht wie folgt erweitert:
+
+⟨expr⟩      ::=     ⟨term0and⟩ | ⟨term0or⟩
+⟨term0and⟩  ::=     ⟨term1⟩ | ⟨term1⟩ ‘/\?’ ⟨term0and⟩
+⟨term0or⟩   ::=     ⟨term1⟩ | ⟨term1⟩ ‘\/?’ ⟨term0or⟩
+⟨term1⟩     ::=     ⟨term2⟩ | ⟨term2⟩ ⟨relopr⟩ ⟨term2⟩
+⟨term2⟩     ::=     ⟨term3⟩ | ⟨term2⟩ ⟨addopr⟩ ⟨term3⟩
+⟨term3⟩     ::=     ⟨term4⟩ | ⟨term3⟩ ⟨multopr⟩ ⟨term4⟩
+⟨term4⟩     ::=     ⟨factor⟩ | ⟨term4⟩ ⟨custopr⟩ ⟨factor⟩
+⟨factor⟩    ::=     ⟨literal⟩
+                  | ⟨ident⟩
+                  | ⟨ident⟩ init
+                  | ⟨ident⟩ ⟨exprList⟩
+                  | ⟨monopr⟩ ⟨factor⟩
+                  | ‘(’ ⟨expr⟩ ‘)’
+
+⟨exprList⟩ ::= ‘(’ [⟨expr⟩ {‘,’ ⟨expr⟩}] ‘)’
+
+Die Expressions werden aus Implementierungssicht wie folgt erweitert:
+
+⟨expr⟩      ::=     ⟨term1⟩ ({‘/\?’ ⟨term1⟩} | {‘\/?’ ⟨term1⟩})
+⟨term1⟩     ::=     ⟨term2⟩ [⟨relopr⟩ ⟨term2⟩]
+⟨term2⟩     ::=     ⟨term3⟩ {⟨addopr⟩ ⟨term3⟩}
+⟨term3⟩     ::=     ⟨term4⟩ {⟨multopr⟩ ⟨term4⟩}
+⟨term4⟩     ::=     ⟨factor⟩ {⟨custopr⟩ ⟨factor⟩}
+⟨factor⟩    ::=     ⟨literal⟩
+                  | ⟨ident⟩ [init | ⟨exprList⟩]
+                  | ⟨monopr⟩ ⟨factor⟩
+                  | ‘(’ ⟨expr⟩ ‘)’
+
+⟨exprList⟩  ::=     ‘(’ [⟨expr⟩ {‘,’ ⟨expr⟩}] ‘)’
+
+Wir benötigen eine neue Produktion, die es erlaubt, dass dem Keyword fun entweder der Identifier ⟨ident⟩ oder
+⟨custopr⟩ folgen kann. Um das zu erreichen, spezifizieren wir ⟨funName⟩:
+
+⟨funName⟩   ::=     ⟨ident⟩ | ⟨custopr⟩
+
+Nun können wir ⟨funDecl⟩ wie folgt anpassen:
+
+⟨funDecl⟩   ::=     fun ⟨funName⟩ ⟨paramList⟩ returns ⟨stoDecl⟩
+                    [global ⟨globlmps⟩] [local cpsStoDecl] do ⟨cpsCmd⟩
+                    endfun
+
+Kontext- und Typeinschränkungen:
+
+Die Verwendung neuer Operatoren ist nur erlaubt, wenn sie zuvor im Programm definiert wurden. Bei den unterstützten
+Typen beschränken wir uns auf int32 und bool, da wir IML in der reduzierten Variante implementieren.
 
 Entwurfsalternativen:
-In unserer ersten Spezifikation wollten wir die Deklaration zuerst im Stile von C und C++ mit Kompilerpragmas in Form von Kommentaren implementieren. Nach Rückmeldung haben wir uns entschlossen dass eine Deklaration im "global"-Block sauberer ist. 
-Auch die Idee, den Operator in der Deklaration in Hexadezimal zu schreiben haben wir uns aus Gründen der Lesbarkeit verworfen.
 
-Anhang: IML Testprogramm
+In unserer ersten Spezifikation wollten wir die Deklaration im Stil von C und C++ mit Compiler-Pragmas in Form von
+Kommentaren implementieren. Wir sind jedoch zu dem Entschluss gekommen, dass eine Deklaration im "global"-Block
+sauberer ist. Aus Gründen der Lesbarkeit haben wir die initiale Idee verworfen, die Operatoren in der Deklaration
+hexadezimal zu schreiben.
+
+Anhang:
+
+IML Testprogramm:
+
 program CustomOperator()
 global
-  infix ** 3
-  fun operator**(a:int32, b:int32) returns result:int32
+  fun **(a:int32, b:int32) returns result:int32
   local
     var i:int32
   do
-   i init := 0;
-   result init := 1;
-   while i < b do
-    result := result * a;  
-    i := i + 1
-   endwhile
+    i init := 0;
+    result init := 1;
+    while i < b do
+      result := result * a;
+      i := i + 1
+    endwhile
   endfun
 do
   debugout 2 ** 8
 endprogram
 
-
-
-===========================================================
+=======================================================================================================================
 
 • Abstract
 • Idee der Erweiterung mit konkreten Beispielen
