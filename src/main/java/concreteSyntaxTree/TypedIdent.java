@@ -6,9 +6,9 @@ import scanner.modesAndTypes.Type;
 import scanner.interfaces.IToken;
 
 public class TypedIdent extends Production implements ITypedIdent {
-    private final IToken T_ident;
-    private final IToken T_colon;
-    private final IToken T_type;
+    final IToken T_ident;
+    final IToken T_colon;
+    final IToken T_type;
 
     public TypedIdent(IToken T_ident, IToken T_colon, IToken T_type) {
         this.T_ident = T_ident;

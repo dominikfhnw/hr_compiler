@@ -8,7 +8,7 @@ public interface IAbstractSyntaxTreeNode {
 
     public abstract String toString(String indent);
 
-        public void saveNamespace(HashMap<String, TypedIdent> saveNamespace) throws AlreadyDeclaredError, AlreadyInitializedError;
+        public void storeNamespace(HashMap<String, TypedIdent> saveNamespace) throws AlreadyDeclaredError, AlreadyInitializedError;
 
         public void checkScope() throws NotDeclaredError;
 
