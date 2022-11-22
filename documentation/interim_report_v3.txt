@@ -17,7 +17,7 @@ Idee:
 Wir erweitern IML um eine Möglichkeit, benutzerdefinierte Operatoren hinzuzufügen. Neue Operatoren werden im
 Deklarationsteil des IML-Programms angegeben, z. B.: "**". Von der ursprünglichen Idee, die Präzedenz wählen zu
 können und spezifizieren zu müssen sowie das Keyword infix zu verwenden, z. B.: in der Form "infix ** 3", haben wir
-uns mittlerweile distanziert (siehe Abschnitt "Grammatikalische Syntax"). Der neue Operator wird in einer Funktion
+uns mittlerweile distanziert (siehe Abschnitt "Grammatikalische Syntax"). Der neue Operator wird in einer Funktion
 namens "**" definiert. Anschliessend kann dieser wie jeder andere Infix-Operator verwendet werden, wie das folgende
 Beispiel zeigt:
 

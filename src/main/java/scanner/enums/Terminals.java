@@ -12,6 +12,7 @@
 
         // Operators
         ADDOPR("addOpr"),
+        CUSTOPR("custOpr"),
         BOOLOPR("boolOpr"),
         MULTOPR("multOpr"),
         RELOPR("relOpr"),
