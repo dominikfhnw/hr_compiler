@@ -6,8 +6,8 @@ import concreteSyntaxTree.interfaces.ITerm3;
 
 public class Term2 extends Production implements ITerm2 {
 
-    private final ITerm3 N_term3;
-    private final ITerm2NTS N_term2NTS;
+    final ITerm3 N_term3;
+    final ITerm2NTS N_term2NTS;
 
     public Term2(ITerm3 N_term3, ITerm2NTS N_term2NTS) {
         this.N_term3 = N_term3;

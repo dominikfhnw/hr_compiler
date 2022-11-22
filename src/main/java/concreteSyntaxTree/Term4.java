@@ -3,8 +3,8 @@ import concreteSyntaxTree.interfaces.*;
 
 public class Term4 extends Production implements ITerm4 {
 
-    private final IFactor N_factor;
-    private final ITerm4NTS N_term4NTS;
+    final IFactor N_factor;
+    final ITerm4NTS N_term4NTS;
 
     public Term4(IFactor N_factor, ITerm4NTS N_term4NTS) {
         this.N_factor = N_factor;
