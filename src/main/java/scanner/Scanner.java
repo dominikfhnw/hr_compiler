@@ -117,5 +117,4 @@ public class Scanner {
         return Arrays.stream(Operators.values()).anyMatch(operators -> operators.getSymbol() == c) ||
             Arrays.stream(Terminals.values()).anyMatch(terminals -> terminals.getSymbol() == c);
     }
-
 }
