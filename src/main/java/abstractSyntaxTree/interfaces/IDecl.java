@@ -1,6 +1,6 @@
 package abstractSyntaxTree.interfaces;
 
-public interface IDecl {
+public interface IDecl extends IAbstractSyntaxTreeNode {
 
     public String getIdentString();
 
