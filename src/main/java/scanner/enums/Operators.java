@@ -83,7 +83,6 @@ public enum Operators implements IToken {
             default -> false;
         };
     }
-
     @Override
     public String toString() {
         return name();
