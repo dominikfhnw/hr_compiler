@@ -1,4 +1,5 @@
 package abstractSyntaxTree.interfaces;
 
-public interface IFactor extends IExpression{
+public interface IFactor extends IExpression {
+
 }
