@@ -4,6 +4,7 @@ import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.IChangeModeNTS;
 import scanner.enums.ChangeModes;
 import scanner.interfaces.IToken;
+import scanner.modesAndTypes.ChangeMode;
 
 // changeModeNTS ::= CHANGEMODE
 
@@ -16,7 +17,6 @@ public class ChangeModeNTS extends Production implements IChangeModeNTS {
 
     @Override
     public ChangeModes toAbstractSyntax() {
-        return null; // needs to be fixed
-        // return ((ChangeMode) T_changeModeNTS).getChangeMode();
+        return ((ChangeMode) T_changeModeNTS).getChangeMode();
     }
 }

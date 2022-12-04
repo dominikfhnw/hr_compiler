@@ -7,7 +7,7 @@ import concreteSyntaxTree.interfaces.IParameterNTS;
 import scanner.interfaces.IToken;
 import java.util.ArrayList;
 
-// paramNTS ::= COMMA param paramNTS
+// parameterNTS ::= COMMA parameter parameterNTS
 
 public class ParameterNTS extends Production implements IParameterNTS {
     final IToken T_comma;

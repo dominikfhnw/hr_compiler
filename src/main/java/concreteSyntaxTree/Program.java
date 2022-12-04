@@ -30,8 +30,7 @@ public class Program extends Production implements IProgram {
 
     @Override
     public abstractSyntaxTree.Program toAbstractSyntax() {
-        return null;
-        //return new abstractSyntaxTree.Program((Ident) T_ident, N_globalNTS.toAbstractSyntax(), N_cpsCmd.toAbstractSyntax());
+        return new abstractSyntaxTree.Program((Ident) T_ident, N_globalNTS.toAbstractSyntax(), N_cpsCmd.toAbstractSyntax());
     }
 
 }

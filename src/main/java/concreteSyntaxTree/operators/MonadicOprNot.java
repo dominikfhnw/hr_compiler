@@ -6,6 +6,7 @@ import scanner.interfaces.IToken;
 import scanner.operators.Operator;
 
 // monadicOpr ::= NOT
+
 public class MonadicOprNot extends Production implements IMonadicOpr {
     final IToken T_notOpr;
 

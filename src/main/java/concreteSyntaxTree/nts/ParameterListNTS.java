@@ -7,7 +7,7 @@ import concreteSyntaxTree.interfaces.IParameterListNTS;
 import concreteSyntaxTree.interfaces.IParameterNTS;
 import java.util.ArrayList;
 
-// paramListNTS ::= param paramNTS
+// parameterListNTS ::= parameter parameterNTS
 
 public class ParameterListNTS extends Production implements IParameterListNTS {
     final IParameter N_parameter;

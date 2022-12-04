@@ -1,14 +1,12 @@
 package scanner.modesAndTypes;
 
+import scanner.enums.ChangeModes;
 import scanner.enums.Terminals;
 import scanner.Base;
 
 public class ChangeMode extends Base {
-    enum ChangeModes {
-        CONST,
-        VAR
-    }
-    private final ChangeModes changeMode;
+
+    final ChangeModes changeMode;
 
     ChangeMode(ChangeModes changeMode) {
         super(Terminals.CHANGEMODE);

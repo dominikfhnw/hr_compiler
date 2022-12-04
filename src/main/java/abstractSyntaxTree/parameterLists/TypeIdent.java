@@ -7,9 +7,10 @@ import scanner.enums.Types;
 
 public class TypeIdent {
 
-    private Ident ident;
-    private Types type;
-    private boolean isInit;
+    Ident ident;
+    Types type;
+    boolean isConst;
+    boolean isInit;
 
     public TypeIdent(Ident ident, Types type) {
         this.ident = ident;
@@ -24,12 +25,21 @@ public class TypeIdent {
         return type;
     }
 
-    public boolean isInit() {
-        return isInit;
-    }
-
     public void setInit() {
         this.isInit = true;
     }
+
+    public boolean getInit() {
+        return isInit;
+    }
+
+    public void setConst() {
+        this.isConst = true;
+    }
+
+    public boolean getConst() {
+        return isConst;
+    }
+
 
 }

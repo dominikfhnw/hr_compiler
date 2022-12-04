@@ -21,7 +21,6 @@ public class Parameter extends Production implements IParameter {
 
     @Override
     public abstractSyntaxTree.parameterLists.Parameter toAbstractSyntax() {
-        return null;
-        // return new abstractSyntaxTree.parameterLists.Parameter(N_mechModeNTS.toAbstractSyntax(), N_changeModeNTS.toAbstractSyntax(), N_typedIdent.toAbstractSyntax());
+        return new abstractSyntaxTree.parameterLists.Parameter(N_mechModeNTS.toAbstractSyntax(), N_changeModeNTS.toAbstractSyntax(), N_typedIdent.toAbstractSyntax());
     }
 }

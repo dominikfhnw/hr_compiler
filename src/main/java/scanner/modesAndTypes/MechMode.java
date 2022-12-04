@@ -1,15 +1,12 @@
 package scanner.modesAndTypes;
 
+import scanner.enums.MechModes;
 import scanner.enums.Terminals;
 import scanner.Base;
 
 public class MechMode extends Base {
 
-    enum MechModes {
-        COPY,
-        REF
-    }
-    private final MechModes mechMode;
+    final MechModes mechMode;
 
     MechMode(MechModes mechMode) {
         super(Terminals.MECHMODE);

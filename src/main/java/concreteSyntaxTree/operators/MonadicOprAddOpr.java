@@ -6,6 +6,7 @@ import scanner.interfaces.IToken;
 import scanner.operators.Operator;
 
 // monadicOpr ::= ADDOPR
+
 public class MonadicOprAddOpr extends Production implements IMonadicOpr {
     final IToken T_addOpr;
 
