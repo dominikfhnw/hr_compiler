@@ -5,6 +5,7 @@ import concreteSyntaxTree.nts.ChangeModeNTS;
 import concreteSyntaxTree.nts.CpsCmdNTS;
 import concreteSyntaxTree.nts.CpsDeclNTS;
 import concreteSyntaxTree.nts.CpsStoDeclNTS;
+import concreteSyntaxTree.nts.ExpressionListLParenNTS;
 import concreteSyntaxTree.nts.ExpressionListNTS;
 import concreteSyntaxTree.nts.ExpressionNTS;
 import concreteSyntaxTree.nts.FactorNTSExpressionList;
@@ -127,7 +128,7 @@ public class Parser implements IParser {
 
     /*
     stoDecl ::= typedIdent
-    stoDecl ::= CHANGEMOD typedIdent
+    stoDecl ::= CHANGEMODE typedIdent
     */
     private IStoDecl stoDecl() throws GrammarError {
         if (currentTerminal == Terminals.IDENT) {
@@ -158,25 +159,25 @@ public class Parser implements IParser {
     }
 
     /*
-    changeModNTS ::= CHANGEMODE
-    changeModNTS::= ε
+    changeModeNTS ::= CHANGEMODE
+    changeModeNTS::= ε
     */
     private IChangeModeNTS changeModeNTS() throws GrammarError {
         if (currentTerminal == Terminals.CHANGEMODE) {
             // changeModeNTS ::= CHANGEMODE
             return new ChangeModeNTS(consume(Terminals.CHANGEMODE));
         } else if (currentTerminal == Terminals.IDENT) {
-            // changeModNTS ::= ε
+            // changeModeNTS ::= ε
             return new IEpsilon.ChangeModeNTS();
         } else {
             throw new GrammarError(Terminals.CHANGEMODENTS, currentTerminal);
         }
     }
 
-    /* param ::= mechModeNTS changeModNTS typedIdent */
+    /* param ::= mechModeNTS changeModeNTS typedIdent */
     private IParameter parameter() throws GrammarError {
         if (currentTerminal == Terminals.IDENT || currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.MECHMODE) {
-            // param ::= <mechModeNTS> <changeModNTS> <typedIdent>
+            // param ::= <mechModeNTS> <changeModeNTS> <typedIdent>
             return new Parameter(mechModeNTS(), changeModeNTS(), typedIdent());
         } else {
             throw new GrammarError(Terminals.PARAM, currentTerminal);
@@ -184,15 +185,15 @@ public class Parser implements IParser {
     }
 
     /*
-    paramNTS ::= COMMA param paramNTS
+    paramNTS ::= COMMA parameter parameterNTS
     paramNTS ::= ε
     */
     private IParameterNTS parameterNTS() throws GrammarError {
         if (currentTerminal == Terminals.COMMA) {
-            // paramNTS ::= COMMA <param> <paramNTS>
+            // parameterNTS ::= COMMA <parameter> <parameterNTS>
             return new ParameterNTS(consume(Terminals.COMMA), parameter(), parameterNTS());
         } else if (currentTerminal == Terminals.RPAREN) {
-            // paramNTS ::= ε
+            // parameterNTS ::= ε
             return new IEpsilon.ParameterNTS();
         } else {
             throw new GrammarError(Terminals.PARAMNTS, currentTerminal);
@@ -200,15 +201,15 @@ public class Parser implements IParser {
     }
 
     /*
-    paramListNTS ::= param paramNTS
-    paramListNTS ::= ε
+    parameterListNTS ::= parameter parameterNTS
+    parameterListNTS ::= ε
     */
     private IParameterListNTS parameterListNTS() throws GrammarError {
         if (currentTerminal == Terminals.IDENT || currentTerminal == Terminals.MECHMODE || currentTerminal == Terminals.CHANGEMODE) {
-            // paramListNTS ::= <param> <paramNTS>
+            // parameterListNTS ::= <parameter> <parameterNTS>
             return new ParameterListNTS(parameter(), parameterNTS());
         } else if (currentTerminal == Terminals.RPAREN) {
-            // paramListNTS ::= ε
+            // parameterListNTS ::= ε
             return new IEpsilon.ParameterListNTS();
         } else {
             throw new GrammarError(Terminals.PARAMLISTNTS, currentTerminal);
@@ -241,10 +242,10 @@ public class Parser implements IParser {
         }
     }
 
-    /* funDecl ::= FUN IDENT paramList RETURNS stoDecl funDeclNTS DO cpsCmd ENDFUN */
+    /* funDecl ::= FUN IDENT parameterList RETURNS stoDecl funDeclNTS DO cpsCmd ENDFUN */
     private IFunDecl funDecl() throws GrammarError {
         if (currentTerminal == Terminals.FUN) {
-            // funDecl ::= FUN IDENT <paramList> RETURNS <stoDecl> <funDeclNTS> DO <cpsCmd> ENDFUN
+            // funDecl ::= FUN IDENT <parameterList> RETURNS <stoDecl> <funDeclNTS> DO <cpsCmd> ENDFUN
             return new FunDecl(consume(Terminals.FUN), consume(Terminals.IDENT), parameterList(), consume(Terminals.RETURNS),
                 stoDecl(), funDeclNTS(), consume(Terminals.DO), cpsCmd(), consume(Terminals.ENDFUN));
         } else {
@@ -497,8 +498,7 @@ public class Parser implements IParser {
         if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
             || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL || currentTerminal == Terminals.LBRACKET) {
             // expressionListLparenNTS ::= <expression> <expressionListNTS>
-            return null; // needs to be fixed
-            //return new IEpsilon.ExpressionListLParenNTS(expression(), expressionListNTS());
+            return new ExpressionListLParenNTS(expression(), expressionListNTS());
         } else if (currentTerminal == Terminals.RPAREN) {
             // expressionListLparenNTS ::= ε
             return new IEpsilon.ExpressionListLParenNTS();
@@ -523,10 +523,10 @@ public class Parser implements IParser {
     */
     private IIfElseNTS ifElseNTS() throws GrammarError {
         if (currentTerminal == Terminals.ELSE) {
-            // ifelseNTS ::= ELSE <cpsCmd>
+            // ifElseNTS ::= ELSE <cpsCmd>
             return new IfElseNTS(consume(Terminals.ELSE), cpsCmd());
         } else if (currentTerminal == Terminals.ENDIF) {
-            // ifelseNTS ::= ε
+            // ifElseNTS ::= ε
             return new IEpsilon.IfElseNTS();
         } else {
             throw new GrammarError(Terminals.IFELSENTS, currentTerminal);
