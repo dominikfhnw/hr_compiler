@@ -1,6 +1,6 @@
 package abstractSyntaxTree.interfaces;
 
-import abstractSyntaxTree.TypedIdent;
+import abstractSyntaxTree.TypeIdent;
 import errors.*;
 import java.util.HashMap;
 
@@ -8,7 +8,7 @@ public interface IAbstractSyntaxTreeNode {
 
     public abstract String toString(String indent);
 
-        public void storeNamespace(HashMap<String, TypedIdent> saveNamespace) throws AlreadyDeclaredError, AlreadyInitializedError;
+        public void storeNamespace(HashMap<String, TypeIdent> saveNamespace) throws AlreadyDeclaredError, AlreadyInitializedError;
 
         public void checkScope() throws NotDeclaredError;
 
@@ -16,6 +16,6 @@ public interface IAbstractSyntaxTreeNode {
 
         public void checkInit() throws NotInitializedError, AlreadyInitializedError;
 
-        public void setInit(TypedIdent ident);
+        public void setInit(TypeIdent ident);
 
 }
