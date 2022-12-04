@@ -52,7 +52,7 @@
         EXPRLISTNTS("exprListNTS"),
         EXPRLISTLPARENNTS("exprListLParenNTS"),
         FACTOR("factor"),
-        FACTOR_NTS("factorNTS"),
+        FACTORNTS("factorNTS"),
         FUN("fun"),
         FUNDECL("funDecl"),
         FUNDECLNTS("funDeclNTS"),
@@ -62,6 +62,7 @@
         IFELSENTS("ifElseNTS"),
         INIT("init"),
         LOCAL("local"),
+        MONADICOPR("monadicOpr"),
         NOTOPR("not"),
         PARAM("param"),
         PARAMLIST("paramList"),
@@ -100,6 +101,8 @@
         TERM2NTS("term2NTS"),
         TERM3("term3"),
         TERM3NTS("term3NTS"),
+        TERM4("term4"),
+        TERM4NTS("term4NTS"),
         TYPEDIDENT("typedIdent"),
         QUEST("?");
 
