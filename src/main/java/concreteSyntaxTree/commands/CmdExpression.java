@@ -1,5 +1,6 @@
 package concreteSyntaxTree.commands;
 
+import abstractSyntaxTree.commands.AssignCmd;
 import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.ICmd;
 import concreteSyntaxTree.interfaces.IExpression;
@@ -21,7 +22,6 @@ public class CmdExpression extends Production implements ICmd {
 
     @Override
     public abstractSyntaxTree.interfaces.ICmd toAbstractSyntax() {
-        return null; // needs to be fixed
-        // return new AssignCmd(N_expression1.toAbstractSyntax(), N_expression2.toAbstractSyntax());
+        return new AssignCmd(N_expression1.toAbstractSyntax(), N_expression2.toAbstractSyntax());
     }
 }

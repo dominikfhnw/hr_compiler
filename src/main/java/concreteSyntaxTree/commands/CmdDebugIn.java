@@ -1,5 +1,6 @@
 package concreteSyntaxTree.commands;
 
+import abstractSyntaxTree.commands.DebugInCmd;
 import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.ICmd;
 import concreteSyntaxTree.interfaces.IExpression;
@@ -18,7 +19,6 @@ public class CmdDebugIn extends Production implements ICmd {
 
     @Override
     public abstractSyntaxTree.interfaces.ICmd toAbstractSyntax() {
-        return null; // needs to be fixed
-        // return new DebugInCmd(N_expression.toAbstractSyntax());
+        return new DebugInCmd(N_expression.toAbstractSyntax());
     }
 }

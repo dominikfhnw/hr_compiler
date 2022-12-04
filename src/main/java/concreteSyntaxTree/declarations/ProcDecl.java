@@ -9,7 +9,7 @@ import concreteSyntaxTree.interfaces.IProcDeclNTS;
 import scanner.Ident;
 import scanner.interfaces.IToken;
 
-// procDecl ::= PROC IDENT paramList procDeclNTS DO cpsCmd ENDPROC
+// procDecl ::= PROC IDENT parameterList procDeclNTS DO cpsCmd ENDPROC
 
 public class ProcDecl extends Production implements IProcDecl {
     final IToken T_proc;
@@ -32,8 +32,7 @@ public class ProcDecl extends Production implements IProcDecl {
 
     @Override
     public IDecl toAbstractSyntax() {
-        return null;
-        // return new abstractSyntaxTree.Declarations.ProcDecl((Ident) T_ident, N_parameterList.toAbstractSyntax(), N_procDeclNTS.toAbstractSyntax(), N_cpsCmd.toAbstractSyntax());
+        return new abstractSyntaxTree.declarations.ProcDecl((Ident) T_ident, N_parameterList.toAbstractSyntax(), N_procDeclNTS.toAbstractSyntax(), N_cpsCmd.toAbstractSyntax());
     }
 
 }

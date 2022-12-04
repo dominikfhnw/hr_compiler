@@ -4,7 +4,7 @@ import concreteSyntaxTree.interfaces.IExpression;
 import concreteSyntaxTree.interfaces.IExpressionNTS;
 import concreteSyntaxTree.interfaces.ITerm1;
 
-// expr ::= term1 exprNTS
+// expression ::= term1 exprNTS
 
 public class Expression extends Production implements IExpression {
 

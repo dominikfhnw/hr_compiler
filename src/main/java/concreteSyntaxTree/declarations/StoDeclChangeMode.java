@@ -5,6 +5,7 @@ import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.IStoDecl;
 import concreteSyntaxTree.interfaces.ITypedIdent;
 import scanner.interfaces.IToken;
+import scanner.modesAndTypes.ChangeMode;
 
 // stoDecl ::= CHANGEMODE typedIdent
 
@@ -20,7 +21,6 @@ public class StoDeclChangeMode extends Production implements IStoDecl {
 
     @Override
     public StoDecl toAbstractSyntax() {
-        return new StoDecl();
-        // return new StoDecl(((Changemode) T_changeMode).getChangemode(), N_typedIdent.toAbsSyntax()); needs to be fixed
+        return new StoDecl(((ChangeMode) T_changeMode).getChangeMode(), N_typedIdent.toAbstractSyntax());
     }
 }

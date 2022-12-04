@@ -7,7 +7,7 @@ import concreteSyntaxTree.interfaces.IExpressionListLParenNTS;
 import scanner.interfaces.IToken;
 import java.util.ArrayList;
 
-// exprList ::= LPAREN exprListLParenNTS RPAREN
+// expressionList ::= LPAREN expressionListLParenNTS RPAREN
 
 public class ExpressionList extends Production implements IExpressionList {
     final IToken T_lParen;

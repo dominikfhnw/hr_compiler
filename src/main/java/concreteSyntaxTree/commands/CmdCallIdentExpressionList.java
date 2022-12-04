@@ -1,8 +1,10 @@
 package concreteSyntaxTree.commands;
 
+import abstractSyntaxTree.commands.ProcCallCmd;
 import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.ICmd;
 import concreteSyntaxTree.interfaces.IExpressionList;
+import scanner.Ident;
 import scanner.interfaces.IToken;
 
 // cmd ::= CALL IDENT exprList
@@ -20,7 +22,6 @@ public class CmdCallIdentExpressionList extends Production implements ICmd {
 
     @Override
     public abstractSyntaxTree.interfaces.ICmd toAbstractSyntax() {
-        return null; // needs to be fixed
-        // return new ProcCallCmd((Ident) T_ident, N_expressionList.toAbstractSyntax());
+        return new ProcCallCmd((Ident) T_ident, N_expressionList.toAbstractSyntax());
     }
 }

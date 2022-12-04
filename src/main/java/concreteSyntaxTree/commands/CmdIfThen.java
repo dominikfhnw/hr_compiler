@@ -1,5 +1,6 @@
 package concreteSyntaxTree.commands;
 
+import abstractSyntaxTree.commands.IfCmd;
 import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.ICmd;
 import concreteSyntaxTree.interfaces.ICpsCmd;
@@ -28,7 +29,6 @@ public class CmdIfThen extends Production implements ICmd {
 
     @Override
     public abstractSyntaxTree.interfaces.ICmd toAbstractSyntax() {
-        return null; // needs to be fixed
-        // return new IfCmd(N_expression.toAbstractSyntax(), N_cpsCmd.toAbstractSyntax(), N_ifElseNTS.toAbstractSyntax());
+        return new IfCmd(N_expression.toAbstractSyntax(), N_cpsCmd.toAbstractSyntax(), N_ifElseNTS.toAbstractSyntax());
     }
 }

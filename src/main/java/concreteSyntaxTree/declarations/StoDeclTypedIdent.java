@@ -17,6 +17,6 @@ public class StoDeclTypedIdent extends Production implements IStoDecl {
 
     @Override
     public StoDecl toAbstractSyntax() {
-        return new StoDecl(); // return new StoDecl(N_typedIdent.toAbstractSyntax()); needs to be fixed
+        return new StoDecl(N_typedIdent.toAbstractSyntax());
     }
 }
