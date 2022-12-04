@@ -18,6 +18,8 @@ public class BoolExpression implements IExpression {
         this.expressionRight = expressionRight;
     }
 
+    // needs to be implemented
+
     @Override
     public Types getType() {
         return null;

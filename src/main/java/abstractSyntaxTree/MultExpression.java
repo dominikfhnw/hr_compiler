@@ -7,10 +7,10 @@ import scanner.enums.Types;
 
 public class MultExpression implements IExpression {
 
-    private Operators multOpr;
-    private IExpression expressionLeft;
-    private IExpression expressionRight;
-    private Types castType;
+    Operators multOpr;
+    IExpression expressionLeft;
+    IExpression expressionRight;
+    Types castType;
 
     public MultExpression(Operators multOpr, IExpression expressionLeft, IExpression expressionRight) {
         this.multOpr = multOpr;
@@ -18,6 +18,8 @@ public class MultExpression implements IExpression {
         this.expressionRight = expressionRight;
 
     }
+
+    // needs to be implemented
 
     @Override
     public Types getType() {

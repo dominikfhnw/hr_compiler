@@ -6,18 +6,33 @@ import errors.AlreadyInitializedError;
 import errors.NotDeclaredError;
 import errors.NotInitializedError;
 import errors.TypeCheckError;
+import scanner.Ident;
+import java.util.ArrayList;
 import java.util.HashMap;
 
-// needs to be specified and fully implemented
+// needs to be implemented
 
 public class ProcDecl implements IDecl {
+
+    Ident ident;
+    CpsCmd cpsCmd;
+    ArrayList<Parameter> parameters;
+    ArrayList<StoDecl> stoDecls;
+    boolean initCheckDone = false;
+
+    public ProcDecl(Ident ident, ArrayList<Parameter> parameters, ArrayList<StoDecl> stoDecls, CpsCmd cpsCmd) {
+        this.ident = ident;
+        this.parameters = parameters;
+        this.stoDecls = stoDecls;
+        this.cpsCmd = cpsCmd;
+    }
     @Override
     public String toString(String indent) {
         return null;
     }
 
     @Override
-    public void storeNamespace(HashMap<String, TypedIdent> saveNamespace)
+    public void storeNamespace(HashMap<String, TypeIdent> saveNamespace)
         throws AlreadyDeclaredError, AlreadyInitializedError {
 
     }
@@ -38,7 +53,7 @@ public class ProcDecl implements IDecl {
     }
 
     @Override
-    public void setInit(TypedIdent ident) {
+    public void setInit(TypeIdent ident) {
 
     }
 

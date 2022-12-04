@@ -6,10 +6,9 @@ import errors.AlreadyInitializedError;
 import errors.NotDeclaredError;
 import errors.NotInitializedError;
 import errors.TypeCheckError;
-
 import java.util.HashMap;
 
-// Needs to be specified and fully implemented
+// needs to be implemented
 
 public class StoDecl implements IDecl {
 
@@ -19,7 +18,7 @@ public class StoDecl implements IDecl {
     }
 
     @Override
-    public void storeNamespace(HashMap<String, TypedIdent> saveNamespace)
+    public void storeNamespace(HashMap<String, TypeIdent> saveNamespace)
         throws AlreadyDeclaredError, AlreadyInitializedError {
     }
 
@@ -39,7 +38,7 @@ public class StoDecl implements IDecl {
     }
 
     @Override
-    public void setInit(TypedIdent ident) {
+    public void setInit(TypeIdent ident) {
 
     }
 

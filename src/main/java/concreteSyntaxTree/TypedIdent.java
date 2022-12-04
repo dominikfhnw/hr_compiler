@@ -1,5 +1,6 @@
 package concreteSyntaxTree;
 
+import abstractSyntaxTree.TypeIdent;
 import concreteSyntaxTree.interfaces.ITypedIdent;
 import scanner.Ident;
 import scanner.modesAndTypes.Type;
@@ -19,7 +20,7 @@ public class TypedIdent extends Production implements ITypedIdent {
     }
 
     @Override
-    public abstractSyntaxTree.TypedIdent toAbstractSyntax() {
-        return new abstractSyntaxTree.TypedIdent((Ident) T_ident, ((Type) T_type).getType());
+    public TypeIdent toAbstractSyntax() {
+        return new TypeIdent((Ident) T_ident, ((Type) T_type).getType());
     }
 }

@@ -3,13 +3,15 @@ package abstractSyntaxTree;
 import scanner.Ident;
 import scanner.enums.Types;
 
-public class TypedIdent {
+// needs to be implemented
+
+public class TypeIdent {
 
     private Ident ident;
     private Types type;
     private boolean isInit;
 
-    public TypedIdent(Ident ident, Types type) {
+    public TypeIdent(Ident ident, Types type) {
         this.ident = ident;
         this.type = type;
     }

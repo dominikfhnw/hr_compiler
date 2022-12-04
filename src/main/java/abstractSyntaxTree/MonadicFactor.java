@@ -5,6 +5,8 @@ import scanner.enums.LRValue;
 import scanner.enums.Types;
 import scanner.operators.Operator;
 
+// needs to be implemented
+
 public class MonadicFactor implements IFactor {
 
     Operator monadicOpr;

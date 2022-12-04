@@ -8,15 +8,17 @@ import scanner.enums.Types;
 public class CustExpression implements IExpression {
 
     Operators custOpr;
-    private IExpression expressionLeft;
-    private IExpression expressionRight;
-    private Types castType;
+    IExpression expressionLeft;
+    IExpression expressionRight;
+    Types castType;
 
     public CustExpression(Operators custOpr, IExpression expressionLeft, IExpression expressionRight) {
         this.custOpr = custOpr;
         this.expressionLeft = expressionLeft;
         this.expressionRight = expressionRight;
     }
+
+    // needs to be implemented
 
     @Override
     public Types getType() {

@@ -5,6 +5,8 @@ import scanner.Literal;
 import scanner.enums.LRValue;
 import scanner.enums.Types;
 
+// needs to be implemented
+
 public class LiteralFactor implements IFactor {
     Literal literal;
     Types castType;

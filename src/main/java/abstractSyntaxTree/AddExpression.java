@@ -7,10 +7,10 @@ import scanner.enums.Types;
 
 public class AddExpression implements IExpression {
 
-    private Operators addOpr;
-    private IExpression expressionLeft;
-    private IExpression expressionRight;
-    private Types castType;
+    Operators addOpr;
+    IExpression expressionLeft;
+    IExpression expressionRight;
+    Types castType;
 
     public AddExpression(Operators addOpr, IExpression expressionLeft, IExpression expressionRight) {
         this.addOpr = addOpr;
@@ -18,6 +18,8 @@ public class AddExpression implements IExpression {
         this.expressionRight = expressionRight;
 
     }
+
+    // needs to be implemented
 
     @Override
     public Types getType() {
