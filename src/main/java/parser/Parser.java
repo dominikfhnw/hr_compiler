@@ -70,12 +70,35 @@ public class Parser implements IParser {
         }
     }
 
-    // param ::= flowModeNTS mechModeNTS changeModNTS typedIdent
+    // mechModeNTS ::= MECHMODE
+    // mechModeNTS::= ε
+    private IMechModeNTS mechModeNTS() throws GrammarError {
+        if (currentTerminal == Terminals.MECHMODE) { // mechModeNTS ::= MECHMODE
+            return new MechModeNTS(consume(Terminals.MECHMODE));
+        } else if (currentTerminal == Terminals.IDENT || currentTerminal == Terminals.CHANGEMODE) { // mechModeNTS ::= ε
+            return new IEpsilon.MechModeNTS();
+        } else {
+            throw new GrammarError(Terminals.MECHMODENTS, currentTerminal);
+        }
+    }
+
+    // changeModNTS ::= CHANGEMOD
+    // changeModNTS::= ε
+    private IChangeModeNTS changeModeNTS() throws GrammarError {
+        if (currentTerminal == Terminals.CHANGEMODE) { // changeModeNTS ::= CHANGEMODE
+            return new ChangeModeNTS(consume(Terminals.CHANGEMODE));
+        } else if (currentTerminal == Terminals.IDENT) { // changeModNTS ::= ε
+            return new IEpsilon.ChangeModeNTS();
+        } else {
+            throw new GrammarError(Terminals.CHANGEMODENTS, currentTerminal);
+        }
+    }
+
+    // param ::= mechModeNTS changeModNTS typedIdent
     private IParameter parameter() throws GrammarError {
-        if (currentTerminal == Terminals.IDENT || currentTerminal == Terminals.FLOWMODE || currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.MECHMODE) { // param ::= <flowModeNTS> <mechModeNTS> <changeModNTS> <typedIdent>
+        if (currentTerminal == Terminals.IDENT || currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.MECHMODE) { // param ::= <mechModeNTS> <changeModNTS> <typedIdent>
             ITypedIdent N_typedIdent = typedIdent();
-            return null;
-            // return new Parameter(flowModeNTS(), mechModeNTS(), changeModeNTS(), typedIdent());
+            return new Parameter(mechModeNTS(), changeModeNTS(), typedIdent());
         } else {
             throw new GrammarError(Terminals.PARAM, currentTerminal);
         }
