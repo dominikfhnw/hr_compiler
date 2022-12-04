@@ -97,7 +97,7 @@ public class Parser implements IParser {
     // paramListNTS ::= ε
     private IParameterListNTS parameterListNTS() throws GrammarError {
         if (currentTerminal == Terminals.IDENT || currentTerminal == Terminals.MECHMODE || currentTerminal == Terminals.CHANGEMODE) { // paramListNTS ::= <param> <paramNTS>
-            return new ParamListNTS(parameter(), parameterNTS());
+            return new ParameterListNTS(parameter(), parameterNTS());
         } else if (currentTerminal == Terminals.RPAREN) { // paramListNTS ::= ε
             return new IEpsilon.ParameterListNTS();
         } else {

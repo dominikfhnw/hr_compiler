@@ -14,7 +14,7 @@ public class CmdSkip extends Production implements ICmd {
     }
 
     @Override
-    public abstractSyntaxTree.interfaces.ICmd toAbsSyntax() {
+    public abstractSyntaxTree.interfaces.ICmd toAbstractSyntax() {
         return null;
     }
 }
