@@ -1,7 +1,5 @@
 package parser;
 
-import abstractSyntaxTree.CpsCmd;
-import abstractSyntaxTree.Parameter;
 import concreteSyntaxTree.*;
 import concreteSyntaxTree.interfaces.*;
 import errors.*;
@@ -137,6 +135,83 @@ public class Parser implements IParser {
         }
     }
 
+    // expr ::= term1 exprNTS
+    private IExpression expression() throws GrammarError {
+        if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
+            || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL || currentTerminal == Terminals.LBRACKET) { // expr ::= <term1> <exprNTS>
+            return new Expression(term1(), expressionNTS());
+        } else {
+            throw new GrammarError(Terminals.EXPR, currentTerminal);
+        }
+    }
+
+    /*
+    exprNTS ::= BOOLOPR term1 exprNTS
+    exprNTS ::= ε
+     */
+    private IExpressionNTS expressionNTS() throws GrammarError {
+        if (currentTerminal == Terminals.BOOLOPR) { // exprNTS ::= BOOLOPR <term1> <exprNTS>
+            return new ExpressionNTS(consume(Terminals.BOOLOPR), term1(), expressionNTS());
+        } else if (currentTerminal == Terminals.COMMA || currentTerminal == Terminals.RPAREN || currentTerminal == Terminals.COLON
+            || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDPROC
+            || currentTerminal == Terminals.ENDWHILE || currentTerminal == Terminals.ENDIF || currentTerminal == Terminals.ELSE
+            || currentTerminal == Terminals.ENDFUN || currentTerminal == Terminals.ENDPROGRAM || currentTerminal == Terminals.SEMICOLON
+            || currentTerminal == Terminals.BECOMES) { // exprNTS ::= ε
+            return new IEpsilon.ExpressionNTS();
+        } else {
+            throw new GrammarError(Terminals.EXPRNTS, currentTerminal);
+        }
+    }
+
+    // exprListNTS ::= COMMA expr exprListNTS
+    // exprListNTS ::= ε
+    private IExpressionListNTS expressionListNTS() throws GrammarError {
+        if (currentTerminal == Terminals.COMMA) { // exprListNTS ::= COMMA <expr> <exprListNTS>
+            return new ExpressionListNTS(consume(Terminals.COMMA), expression(), expressionListNTS());
+        } else if (currentTerminal == Terminals.RPAREN) { // expressionListNTS ::= ε
+            return new IEpsilon.ExpressionListNTS();
+        } else {
+            throw new GrammarError(Terminals.EXPRLISTNTS, currentTerminal);
+        }
+    }
+
+    /*
+    exprListLparenNTS ::= expr exprListNTS
+    exprListLparenNTS ::= ε
+    */
+    private IExpressionListLParenNTS expressionListLParenNTS() throws GrammarError {
+        if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
+            || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL || currentTerminal == Terminals.LBRACKET) { // exprListLparenNTS ::= <expr> <exprListNTS>
+            return null;
+            // return new IEpsilon.ExpressionListLParenNTS(expression(), expressionListNTS());
+        } else if (currentTerminal == Terminals.RPAREN) { // exprListLparenNTS ::= ε
+            return new IEpsilon.ExpressionListLParenNTS();
+        } else {
+            throw new GrammarError(Terminals.EXPRLISTLPARENNTS, currentTerminal);
+        }
+    }
+
+    // exprList ::= LPAREN exprListLparenNTS RPAREN
+    private IExpressionList expressionList() throws GrammarError {
+        if (currentTerminal == Terminals.LPAREN) { // exprList ::= LPAREN <exprListLparenNTS> RPAREN
+            return new ExpressionList(consume(Terminals.LPAREN), expressionListLParenNTS(), consume(Terminals.RPAREN));
+        } else {
+            throw new GrammarError(Terminals.EXPRLIST, currentTerminal);
+        }
+    }
+
+    // ifelseNTS ::= ELSE cpsCmd
+    // ifelseNTS ::= ε
+    private IIfElseNTS ifElseNTS() throws GrammarError {
+        if (currentTerminal == Terminals.ELSE) { // ifelseNTS ::= ELSE <cpsCmd>
+            return new IfElseNTS(consume(Terminals.ELSE), cpsCmd());
+        } else if (currentTerminal == Terminals.ENDIF) { // ifelseNTS ::= ε
+            return new IEpsilon.IfElseNTS();
+        } else {
+            throw new GrammarError(Terminals.IFELSENTS, currentTerminal);
+        }
+    }
+
     // cmd ::= SKIP
     // cmd ::= expr BECOMES expr
     // cmd ::= IF expr THEN cpsCmd ifelseNTS ENDIF
@@ -147,23 +222,22 @@ public class Parser implements IParser {
     private ICmd cmd() throws GrammarError {
         if (currentTerminal == Terminals.SKIP) { // cmd ::= SKIP
             return new CmdSkip(consume(Terminals.SKIP));
-        } /* else if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
+        } else if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
             || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL) { // cmd ::= <expr> BECOMES <expr>
-            IExpr N_expr1 = expr();
-            IToken T_becomes = consume(Terminals.BECOMES);
-            IExpr N_expr2 = expr();
-            return new CmdExpr(N_expr1, T_becomes, N_expr2);
+            IExpression N_expr1 = expression();
+            IExpression N_expr2 = expression();
+            return new CmdExpr(N_expr1, consume(Terminals.BECOMES), N_expr2);
         } else if (currentTerminal == Terminals.IF) { // cmd ::= IF <expr> THEN <cpsCmd> <ifelseNTS> ENDIF
-            return new CmdIfThen(consume(Terminals.IF), expr(), consume(Terminals.THEN), cpsCmd(), ifElseNTS(), consume(Terminals.ENDIF));
+            return new CmdIfThen(consume(Terminals.IF), expression(), consume(Terminals.THEN), cpsCmd(), ifElseNTS(), consume(Terminals.ENDIF));
         } else if (currentTerminal == Terminals.WHILE) { // cmd ::= WHILE <expr> DO <cpsCmd> ENDWHILE
-            return new CmdWhileDo(consume(Terminals.WHILE), expr(), consume(Terminals.DO), cpsCmd(), consume(Terminals.ENDWHILE));
+            return new CmdWhileDo(consume(Terminals.WHILE), expression(), consume(Terminals.DO), cpsCmd(), consume(Terminals.ENDWHILE));
         } else if (currentTerminal == Terminals.CALL) { // cmd ::= CALL IDENT <exprList>
-            return new CmdCallIdentExprList(consume(Terminals.CALL), consume(Terminals.IDENT), exprList());
+            return new CmdCallIdentExpressionList(consume(Terminals.CALL), consume(Terminals.IDENT), expressionList());
         } else if (currentTerminal == Terminals.DEBUGIN) { // cmd ::= DEBUGIN <expr>
-            return new CmdDebugIn(consume(Terminals.DEBUGIN), expr());
+            return new CmdDebugIn(consume(Terminals.DEBUGIN), expression());
         } else if (currentTerminal == Terminals.DEBUGOUT) { // cmd ::= DEBUGOUT <expr>
-            return new CmdDebugOut(consume(Terminals.DEBUGOUT), expr());
-        } */ else {
+            return new CmdDebugOut(consume(Terminals.DEBUGOUT), expression());
+        } else {
             throw new GrammarError(Terminals.CMD, currentTerminal);
         }
     }
