@@ -1,10 +1,8 @@
 package scanner.enums;
 
-public enum Modes {
+public enum ChangeModes {
 
     CONST,
-    COPY,
-    REF,
     VAR
 
 }

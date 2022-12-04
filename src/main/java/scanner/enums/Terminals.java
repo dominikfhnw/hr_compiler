@@ -19,13 +19,13 @@
 
         // Modes
         CHANGEMODE("changeMode"),
-        FLOWMODE("flowMode"),
         MECHMODE("mechMode"),
 
         // Keywords
         BECOMES("becomes"),
         CALL("call"),
         CASE("case"),
+        CHANGEMODENTS("changeModeNTS"),
         CMD("cmd"),
         CPSCMD("cpsCmd"),
         CPSCMDNTS("cpsCmdNTS"),
@@ -62,6 +62,7 @@
         IFELSENTS("ifElseNTS"),
         INIT("init"),
         LOCAL("local"),
+        MECHMODENTS("mechModeNTS"),
         MONADICOPR("monadicOpr"),
         NOTOPR("not"),
         PARAM("param"),
@@ -106,11 +107,7 @@
         TYPEDIDENT("typedIdent"),
         QUEST("?");
 
-        /*
-        CHANGEMODE_NTS(""),
-        MECHMODE_NTS(""),
-        MONADICOPR(""),
-        TODECL(""),*/
+        // TODECL("")
 
         final String stringValue;
         char charValue;
