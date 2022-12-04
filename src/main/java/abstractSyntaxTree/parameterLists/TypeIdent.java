@@ -1,4 +1,4 @@
-package abstractSyntaxTree;
+package abstractSyntaxTree.parameterLists;
 
 import scanner.Ident;
 import scanner.enums.Types;

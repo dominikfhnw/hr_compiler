@@ -1,4 +1,4 @@
-package concreteSyntaxTree.NTS;
+package concreteSyntaxTree.nts;
 
 import abstractSyntaxTree.interfaces.IFactor;
 import concreteSyntaxTree.Production;

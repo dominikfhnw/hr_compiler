@@ -1,4 +1,4 @@
-package abstractSyntaxTree;
+package abstractSyntaxTree.parameterLists;
 
 import scanner.enums.ChangeModes;
 import scanner.enums.LRValue;

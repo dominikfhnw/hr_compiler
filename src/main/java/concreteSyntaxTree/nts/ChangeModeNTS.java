@@ -1,10 +1,9 @@
-package concreteSyntaxTree.NTS;
+package concreteSyntaxTree.nts;
 
 import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.IChangeModeNTS;
 import scanner.enums.ChangeModes;
 import scanner.interfaces.IToken;
-import scanner.modesAndTypes.ChangeMode;
 
 // changeModeNTS ::= CHANGEMODE
 

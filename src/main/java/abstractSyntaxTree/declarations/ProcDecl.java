@@ -1,8 +1,8 @@
 package abstractSyntaxTree.declarations;
 
 import abstractSyntaxTree.commands.CpsCmd;
-import abstractSyntaxTree.Parameter;
-import abstractSyntaxTree.TypeIdent;
+import abstractSyntaxTree.parameterLists.Parameter;
+import abstractSyntaxTree.parameterLists.TypeIdent;
 import abstractSyntaxTree.interfaces.IDecl;
 import errors.AlreadyDeclaredError;
 import errors.AlreadyInitializedError;

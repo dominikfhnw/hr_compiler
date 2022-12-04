@@ -1,4 +1,4 @@
-package concreteSyntaxTree.NTS;
+package concreteSyntaxTree.nts;
 
 import abstractSyntaxTree.expressions.MultExpression;
 import abstractSyntaxTree.interfaces.IExpression;

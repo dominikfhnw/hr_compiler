@@ -1,6 +1,6 @@
 package concreteSyntaxTree.interfaces;
 
-import abstractSyntaxTree.Parameter;
+import abstractSyntaxTree.parameterLists.Parameter;
 
 public interface IParameter extends IProduction {
 

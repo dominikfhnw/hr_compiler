@@ -1,6 +1,6 @@
 package abstractSyntaxTree.declarations;
 
-import abstractSyntaxTree.TypeIdent;
+import abstractSyntaxTree.parameterLists.TypeIdent;
 import abstractSyntaxTree.interfaces.IDecl;
 import errors.AlreadyDeclaredError;
 import errors.AlreadyInitializedError;

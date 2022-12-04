@@ -1,6 +1,6 @@
 package concreteSyntaxTree.parameterLists;
 
-import abstractSyntaxTree.Parameter;
+import abstractSyntaxTree.parameterLists.Parameter;
 import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.IParameterList;
 import concreteSyntaxTree.interfaces.IParameterListNTS;

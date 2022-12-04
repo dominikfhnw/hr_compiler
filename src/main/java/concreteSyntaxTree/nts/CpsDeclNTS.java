@@ -1,4 +1,4 @@
-package concreteSyntaxTree.NTS;
+package concreteSyntaxTree.nts;
 
 import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.ICpsDeclNTS;

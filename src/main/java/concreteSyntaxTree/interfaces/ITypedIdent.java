@@ -1,6 +1,6 @@
 package concreteSyntaxTree.interfaces;
 
-import abstractSyntaxTree.TypeIdent;
+import abstractSyntaxTree.parameterLists.TypeIdent;
 
 public interface ITypedIdent extends IProduction {
 

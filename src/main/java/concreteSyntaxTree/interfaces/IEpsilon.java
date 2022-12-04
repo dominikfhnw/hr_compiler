@@ -2,7 +2,7 @@ package concreteSyntaxTree.interfaces;
 
 import abstractSyntaxTree.commands.CpsCmd;
 import abstractSyntaxTree.factors.InitFactor;
-import abstractSyntaxTree.Parameter;
+import abstractSyntaxTree.parameterLists.Parameter;
 import abstractSyntaxTree.declarations.StoDecl;
 import abstractSyntaxTree.interfaces.IDecl;
 import concreteSyntaxTree.Production;

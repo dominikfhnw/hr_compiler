@@ -1,4 +1,4 @@
-package concreteSyntaxTree.NTS;
+package concreteSyntaxTree.nts;
 
 import abstractSyntaxTree.expressions.BoolExpression;
 import abstractSyntaxTree.interfaces.IExpression;

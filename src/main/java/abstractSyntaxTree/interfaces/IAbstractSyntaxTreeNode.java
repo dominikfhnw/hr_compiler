@@ -1,6 +1,6 @@
 package abstractSyntaxTree.interfaces;
 
-import abstractSyntaxTree.TypeIdent;
+import abstractSyntaxTree.parameterLists.TypeIdent;
 import errors.*;
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package concreteSyntaxTree.NTS;
+package concreteSyntaxTree.nts;
 
 // mechModeNTS ::= MECHMODE
 
@@ -6,7 +6,6 @@ import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.IMechModeNTS;
 import scanner.enums.MechModes;
 import scanner.interfaces.IToken;
-import scanner.modesAndTypes.MechMode;
 
 public class MechModeNTS extends Production implements IMechModeNTS {
     final IToken T_mechMode;

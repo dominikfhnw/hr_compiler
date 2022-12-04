@@ -1,6 +1,6 @@
 package concreteSyntaxTree.parameterLists;
 
-import abstractSyntaxTree.TypeIdent;
+import abstractSyntaxTree.parameterLists.TypeIdent;
 import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.ITypedIdent;
 import scanner.Ident;
