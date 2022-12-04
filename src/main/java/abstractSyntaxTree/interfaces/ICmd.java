@@ -1,5 +1,5 @@
 package abstractSyntaxTree.interfaces;
 
-public interface ICmd {
+public interface ICmd extends IAbstractSyntaxTreeNode {
 
 }

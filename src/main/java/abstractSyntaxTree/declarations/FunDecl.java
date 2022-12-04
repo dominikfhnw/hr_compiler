@@ -4,7 +4,6 @@ import abstractSyntaxTree.commands.CpsCmd;
 import abstractSyntaxTree.interfaces.IDecl;
 import abstractSyntaxTree.parameterLists.Parameter;
 import abstractSyntaxTree.parameterLists.TypeIdent;
-import errors.AlreadyDeclaredError;
 import errors.AlreadyInitializedError;
 import errors.NotDeclaredError;
 import errors.NotInitializedError;
@@ -12,7 +11,8 @@ import errors.TypeCheckError;
 import scanner.Ident;
 import scanner.enums.Types;
 import java.util.ArrayList;
-import java.util.HashMap;
+
+// needs to be implemented
 
 public class FunDecl implements IDecl {
 
@@ -50,12 +50,6 @@ public class FunDecl implements IDecl {
     @Override
     public String toString(String indent) {
         return null;
-    }
-
-    @Override
-    public void storeNamespace(HashMap<String, TypeIdent> saveNamespace)
-        throws AlreadyDeclaredError, AlreadyInitializedError {
-
     }
 
     @Override

@@ -4,14 +4,12 @@ import abstractSyntaxTree.commands.CpsCmd;
 import abstractSyntaxTree.parameterLists.Parameter;
 import abstractSyntaxTree.parameterLists.TypeIdent;
 import abstractSyntaxTree.interfaces.IDecl;
-import errors.AlreadyDeclaredError;
 import errors.AlreadyInitializedError;
 import errors.NotDeclaredError;
 import errors.NotInitializedError;
 import errors.TypeCheckError;
 import scanner.Ident;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 // needs to be implemented
 
@@ -32,12 +30,6 @@ public class ProcDecl implements IDecl {
     @Override
     public String toString(String indent) {
         return null;
-    }
-
-    @Override
-    public void storeNamespace(HashMap<String, TypeIdent> saveNamespace)
-        throws AlreadyDeclaredError, AlreadyInitializedError {
-
     }
 
     @Override
