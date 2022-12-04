@@ -88,6 +88,17 @@ public class Parser implements IParser {
         }
     }
 
+    /* program ::= PROGRAM IDENT globalNTS DO cpsCmd ENDPROGRAM */
+    private IProgram program() throws GrammarError {
+        if (this.currentTerminal == Terminals.PROGRAM) {
+            // program ::= PROGRAM IDENT <globalNTS> DO <cpsCmd> ENDPROGRAM
+            return new Program(consume(Terminals.PROGRAM), consume(Terminals.IDENT), globalNTS(), consume(Terminals.DO),
+                cpsCmd(), consume(Terminals.ENDPROGRAM));
+        } else {
+            throw new GrammarError(Terminals.PROGRAM, currentTerminal);
+        }
+    }
+
     /*
     globalNTS ::= GLOBAL cpsDecl
     globalNTS ::= ε
@@ -123,7 +134,7 @@ public class Parser implements IParser {
             // stoDecl ::= <typedIdent>
             return new StoDeclTypedIdent(typedIdent());
         } else if (currentTerminal == Terminals.CHANGEMODE) {
-            // stoDecl ::= CHANGEMOD <typedIdent>
+            // stoDecl ::= CHANGEMODE <typedIdent>
             return new StoDeclChangeMode(consume(Terminals.CHANGEMODE), typedIdent());
         } else {
             throw new GrammarError(Terminals.STODECL, currentTerminal);
@@ -135,9 +146,11 @@ public class Parser implements IParser {
     mechModeNTS::= ε
     */
     private IMechModeNTS mechModeNTS() throws GrammarError {
-        if (currentTerminal == Terminals.MECHMODE) { // mechModeNTS ::= MECHMODE
+        if (currentTerminal == Terminals.MECHMODE) {
+            // mechModeNTS ::= MECHMODE
             return new MechModeNTS(consume(Terminals.MECHMODE));
-        } else if (currentTerminal == Terminals.IDENT || currentTerminal == Terminals.CHANGEMODE) { // mechModeNTS ::= ε
+        } else if (currentTerminal == Terminals.IDENT || currentTerminal == Terminals.CHANGEMODE) {
+            // mechModeNTS ::= ε
             return new IEpsilon.MechModeNTS();
         } else {
             throw new GrammarError(Terminals.MECHMODENTS, currentTerminal);
@@ -145,7 +158,7 @@ public class Parser implements IParser {
     }
 
     /*
-    changeModNTS ::= CHANGEMOD
+    changeModNTS ::= CHANGEMODE
     changeModNTS::= ε
     */
     private IChangeModeNTS changeModeNTS() throws GrammarError {
@@ -162,8 +175,8 @@ public class Parser implements IParser {
 
     /* param ::= mechModeNTS changeModNTS typedIdent */
     private IParameter parameter() throws GrammarError {
-        if (currentTerminal == Terminals.IDENT || currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.MECHMODE) { // param ::= <mechModeNTS> <changeModNTS> <typedIdent>
-            ITypedIdent N_typedIdent = typedIdent();
+        if (currentTerminal == Terminals.IDENT || currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.MECHMODE) {
+            // param ::= <mechModeNTS> <changeModNTS> <typedIdent>
             return new Parameter(mechModeNTS(), changeModeNTS(), typedIdent());
         } else {
             throw new GrammarError(Terminals.PARAM, currentTerminal);
@@ -202,10 +215,10 @@ public class Parser implements IParser {
         }
     }
 
-    /* paramList ::= LPAREN paramListNTS RPAREN */
+    /* parameterList ::= LPAREN parameterListNTS RPAREN */
     private IParameterList parameterList() throws GrammarError {
         if (currentTerminal == Terminals.LPAREN) {
-            // paramList ::= LPAREN <paramListNTS> RPAREN
+            // parameterList ::= LPAREN <parameterListNTS> RPAREN
             return new ParameterList(consume(Terminals.LPAREN), parameterListNTS(), consume(Terminals.RPAREN));
         } else {
             throw new GrammarError(Terminals.PARAMLIST, currentTerminal);
@@ -384,7 +397,7 @@ public class Parser implements IParser {
     factor ::= LITERAL
     factor ::= IDENT factorNTS
     factor ::= monadicOpr factor
-    factor ::= LPAREN expr RPAREN
+    factor ::= LPAREN expression RPAREN
     */
     private IFactor factor() throws GrammarError {
         if (currentTerminal == Terminals.LITERAL) {
@@ -397,7 +410,7 @@ public class Parser implements IParser {
             // factor ::= <monadicOpr> <factor>
             return new FactorMonadicOpr(monadicOpr(), factor());
         } else if (currentTerminal == Terminals.LPAREN) {
-            // factor ::= LPAREN <expr> RPAREN
+            // factor ::= LPAREN <expression> RPAREN
             return new FactorLParen(consume(Terminals.LPAREN), expression(), consume(Terminals.RPAREN));
         } else {
             throw new GrammarError(Terminals.FACTOR, currentTerminal);
@@ -406,7 +419,7 @@ public class Parser implements IParser {
 
     /*
     factorNTS ::= INIT
-    factorNTS ::= exprList
+    factorNTS ::= expressionList
     factorNTS ::= ε
     */
     private IFactorNTS factorNTS() throws GrammarError {
@@ -414,7 +427,7 @@ public class Parser implements IParser {
             // factorNTS ::= INIT
             return new FactorNTSInit(consume(Terminals.INIT));
         } else if (currentTerminal == Terminals.LPAREN) {
-            // factorNTS ::= <exprList>
+            // factorNTS ::= <expressionList>
             return new FactorNTSExpressionList(expressionList());
         } else if (currentTerminal == Terminals.COMMA || currentTerminal == Terminals.RPAREN || currentTerminal == Terminals.COLON
             || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDPROC
@@ -429,11 +442,11 @@ public class Parser implements IParser {
         }
     }
 
-    /* expr ::= term1 exprNTS */
+    /* expression ::= term1 expressionNTS */
     private IExpression expression() throws GrammarError {
         if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
             || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL || currentTerminal == Terminals.LBRACKET) {
-            // expr ::= <term1> <exprNTS>
+            // expression ::= <term1> <exprNTS>
             return new Expression(term1(), expressionNTS());
         } else {
             throw new GrammarError(Terminals.EXPR, currentTerminal);
@@ -441,19 +454,19 @@ public class Parser implements IParser {
     }
 
     /*
-    exprNTS ::= BOOLOPR term1 exprNTS
-    exprNTS ::= ε
+    expressionNTS ::= BOOLOPR term1 expressionNTS
+    expressionNTS ::= ε
      */
     private IExpressionNTS expressionNTS() throws GrammarError {
         if (currentTerminal == Terminals.BOOLOPR) {
-            // exprNTS ::= BOOLOPR <term1> <exprNTS>
+            // expressionNTS ::= BOOLOPR <term1> <expressionNTS>
             return new ExpressionNTS(consume(Terminals.BOOLOPR), term1(), expressionNTS());
         } else if (currentTerminal == Terminals.COMMA || currentTerminal == Terminals.RPAREN || currentTerminal == Terminals.COLON
             || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDPROC
             || currentTerminal == Terminals.ENDWHILE || currentTerminal == Terminals.ENDIF || currentTerminal == Terminals.ELSE
             || currentTerminal == Terminals.ENDFUN || currentTerminal == Terminals.ENDPROGRAM || currentTerminal == Terminals.SEMICOLON
             || currentTerminal == Terminals.BECOMES) {
-            // exprNTS ::= ε
+            // expressionNTS ::= ε
             return new IEpsilon.ExpressionNTS();
         } else {
             throw new GrammarError(Terminals.EXPRNTS, currentTerminal);
@@ -461,12 +474,12 @@ public class Parser implements IParser {
     }
 
     /*
-    exprListNTS ::= COMMA expr exprListNTS
-    exprListNTS ::= ε
+    expressionListNTS ::= COMMA expression expressionListNTS
+    expressionListNTS ::= ε
     */
     private IExpressionListNTS expressionListNTS() throws GrammarError {
         if (currentTerminal == Terminals.COMMA) {
-            // exprListNTS ::= COMMA <expr> <exprListNTS>
+            // expressionListNTS ::= COMMA <expression> <expressionListNTS>
             return new ExpressionListNTS(consume(Terminals.COMMA), expression(), expressionListNTS());
         } else if (currentTerminal == Terminals.RPAREN) {
             // expressionListNTS ::= ε
@@ -477,27 +490,27 @@ public class Parser implements IParser {
     }
 
     /*
-    exprListLparenNTS ::= expr exprListNTS
-    exprListLparenNTS ::= ε
+    expressionListLparenNTS ::= expression expressionListNTS
+    expressionListLparenNTS ::= ε
     */
     private IExpressionListLParenNTS expressionListLParenNTS() throws GrammarError {
         if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
             || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL || currentTerminal == Terminals.LBRACKET) {
-            // exprListLparenNTS ::= <expr> <exprListNTS>
+            // expressionListLparenNTS ::= <expression> <expressionListNTS>
             return null; // needs to be fixed
-            // return new IEpsilon.ExpressionListLParenNTS(expression(), expressionListNTS());
+            //return new IEpsilon.ExpressionListLParenNTS(expression(), expressionListNTS());
         } else if (currentTerminal == Terminals.RPAREN) {
-            // exprListLparenNTS ::= ε
+            // expressionListLparenNTS ::= ε
             return new IEpsilon.ExpressionListLParenNTS();
         } else {
             throw new GrammarError(Terminals.EXPRLISTLPARENNTS, currentTerminal);
         }
     }
 
-    /* exprList ::= LPAREN exprListLparenNTS RPAREN */
+    /* expressionList ::= LPAREN expressionListLparenNTS RPAREN */
     private IExpressionList expressionList() throws GrammarError {
         if (currentTerminal == Terminals.LPAREN) {
-            // exprList ::= LPAREN <exprListLparenNTS> RPAREN
+            // expressionList ::= LPAREN <expressionListLparenNTS> RPAREN
             return new ExpressionList(consume(Terminals.LPAREN), expressionListLParenNTS(), consume(Terminals.RPAREN));
         } else {
             throw new GrammarError(Terminals.EXPRLIST, currentTerminal);
@@ -505,8 +518,8 @@ public class Parser implements IParser {
     }
 
     /*
-    ifelseNTS ::= ELSE cpsCmd
-    ifelseNTS ::= ε
+    ifElseNTS ::= ELSE cpsCmd
+    ifElseNTS ::= ε
     */
     private IIfElseNTS ifElseNTS() throws GrammarError {
         if (currentTerminal == Terminals.ELSE) {
@@ -522,12 +535,12 @@ public class Parser implements IParser {
 
     /*
     cmd ::= SKIP
-    cmd ::= expr BECOMES expr
-    cmd ::= IF expr THEN cpsCmd ifelseNTS ENDIF
-    cmd ::= WHILE expr DO cpsCmd ENDWHILE
-    cmd ::= CALL IDENT exprList
-    cmd ::= DEBUGIN expr
-    cmd ::= DEBUGOUT expr
+    cmd ::= expression BECOMES expression
+    cmd ::= IF expression THEN cpsCmd ifElseNTS ENDIF
+    cmd ::= WHILE expression DO cpsCmd ENDWHILE
+    cmd ::= CALL IDENT expressionList
+    cmd ::= DEBUGIN expression
+    cmd ::= DEBUGOUT expression
     */
     private ICmd cmd() throws GrammarError {
         if (currentTerminal == Terminals.SKIP) {
@@ -535,24 +548,24 @@ public class Parser implements IParser {
             return new CmdSkip(consume(Terminals.SKIP));
         } else if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
             || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL) {
-            // cmd ::= <expr> BECOMES <expr>
+            // cmd ::= <expression> BECOMES <expr>
             IExpression N_expr1 = expression();
             IExpression N_expr2 = expression();
             return new CmdExpression(N_expr1, consume(Terminals.BECOMES), N_expr2);
         } else if (currentTerminal == Terminals.IF) {
-            // cmd ::= IF <expr> THEN <cpsCmd> <ifelseNTS> ENDIF
+            // cmd ::= IF <expression> THEN <cpsCmd> <ifElseNTS> ENDIF
             return new CmdIfThen(consume(Terminals.IF), expression(), consume(Terminals.THEN), cpsCmd(), ifElseNTS(), consume(Terminals.ENDIF));
         } else if (currentTerminal == Terminals.WHILE) {
-            // cmd ::= WHILE <expr> DO <cpsCmd> ENDWHILE
+            // cmd ::= WHILE <expression> DO <cpsCmd> ENDWHILE
             return new CmdWhileDo(consume(Terminals.WHILE), expression(), consume(Terminals.DO), cpsCmd(), consume(Terminals.ENDWHILE));
         } else if (currentTerminal == Terminals.CALL) {
-            // cmd ::= CALL IDENT <exprList>
+            // cmd ::= CALL IDENT <expressionList>
             return new CmdCallIdentExpressionList(consume(Terminals.CALL), consume(Terminals.IDENT), expressionList());
         } else if (currentTerminal == Terminals.DEBUGIN) {
-            // cmd ::= DEBUGIN <expr>
+            // cmd ::= DEBUGIN <expression>
             return new CmdDebugIn(consume(Terminals.DEBUGIN), expression());
         } else if (currentTerminal == Terminals.DEBUGOUT) {
-            // cmd ::= DEBUGOUT <expr>
+            // cmd ::= DEBUGOUT <expression>
             return new CmdDebugOut(consume(Terminals.DEBUGOUT), expression());
         } else {
             throw new GrammarError(Terminals.CMD, currentTerminal);
@@ -632,10 +645,10 @@ public class Parser implements IParser {
         }
     }
 
-    /* procDecl ::= PROC IDENT paramList procDeclNTS DO cpsCmd ENDPROC */
+    /* procDecl ::= PROC IDENT parameterList procDeclNTS DO cpsCmd ENDPROC */
     private IProcDecl procDecl() throws GrammarError {
         if (currentTerminal == Terminals.PROC) {
-            // procDecl ::= PROC IDENT <paramList> <procDeclNTS> DO <cpsCmd> ENDPROC
+            // procDecl ::= PROC IDENT <parameterList> <procDeclNTS> DO <cpsCmd> ENDPROC
             return new ProcDecl(consume(Terminals.PROC), consume(Terminals.IDENT), parameterList(), procDeclNTS(),
                 consume(Terminals.DO), cpsCmd(), consume(Terminals.ENDPROC));
         } else {
@@ -687,16 +700,6 @@ public class Parser implements IParser {
             return new CpsDecl(decl(), cpsDeclNTS());
         } else {
             throw new GrammarError(Terminals.CPSDECL, currentTerminal);
-        }
-    }
-
-    /* program ::= PROGRAM IDENT globalNTS DO cpsCmd ENDPROGRAM */
-    private IProgram program() throws GrammarError {
-        if (this.currentTerminal == Terminals.PROGRAM) {
-            return new Program(consume(Terminals.PROGRAM), consume(Terminals.IDENT), globalNTS(), consume(Terminals.DO),
-                cpsCmd(), consume(Terminals.ENDPROGRAM));
-        } else {
-            throw new GrammarError(Terminals.PROGRAM, currentTerminal);
         }
     }
 

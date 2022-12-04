@@ -107,8 +107,6 @@
         TYPEDIDENT("typedIdent"),
         QUEST("?");
 
-        // TODECL("")
-
         final String stringValue;
         char charValue;
         Terminals(String stringValue) {
