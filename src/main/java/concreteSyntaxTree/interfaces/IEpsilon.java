@@ -1,12 +1,15 @@
 package concreteSyntaxTree.interfaces;
 
 import abstractSyntaxTree.CpsCmd;
+import abstractSyntaxTree.InitFactor;
 import abstractSyntaxTree.Parameter;
 import abstractSyntaxTree.StoDecl;
 import abstractSyntaxTree.interfaces.IDecl;
 import concreteSyntaxTree.Production;
 import abstractSyntaxTree.interfaces.ICmd;
 import abstractSyntaxTree.interfaces.IExpression;
+import abstractSyntaxTree.interfaces.IFactor;
+import scanner.Ident;
 
 import java.util.ArrayList;
 
@@ -63,6 +66,13 @@ public interface IEpsilon {
         }
     }
 
+    class FactorNTS extends Production implements IFactorNTS {
+        @Override
+        public IFactor toAbstractSyntax(Ident ident) {
+            return new InitFactor(ident, false);
+        }
+    }
+
     class FunDeclNTS extends Production implements IFunDeclNTS {
         @Override
         public ArrayList<StoDecl> toAbstractSyntax() {
@@ -76,7 +86,6 @@ public interface IEpsilon {
             return null;
         }
     }
-
 
     class ParameterListNTS extends Production implements IParameterListNTS {
         @Override
@@ -96,6 +105,30 @@ public interface IEpsilon {
         @Override
         public ArrayList<StoDecl> toAbstractSyntax() {
             return new ArrayList<>();
+        }
+    }
+
+    class Term1NTS extends Production implements ITerm1NTS {
+        @Override public IExpression toAbstractSyntax(IExpression expression) {
+            return expression;
+        }
+    }
+
+    class Term2NTS extends Production implements ITerm2NTS {
+        @Override public IExpression toAbstractSyntax(IExpression expression) {
+            return expression;
+        }
+    }
+
+    class Term3NTS extends Production implements ITerm3NTS {
+        @Override public IExpression toAbstractSyntax(IExpression expression) {
+            return expression;
+        }
+    }
+
+    class Term4NTS extends Production implements ITerm4NTS {
+        @Override public IExpression toAbstractSyntax(IExpression expression) {
+            return expression;
         }
     }
 
