@@ -4,5 +4,6 @@ import abstractSyntaxTree.CpsCmd;
 
 public interface IIfElseNTS extends IProduction {
 
-    public CpsCmd toAbstractSyntax();
+    CpsCmd toAbstractSyntax();
+
 }

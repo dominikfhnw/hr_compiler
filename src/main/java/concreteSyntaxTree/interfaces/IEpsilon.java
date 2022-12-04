@@ -12,7 +12,6 @@ import abstractSyntaxTree.interfaces.IFactor;
 import scanner.Ident;
 import scanner.enums.ChangeModes;
 import scanner.enums.MechModes;
-
 import java.util.ArrayList;
 
 public interface IEpsilon {
@@ -24,17 +23,17 @@ public interface IEpsilon {
         }
     }
 
-    class CpsDeclNTS extends Production implements ICpsDeclNTS {
-        @Override
-        public ArrayList<IDecl> toAbstractSyntax(ArrayList<IDecl> temp) {
-            return temp;
-        }
-    }
-
     class CpsCmdNTS extends Production implements ICpsCmdNTS {
         @Override
         public ArrayList<ICmd> toAbstractSyntax(
             ArrayList<ICmd> temp) {
+            return temp;
+        }
+    }
+
+    class CpsDeclNTS extends Production implements ICpsDeclNTS {
+        @Override
+        public ArrayList<IDecl> toAbstractSyntax(ArrayList<IDecl> temp) {
             return temp;
         }
     }

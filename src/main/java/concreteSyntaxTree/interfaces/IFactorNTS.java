@@ -1,4 +1,5 @@
 package concreteSyntaxTree.interfaces;
+
 import abstractSyntaxTree.interfaces.IFactor;
 import scanner.Ident;
 
