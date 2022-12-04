@@ -1,9 +1,11 @@
 package concreteSyntaxTree;
 
+import abstractSyntaxTree.RelExpression;
 import abstractSyntaxTree.interfaces.IExpression;
 import concreteSyntaxTree.interfaces.ITerm1NTS;
 import concreteSyntaxTree.interfaces.ITerm2;
 import scanner.interfaces.IToken;
+import scanner.operators.Operator;
 
 // Term1NTS := RELOPR term2 term1NTS
 
@@ -19,9 +21,10 @@ public class Term1NTS extends Production implements ITerm1NTS {
         this.N_term1NTS = N_term1NTS;
     }
 
-    // needs to be implemented
     @Override
     public IExpression toAbstractSyntax(IExpression expression) {
-        return null;
+        IExpression temp = new RelExpression(((Operator) T_relOpr).getOperator(), expression, N_term2.toAbstractSyntax());
+        return N_term1NTS.toAbstractSyntax(temp);
     }
+
 }

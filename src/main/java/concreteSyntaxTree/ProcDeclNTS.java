@@ -4,17 +4,17 @@ import abstractSyntaxTree.StoDecl;
 import concreteSyntaxTree.interfaces.ICpsStoDecl;
 import concreteSyntaxTree.interfaces.IProcDeclNTS;
 import scanner.interfaces.IToken;
-
 import java.util.ArrayList;
 
 // procDeclNTS ::= LOCAL cpsStoDecl
+
 public class ProcDeclNTS extends Production implements IProcDeclNTS {
     final IToken T_local;
     final ICpsStoDecl N_cpsStoDecl;
 
-    public ProcDeclNTS(IToken t_local, ICpsStoDecl n_cpsStoDecl) {
-        T_local = t_local;
-        N_cpsStoDecl = n_cpsStoDecl;
+    public ProcDeclNTS(IToken T_local, ICpsStoDecl N_cpsStoDecl) {
+        this.T_local = T_local;
+        this.N_cpsStoDecl = N_cpsStoDecl;
     }
 
     @Override

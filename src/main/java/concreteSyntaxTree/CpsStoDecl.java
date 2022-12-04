@@ -4,7 +4,6 @@ import abstractSyntaxTree.StoDecl;
 import concreteSyntaxTree.interfaces.ICpsStoDecl;
 import concreteSyntaxTree.interfaces.ICpsStoDeclNTS;
 import concreteSyntaxTree.interfaces.IStoDecl;
-
 import java.util.ArrayList;
 
 // cpsStoDecl ::= stoDecl cpsStoDeclNTS

@@ -1,13 +1,12 @@
 package concreteSyntaxTree;
 
-// paramNTS ::= COMMA param paramNTS
-
 import abstractSyntaxTree.Parameter;
 import concreteSyntaxTree.interfaces.IParameter;
 import concreteSyntaxTree.interfaces.IParameterNTS;
 import scanner.interfaces.IToken;
-
 import java.util.ArrayList;
+
+// paramNTS ::= COMMA param paramNTS
 
 public class ParameterNTS extends Production implements IParameterNTS {
     final IToken T_comma;

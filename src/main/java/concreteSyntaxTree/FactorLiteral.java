@@ -1,5 +1,6 @@
 package concreteSyntaxTree;
 
+import abstractSyntaxTree.LiteralFactor;
 import concreteSyntaxTree.interfaces.IFactor;
 import scanner.interfaces.IToken;
 import scanner.Literal;
@@ -14,9 +15,8 @@ public class FactorLiteral extends Production implements IFactor {
         this.T_literal = T_literal;
     }
 
-    // needs to be implemented
     @Override
     public abstractSyntaxTree.interfaces.IFactor toAbstractSyntax() {
-        return null;
+        return new LiteralFactor((Literal) T_literal);
     }
 }

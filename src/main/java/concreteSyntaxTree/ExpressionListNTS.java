@@ -1,12 +1,11 @@
 package concreteSyntaxTree;
 
-// exprListNTS ::= COMMA expr exprListNTS
-
 import concreteSyntaxTree.interfaces.IExpression;
 import concreteSyntaxTree.interfaces.IExpressionListNTS;
 import scanner.interfaces.IToken;
-
 import java.util.ArrayList;
+
+// exprListNTS ::= COMMA expr exprListNTS
 
 public class ExpressionListNTS extends Production implements IExpressionListNTS {
     final IToken T_comma;

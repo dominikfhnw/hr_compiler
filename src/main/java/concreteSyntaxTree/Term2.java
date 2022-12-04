@@ -4,6 +4,8 @@ import concreteSyntaxTree.interfaces.ITerm2;
 import concreteSyntaxTree.interfaces.ITerm2NTS;
 import concreteSyntaxTree.interfaces.ITerm3;
 
+// term2 ::= term3 term2NTS
+
 public class Term2 extends Production implements ITerm2 {
 
     final ITerm3 N_term3;

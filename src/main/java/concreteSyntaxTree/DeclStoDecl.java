@@ -4,6 +4,7 @@ import concreteSyntaxTree.interfaces.IDecl;
 import concreteSyntaxTree.interfaces.IStoDecl;
 
 // decl ::= stoDecl
+
 public class DeclStoDecl extends Production implements IDecl {
     final IStoDecl N_stoDecl;
 

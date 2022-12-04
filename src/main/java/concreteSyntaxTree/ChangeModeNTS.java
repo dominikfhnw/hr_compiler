@@ -1,11 +1,11 @@
 package concreteSyntaxTree;
 
-// changeModeNTS ::= CHANGEMODE
-
 import concreteSyntaxTree.interfaces.IChangeModeNTS;
 import scanner.enums.ChangeModes;
 import scanner.interfaces.IToken;
 import scanner.modesAndTypes.ChangeMode;
+
+// changeModeNTS ::= CHANGEMODE
 
 public class ChangeModeNTS extends Production implements IChangeModeNTS {
     final IToken T_changeModeNTS;

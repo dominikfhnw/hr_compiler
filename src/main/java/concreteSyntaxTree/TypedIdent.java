@@ -5,6 +5,8 @@ import scanner.Ident;
 import scanner.modesAndTypes.Type;
 import scanner.interfaces.IToken;
 
+// typedIdent ::= IDENT COLON TYPE
+
 public class TypedIdent extends Production implements ITypedIdent {
     final IToken T_ident;
     final IToken T_colon;

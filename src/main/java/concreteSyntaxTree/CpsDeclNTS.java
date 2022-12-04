@@ -3,7 +3,6 @@ package concreteSyntaxTree;
 import concreteSyntaxTree.interfaces.ICpsDeclNTS;
 import concreteSyntaxTree.interfaces.IDecl;
 import scanner.interfaces.IToken;
-
 import java.util.ArrayList;
 
 // cpsDeclNTS ::= SEMICOLON decl cpsDeclNTS

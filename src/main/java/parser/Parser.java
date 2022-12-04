@@ -415,7 +415,7 @@ public class Parser implements IParser {
             || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL) { // cmd ::= <expr> BECOMES <expr>
             IExpression N_expr1 = expression();
             IExpression N_expr2 = expression();
-            return new CmdExpr(N_expr1, consume(Terminals.BECOMES), N_expr2);
+            return new CmdExpression(N_expr1, consume(Terminals.BECOMES), N_expr2);
         } else if (currentTerminal == Terminals.IF) { // cmd ::= IF <expr> THEN <cpsCmd> <ifelseNTS> ENDIF
             return new CmdIfThen(consume(Terminals.IF), expression(), consume(Terminals.THEN), cpsCmd(), ifElseNTS(), consume(Terminals.ENDIF));
         } else if (currentTerminal == Terminals.WHILE) { // cmd ::= WHILE <expr> DO <cpsCmd> ENDWHILE

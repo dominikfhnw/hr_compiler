@@ -5,10 +5,12 @@ import concreteSyntaxTree.interfaces.IFactorNTS;
 import scanner.Ident;
 import scanner.interfaces.IToken;
 
+// factor ::= IDENT factorNTS
+
 public class FactorIdent extends Production implements IFactor {
 
-    private final IToken T_ident;
-    private final IFactorNTS N_factorNTS;
+    final IToken T_ident;
+    final IFactorNTS N_factorNTS;
 
     public FactorIdent(IToken T_ident, IFactorNTS N_factorNTS) {
         this.T_ident = T_ident;

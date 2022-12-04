@@ -1,10 +1,10 @@
 package concreteSyntaxTree;
 
-// stoDecl ::= typedIdent
-
 import abstractSyntaxTree.StoDecl;
 import concreteSyntaxTree.interfaces.IStoDecl;
 import concreteSyntaxTree.interfaces.ITypedIdent;
+
+// stoDecl ::= typedIdent
 
 public class StoDeclTypedIdent extends Production implements IStoDecl {
 
@@ -16,6 +16,6 @@ public class StoDeclTypedIdent extends Production implements IStoDecl {
 
     @Override
     public StoDecl toAbstractSyntax() {
-        return new StoDecl(); // should return new StoDecl(N_typedIdent.toAbstractSyntax()); needs to be implemented in StoDecl
+        return new StoDecl(); // return new StoDecl(N_typedIdent.toAbstractSyntax()); needs to be fixed
     }
 }

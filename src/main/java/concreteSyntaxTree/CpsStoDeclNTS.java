@@ -4,7 +4,6 @@ import abstractSyntaxTree.StoDecl;
 import concreteSyntaxTree.interfaces.ICpsStoDeclNTS;
 import concreteSyntaxTree.interfaces.IStoDecl;
 import scanner.interfaces.IToken;
-
 import java.util.ArrayList;
 
 // cpsStoDeclNTS ::= SEMICOLON stoDecl cpsStoDeclNTS

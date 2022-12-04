@@ -1,11 +1,11 @@
 package concreteSyntaxTree;
 
-// cmd ::= DEBUGOUT expr
-
 import abstractSyntaxTree.DebugOutCmd;
 import concreteSyntaxTree.interfaces.ICmd;
 import concreteSyntaxTree.interfaces.IExpression;
 import scanner.interfaces.IToken;
+
+// cmd ::= DEBUGOUT expr
 
 public class CmdDebugOut extends Production implements ICmd {
     protected final IToken T_debugOut;
@@ -18,7 +18,7 @@ public class CmdDebugOut extends Production implements ICmd {
 
     @Override
     public abstractSyntaxTree.interfaces.ICmd toAbstractSyntax() {
-        return null;
+        return null; // needs to be fixed
         // return new DebugOutCmd(N_expression.toAbstractSyntax());
     }
 }

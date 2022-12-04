@@ -1,6 +1,8 @@
 package concreteSyntaxTree;
 import concreteSyntaxTree.interfaces.*;
 
+// term4 ::= factor term4NTS
+
 public class Term4 extends Production implements ITerm4 {
 
     final IFactor N_factor;

@@ -1,9 +1,9 @@
 package concreteSyntaxTree;
 
-// cmd ::= SKIP
-
 import concreteSyntaxTree.interfaces.ICmd;
 import scanner.interfaces.IToken;
+
+// cmd ::= SKIP
 
 public class CmdSkip extends Production implements ICmd {
 

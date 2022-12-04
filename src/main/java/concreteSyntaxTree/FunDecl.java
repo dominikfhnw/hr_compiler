@@ -38,13 +38,7 @@ public class FunDecl extends Production implements IFunDecl {
     @Override
     public IDecl toAbstractSyntax() {
         return null;
+        // return new FunDecl((Ident) T_ident, N_parameterList.toAbstractSyntax(), N_stoDecl.toAbstractSyntax(), N_funDeclNTS.toAbstractSyntax(), N_cpsCmd.toAbstractSyntax());
     }
-
-    /*
-    @Override
-    public IDecl toAbstractSyntax() {
-        return new FunDecl((Ident) T_ident, N_parameterList.toAbstractSyntax(), N_stoDecl.toAbstractSyntax(), N_funDeclNTS.toAbstractSyntax(), N_cpsCmd.toAbstractSyntax());
-    }
-    */
 
 }

@@ -9,6 +9,7 @@ import scanner.Ident;
 import scanner.interfaces.IToken;
 
 // procDecl ::= PROC IDENT paramList procDeclNTS DO cpsCmd ENDPROC
+
 public class ProcDecl extends Production implements IProcDecl {
     final IToken T_proc;
     final IToken T_ident;
@@ -18,25 +19,20 @@ public class ProcDecl extends Production implements IProcDecl {
     final ICpsCmd N_cpsCmd;
     final IToken T_endProc;
 
-    public ProcDecl(IToken t_proc, IToken t_ident, IParameterList n_parameterList, IProcDeclNTS n_procDeclNTS, IToken t_do, ICpsCmd n_cpsCmd, IToken t_endProc) {
-        T_proc = t_proc;
-        T_ident = t_ident;
-        T_do = t_do;
-        T_endProc = t_endProc;
-        N_parameterList = n_parameterList;
-        N_procDeclNTS = n_procDeclNTS;
-        N_cpsCmd = n_cpsCmd;
+    public ProcDecl(IToken T_proc, IToken T_ident, IParameterList N_parameterList, IProcDeclNTS N_procDeclNTS, IToken T_do, ICpsCmd N_cpsCmd, IToken T_endProc) {
+        this.T_proc = T_proc;
+        this.T_ident = T_ident;
+        this.T_do = T_do;
+        this.T_endProc = T_endProc;
+        this.N_parameterList = N_parameterList;
+        this.N_procDeclNTS = N_procDeclNTS;
+        this.N_cpsCmd = N_cpsCmd;
     }
 
     @Override
     public IDecl toAbstractSyntax() {
         return null;
+        // return new abstractSyntaxTree.ProcDecl((Ident) T_ident, N_parameterList.toAbstractSyntax(), N_procDeclNTS.toAbstractSyntax(), N_cpsCmd.toAbstractSyntax());
     }
 
-    /*
-    @Override
-    public IDecl toAbstractSyntax() {
-        return new abstractSyntaxTree.ProcDecl((Ident) T_ident, N_parameterList.toAbstractSyntax(), N_procDeclNTS.toAbstractSyntax(), N_cpsCmd.toAbstractSyntax());
-    }
-    */
 }

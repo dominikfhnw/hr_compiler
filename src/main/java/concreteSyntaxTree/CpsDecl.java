@@ -2,7 +2,6 @@ package concreteSyntaxTree;
 import concreteSyntaxTree.interfaces.IDecl;
 import concreteSyntaxTree.interfaces.ICpsDecl;
 import concreteSyntaxTree.interfaces.ICpsDeclNTS;
-
 import java.util.ArrayList;
 
 // cpsDecl ::= decl cpsDeclNTS

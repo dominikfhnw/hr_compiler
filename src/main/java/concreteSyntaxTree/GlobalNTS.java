@@ -4,8 +4,9 @@ import abstractSyntaxTree.interfaces.IDecl;
 import concreteSyntaxTree.interfaces.ICpsDecl;
 import concreteSyntaxTree.interfaces.IGlobalNTS;
 import scanner.interfaces.IToken;
-
 import java.util.ArrayList;
+
+// globalNTS ::= GLOBAL cpsDecl
 
 public class GlobalNTS extends Production implements IGlobalNTS {
     final IToken T_global;

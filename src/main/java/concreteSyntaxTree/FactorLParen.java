@@ -6,6 +6,7 @@ import concreteSyntaxTree.interfaces.IFactor;
 import scanner.interfaces.IToken;
 
 // factor ::= LPAREN expr RPAREN
+
 public class FactorLParen extends Production implements IFactor {
     final IToken T_lParen;
     final IExpression N_expression;

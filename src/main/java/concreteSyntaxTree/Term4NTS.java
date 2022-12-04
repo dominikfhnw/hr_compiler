@@ -1,9 +1,11 @@
 package concreteSyntaxTree;
 
+import abstractSyntaxTree.CustExpression;
 import abstractSyntaxTree.interfaces.IExpression;
 import concreteSyntaxTree.interfaces.IFactor;
 import concreteSyntaxTree.interfaces.ITerm4NTS;
 import scanner.interfaces.IToken;
+import scanner.operators.Operator;
 
 // term4NTS ::= CUSTOPR factor term4NTS
 
@@ -19,9 +21,9 @@ public class Term4NTS extends Production implements ITerm4NTS {
         this.N_term4NTS = N_term4NTS;
     }
 
-    // needs to be implemented
     @Override
     public IExpression toAbstractSyntax(IExpression expression) {
-        return null;
+        IExpression temp = new CustExpression(((Operator) T_custOpr).getOperator(), expression, N_factor.toAbstractSyntax());
+        return N_term4NTS.toAbstractSyntax(temp);
     }
 }

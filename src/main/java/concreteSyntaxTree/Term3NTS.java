@@ -1,9 +1,12 @@
 package concreteSyntaxTree;
 
+import abstractSyntaxTree.AddExpression;
+import abstractSyntaxTree.MultExpression;
 import abstractSyntaxTree.interfaces.IExpression;
 import concreteSyntaxTree.interfaces.ITerm3NTS;
 import concreteSyntaxTree.interfaces.ITerm4;
 import scanner.interfaces.IToken;
+import scanner.operators.Operator;
 
 // term3NTS ::= MULTOPR term4 term3NTS
 
@@ -19,9 +22,9 @@ public class Term3NTS extends Production implements ITerm3NTS{
         this.N_term3NTS = N_term3NTS;
     }
 
-    // needs to be implemented
     @Override
     public IExpression toAbstractSyntax(IExpression expression) {
-        return null;
+        IExpression temp = new MultExpression(((Operator) T_multOpr).getOperator(), expression, N_term4.toAbstractSyntax());
+        return N_term3NTS.toAbstractSyntax(temp);
     }
 }

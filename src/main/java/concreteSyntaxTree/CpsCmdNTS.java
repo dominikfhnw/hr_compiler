@@ -3,15 +3,14 @@ package concreteSyntaxTree;
 import concreteSyntaxTree.interfaces.ICmd;
 import concreteSyntaxTree.interfaces.ICpsCmdNTS;
 import scanner.interfaces.IToken;
-
 import java.util.ArrayList;
 
 // cpsCmdNTS ::= SEMICOLON cmd cpsCmdNTS
 
 public class CpsCmdNTS extends Production implements ICpsCmdNTS {
-    protected final IToken T_semicolon;
-    protected final ICmd N_cmd;
-    protected final ICpsCmdNTS N_cpsCmdNTS;
+    final IToken T_semicolon;
+    final ICmd N_cmd;
+    final ICpsCmdNTS N_cpsCmdNTS;
 
     public CpsCmdNTS(IToken T_semicolon, ICmd N_cmd, ICpsCmdNTS N_cpsCmdNTS) {
         this.T_semicolon = T_semicolon;
