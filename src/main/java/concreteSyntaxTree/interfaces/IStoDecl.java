@@ -1,6 +1,6 @@
 package concreteSyntaxTree.interfaces;
 
-import abstractSyntaxTree.StoDecl;
+import abstractSyntaxTree.declarations.StoDecl;
 
 public interface IStoDecl extends IProduction {
 

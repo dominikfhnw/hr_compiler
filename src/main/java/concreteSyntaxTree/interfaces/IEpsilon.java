@@ -1,9 +1,9 @@
 package concreteSyntaxTree.interfaces;
 
-import abstractSyntaxTree.CpsCmd;
-import abstractSyntaxTree.InitFactor;
+import abstractSyntaxTree.commands.CpsCmd;
+import abstractSyntaxTree.factors.InitFactor;
 import abstractSyntaxTree.Parameter;
-import abstractSyntaxTree.StoDecl;
+import abstractSyntaxTree.declarations.StoDecl;
 import abstractSyntaxTree.interfaces.IDecl;
 import concreteSyntaxTree.Production;
 import abstractSyntaxTree.interfaces.ICmd;

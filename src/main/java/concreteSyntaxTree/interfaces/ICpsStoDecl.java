@@ -1,6 +1,6 @@
 package concreteSyntaxTree.interfaces;
 
-import abstractSyntaxTree.StoDecl;
+import abstractSyntaxTree.declarations.StoDecl;
 import java.util.ArrayList;
 
 public interface ICpsStoDecl extends IProduction {

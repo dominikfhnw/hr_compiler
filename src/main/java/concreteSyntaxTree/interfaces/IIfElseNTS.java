@@ -1,6 +1,6 @@
 package concreteSyntaxTree.interfaces;
 
-import abstractSyntaxTree.CpsCmd;
+import abstractSyntaxTree.commands.CpsCmd;
 
 public interface IIfElseNTS extends IProduction {
 
