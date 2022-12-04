@@ -1,4 +1,5 @@
 package parser;
+
 import concreteSyntaxTree.interfaces.IProgram;
 import errors.GrammarError;
 
