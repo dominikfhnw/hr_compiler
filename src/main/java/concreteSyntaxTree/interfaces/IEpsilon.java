@@ -10,6 +10,8 @@ import abstractSyntaxTree.interfaces.ICmd;
 import abstractSyntaxTree.interfaces.IExpression;
 import abstractSyntaxTree.interfaces.IFactor;
 import scanner.Ident;
+import scanner.enums.ChangeModes;
+import scanner.enums.MechModes;
 
 import java.util.ArrayList;
 
@@ -129,6 +131,20 @@ public interface IEpsilon {
     class Term4NTS extends Production implements ITerm4NTS {
         @Override public IExpression toAbstractSyntax(IExpression expression) {
             return expression;
+        }
+    }
+
+    class ChangeModeNTS extends Production implements IChangeModeNTS {
+        @Override
+        public ChangeModes toAbstractSyntax() {
+            return null;
+        }
+    }
+
+    class MechModeNTS extends Production implements IMechModeNTS {
+        @Override
+        public MechModes toAbstractSyntax() {
+            return null;
         }
     }
 
