@@ -26,12 +26,12 @@ public class DebugOutCmd implements ICmd {
 
     @Override
     public void checkScope() throws NotDeclaredError, LRValueError {
-
+        expression.checkScope();
     }
 
     @Override
     public void checkType() throws TypeCheckError {
-
+        expression.checkType();
     }
 
     @Override

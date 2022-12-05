@@ -1,5 +1,6 @@
 package abstractSyntaxTree.commands;
 
+import abstractSyntaxTree.declarations.ProcDecl;
 import abstractSyntaxTree.interfaces.ICmd;
 import abstractSyntaxTree.interfaces.IExpression;
 import abstractSyntaxTree.parameterLists.TypeIdent;

@@ -8,6 +8,7 @@ import errors.LRValueError;
 import errors.NotDeclaredError;
 import errors.NotInitializedError;
 import errors.TypeCheckError;
+import scanner.enums.Types;
 
 // needs to be implemented
 
@@ -30,12 +31,18 @@ public class IfCmd implements ICmd {
 
     @Override
     public void checkScope() throws NotDeclaredError, LRValueError {
-
+        expression.checkScope();
+        ifCpsCmd.checkScope();
+        elseCpsCmd.checkScope();
     }
 
     @Override
     public void checkType() throws TypeCheckError {
-
+        expression.checkType();
+        ifCpsCmd.checkType();
+        elseCpsCmd.checkType();
+        if (expression.getType() != Types.BOOL)
+            throw new TypeCheckError(Types.BOOL, expression.getType());
     }
 
     @Override

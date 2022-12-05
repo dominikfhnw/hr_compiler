@@ -26,12 +26,16 @@ public class CpsCmd implements ICmd {
 
     @Override
     public void checkScope() throws NotDeclaredError, LRValueError {
-
+        for (ICmd cmd : commands) {
+            cmd.checkScope();
+        }
     }
 
     @Override
     public void checkType() throws TypeCheckError {
-
+        for (ICmd cmd : commands) {
+            cmd.checkType();
+        }
     }
 
     @Override

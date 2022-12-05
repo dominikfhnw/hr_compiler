@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 // needs to be implemented
 
-public class Program {
+public class Program extends AbstractSyntaxTreeNode {
 
     Ident ident;
     ArrayList<IDecl> globalDeclarations;

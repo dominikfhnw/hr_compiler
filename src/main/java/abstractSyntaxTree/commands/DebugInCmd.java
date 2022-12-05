@@ -8,6 +8,7 @@ import errors.LRValueError;
 import errors.NotDeclaredError;
 import errors.NotInitializedError;
 import errors.TypeCheckError;
+import scanner.enums.LRValue;
 
 // needs to be implemented
 
@@ -26,12 +27,14 @@ public class DebugInCmd implements ICmd {
 
     @Override
     public void checkScope() throws NotDeclaredError, LRValueError {
-
+        expression.checkScope();
+        if (expression.getLRValue() != LRValue.LVALUE)
+            throw new LRValueError(LRValue.LVALUE, expression.getLRValue());
     }
 
     @Override
     public void checkType() throws TypeCheckError {
-
+        expression.checkType();
     }
 
     @Override
