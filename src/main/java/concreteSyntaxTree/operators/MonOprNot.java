@@ -1,16 +1,16 @@
 package concreteSyntaxTree.operators;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IMonadicOpr;
+import concreteSyntaxTree.interfaces.IMonOpr;
 import scanner.interfaces.IToken;
 import scanner.operators.Operator;
 
 // monadicOpr ::= NOT
 
-public class MonadicOprNot extends Production implements IMonadicOpr {
+public class MonOprNot extends Production implements IMonOpr {
     final IToken T_notOpr;
 
-    public MonadicOprNot(IToken T_notOpr) {
+    public MonOprNot(IToken T_notOpr) {
         this.T_notOpr = T_notOpr;
     }
 

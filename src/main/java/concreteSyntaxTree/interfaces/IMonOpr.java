@@ -2,7 +2,7 @@ package concreteSyntaxTree.interfaces;
 
 import scanner.operators.Operator;
 
-public interface IMonadicOpr extends IProduction {
+public interface IMonOpr extends IProduction {
 
     Operator toAbstractSyntax();
 

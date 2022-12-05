@@ -13,18 +13,18 @@ import scanner.operators.Operator;
 
 // needs to be implemented
 
-public class MonadicFactor implements IFactor {
+public class MonFactor implements IFactor {
 
     Operator monadicOpr;
     IFactor factor;
     Types castType;
 
-    public MonadicFactor(Operator monadicOpr, IFactor factor) {
+    public MonFactor(Operator monadicOpr, IFactor factor) {
         this.monadicOpr = monadicOpr;
         this.factor = factor;
     }
 
-    public MonadicFactor(Operator monadicOpr) {
+    public MonFactor(Operator monadicOpr) {
         this.monadicOpr = monadicOpr;
     }
 

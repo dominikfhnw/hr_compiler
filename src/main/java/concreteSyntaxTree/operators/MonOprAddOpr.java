@@ -1,16 +1,16 @@
 package concreteSyntaxTree.operators;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IMonadicOpr;
+import concreteSyntaxTree.interfaces.IMonOpr;
 import scanner.interfaces.IToken;
 import scanner.operators.Operator;
 
 // monadicOpr ::= ADDOPR
 
-public class MonadicOprAddOpr extends Production implements IMonadicOpr {
+public class MonOprAddOpr extends Production implements IMonOpr {
     final IToken T_addOpr;
 
-    public MonadicOprAddOpr(IToken T_addOpr) {
+    public MonOprAddOpr(IToken T_addOpr) {
         this.T_addOpr = T_addOpr;
     }
 
