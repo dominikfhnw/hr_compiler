@@ -11,7 +11,6 @@ import concreteSyntaxTree.nts.ExpressionNTS;
 import concreteSyntaxTree.nts.FactorNTSExpressionList;
 import concreteSyntaxTree.nts.FactorNTSInit;
 import concreteSyntaxTree.nts.FunDeclNTS;
-import concreteSyntaxTree.nts.GlobalNTS;
 import concreteSyntaxTree.nts.IfElseNTS;
 import concreteSyntaxTree.nts.MechModeNTS;
 import concreteSyntaxTree.nts.ParameterListNTS;
@@ -89,30 +88,13 @@ public class Parser implements IParser {
         }
     }
 
-    /* program ::= PROGRAM IDENT globalNTS DO cpsCmd ENDPROGRAM */
+    /* program ::= PROGRAM IDENT DO cpsCmd ENDPROGRAM */
     private IProgram program() throws GrammarError {
         if (this.currentTerminal == Terminals.PROGRAM) {
-            // program ::= PROGRAM IDENT <globalNTS> DO <cpsCmd> ENDPROGRAM
-            return new Program(consume(Terminals.PROGRAM), consume(Terminals.IDENT), globalNTS(), consume(Terminals.DO),
-                cpsCmd(), consume(Terminals.ENDPROGRAM));
+            // program ::= PROGRAM IDENT DO <cpsCmd> ENDPROGRAM
+            return new Program(consume(Terminals.PROGRAM), consume(Terminals.IDENT), consume(Terminals.DO), cpsCmd(), consume(Terminals.ENDPROGRAM));
         } else {
             throw new GrammarError(Terminals.PROGRAM, currentTerminal);
-        }
-    }
-
-    /*
-    globalNTS ::= GLOBAL cpsDecl
-    globalNTS ::= ε
-    */
-    private IGlobalNTS globalNTS() throws GrammarError {
-        if (currentTerminal == Terminals.GLOBAL) {
-            // globalNTS ::= GLOBAL <cpsDecl>
-            return new GlobalNTS(consume(Terminals.GLOBAL), cpsDecl());
-        } else if (currentTerminal == Terminals.DO) {
-            // globalNTS ::= ε
-            return new IEpsilon.GlobalNTS();
-        } else {
-            throw new GrammarError(Terminals.GLOBALNTS, currentTerminal);
         }
     }
 

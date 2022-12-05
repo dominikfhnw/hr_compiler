@@ -16,13 +16,6 @@ import java.util.ArrayList;
 
 public interface IEpsilon {
 
-    class GlobalNTS extends Production implements IGlobalNTS {
-        @Override
-        public ArrayList<IDecl> toAbstractSyntax() {
-            return new ArrayList<>();
-        }
-    }
-
     class CpsCmdNTS extends Production implements ICpsCmdNTS {
         @Override
         public ArrayList<ICmd> toAbstractSyntax(
