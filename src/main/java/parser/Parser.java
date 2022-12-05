@@ -88,49 +88,19 @@ public class Parser implements IParser {
         }
     }
 
-    /* program ::= PROGRAM IDENT DO cpsCmd ENDPROGRAM */
+    /* <program> ::= program <ident> do <cpsCmd> endprogram */
     private IProgram program() throws GrammarError {
         if (this.currentTerminal == Terminals.PROGRAM) {
-            // program ::= PROGRAM IDENT DO <cpsCmd> ENDPROGRAM
             return new Program(consume(Terminals.PROGRAM), consume(Terminals.IDENT), consume(Terminals.DO), cpsCmd(), consume(Terminals.ENDPROGRAM));
         } else {
             throw new GrammarError(Terminals.PROGRAM, currentTerminal);
         }
     }
 
-    /* typedIdent ::= IDENT COLON TYPE */
-    private ITypedIdent typedIdent() throws GrammarError {
-        if (currentTerminal == Terminals.IDENT) {
-            // typedIdent ::= IDENT COLON TYPE
-            return new TypedIdent(consume(Terminals.IDENT), consume(Terminals.COLON), consume(Terminals.TYPE));
-        } else {
-            throw new GrammarError(Terminals.TYPEDIDENT, currentTerminal);
-        }
-    }
-
-    /*
-    stoDecl ::= typedIdent
-    stoDecl ::= CHANGEMODE typedIdent
-    */
-    private IStoDecl stoDecl() throws GrammarError {
-        if (currentTerminal == Terminals.IDENT) {
-            // stoDecl ::= <typedIdent>
-            return new StoDeclTypedIdent(typedIdent());
-        } else if (currentTerminal == Terminals.CHANGEMODE) {
-            // stoDecl ::= CHANGEMODE <typedIdent>
-            return new StoDeclChangeMode(consume(Terminals.CHANGEMODE), typedIdent());
-        } else {
-            throw new GrammarError(Terminals.STODECL, currentTerminal);
-        }
-    }
-
-    /*
-    mechModeNTS ::= MECHMODE
-    mechModeNTS::= ε
-    */
+    /* mechModeNTS ::= mechmode | ε */
     private IMechModeNTS mechModeNTS() throws GrammarError {
         if (currentTerminal == Terminals.MECHMODE) {
-            // mechModeNTS ::= MECHMODE
+            // mechModeNTS ::= mechmode
             return new MechModeNTS(consume(Terminals.MECHMODE));
         } else if (currentTerminal == Terminals.IDENT || currentTerminal == Terminals.CHANGEMODE) {
             // mechModeNTS ::= ε
@@ -140,13 +110,10 @@ public class Parser implements IParser {
         }
     }
 
-    /*
-    changeModeNTS ::= CHANGEMODE
-    changeModeNTS::= ε
-    */
+    /* changeModeNTS ::= changemode | ε */
     private IChangeModeNTS changeModeNTS() throws GrammarError {
         if (currentTerminal == Terminals.CHANGEMODE) {
-            // changeModeNTS ::= CHANGEMODE
+            // changeModeNTS ::= changemode
             return new ChangeModeNTS(consume(Terminals.CHANGEMODE));
         } else if (currentTerminal == Terminals.IDENT) {
             // changeModeNTS ::= ε
@@ -156,65 +123,108 @@ public class Parser implements IParser {
         }
     }
 
-    /* param ::= mechModeNTS changeModeNTS typedIdent */
-    private IParameter parameter() throws GrammarError {
-        if (currentTerminal == Terminals.IDENT || currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.MECHMODE) {
-            // param ::= <mechModeNTS> <changeModeNTS> <typedIdent>
-            return new Parameter(mechModeNTS(), changeModeNTS(), typedIdent());
-        } else {
-            throw new GrammarError(Terminals.PARAM, currentTerminal);
-        }
-    }
-
     /*
-    paramNTS ::= COMMA parameter parameterNTS
-    paramNTS ::= ε
-    */
-    private IParameterNTS parameterNTS() throws GrammarError {
-        if (currentTerminal == Terminals.COMMA) {
-            // parameterNTS ::= COMMA <parameter> <parameterNTS>
-            return new ParameterNTS(consume(Terminals.COMMA), parameter(), parameterNTS());
-        } else if (currentTerminal == Terminals.RPAREN) {
-            // parameterNTS ::= ε
-            return new IEpsilon.ParameterNTS();
-        } else {
-            throw new GrammarError(Terminals.PARAMNTS, currentTerminal);
-        }
-    }
-
-    /*
-    parameterListNTS ::= parameter parameterNTS
-    parameterListNTS ::= ε
-    */
-    private IParameterListNTS parameterListNTS() throws GrammarError {
-        if (currentTerminal == Terminals.IDENT || currentTerminal == Terminals.MECHMODE || currentTerminal == Terminals.CHANGEMODE) {
-            // parameterListNTS ::= <parameter> <parameterNTS>
-            return new ParameterListNTS(parameter(), parameterNTS());
-        } else if (currentTerminal == Terminals.RPAREN) {
-            // parameterListNTS ::= ε
-            return new IEpsilon.ParameterListNTS();
-        } else {
-            throw new GrammarError(Terminals.PARAMLISTNTS, currentTerminal);
-        }
-    }
-
-    /* parameterList ::= LPAREN parameterListNTS RPAREN */
+   <paramList> ::= '(' [<param> {',' <param>}] ')'
+   [<param> {',' <param>}] = parameterListNTS()
+   */
     private IParameterList parameterList() throws GrammarError {
         if (currentTerminal == Terminals.LPAREN) {
-            // parameterList ::= LPAREN <parameterListNTS> RPAREN
             return new ParameterList(consume(Terminals.LPAREN), parameterListNTS(), consume(Terminals.RPAREN));
         } else {
             throw new GrammarError(Terminals.PARAMLIST, currentTerminal);
         }
     }
 
+    /* paramNTS ::= ',' <param> paramNTS | ε */
+    private IParameterNTS parameterNTS() throws GrammarError {
+        if (currentTerminal == Terminals.COMMA) {
+            // paramNTS ::= ',' <param> paramNTS
+            return new ParameterNTS(consume(Terminals.COMMA), parameter(), parameterNTS());
+        } else if (currentTerminal == Terminals.RPAREN) {
+            // paramNTS ::= ε
+            return new IEpsilon.ParameterNTS();
+        } else {
+            throw new GrammarError(Terminals.PARAMNTS, currentTerminal);
+        }
+    }
+
+    /* paramListNTS ::= param paramNTS | ε */
+    private IParameterListNTS parameterListNTS() throws GrammarError {
+        if (currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.MECHMODE || currentTerminal == Terminals.IDENT) {
+            // paramListNTS ::= <param> <paramNTS>
+            return new ParameterListNTS(parameter(), parameterNTS());
+        } else if (currentTerminal == Terminals.RPAREN) {
+            // paramListNTS ::= ε
+            return new IEpsilon.ParameterListNTS();
+        } else {
+            throw new GrammarError(Terminals.PARAMLISTNTS, currentTerminal);
+        }
+    }
+
+    /* <param> ::= [<mechModeNTS>] [<changeModeNTS>] <typedIdent> */
+    private IParameter parameter() throws GrammarError {
+        if (currentTerminal == Terminals.MECHMODE || currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.IDENT) {
+            return new Parameter(mechModeNTS(), changeModeNTS(), typedIdent());
+        } else {
+            throw new GrammarError(Terminals.PARAM, currentTerminal);
+        }
+    }
+
+    /* <typedIdent> ::= <ident> ':' <type> */
+    private ITypedIdent typedIdent() throws GrammarError {
+        if (currentTerminal == Terminals.IDENT) {
+            return new TypedIdent(consume(Terminals.IDENT), consume(Terminals.COLON), consume(Terminals.TYPE));
+        } else {
+            throw new GrammarError(Terminals.TYPEDIDENT, currentTerminal);
+        }
+    }
+
+    /* <decl> ::= <stoDecl> | <funDecl> | <procDecl> */
+    private IDecl decl() throws GrammarError {
+        if (currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.IDENT) {
+            // decl ::= <stoDecl>
+            return new DeclStoDecl(stoDecl());
+        } else if (currentTerminal == Terminals.FUN) {
+            // decl ::= <funDecl>
+            return new DeclFunDecl(funDecl());
+        } else if (currentTerminal == Terminals.PROC) {
+            // decl ::= <procDecl>
+            return new DeclProcDecl(procDecl());
+        } else {
+            throw new GrammarError(Terminals.DECL, currentTerminal);
+        }
+    }
+
+    /* <stoDecl> ::= [<changeModeNTS>] <typedIdent> */
+    private IStoDecl stoDecl() throws GrammarError {
+        if (currentTerminal == Terminals.CHANGEMODE) {
+            // stoDecl ::= <changemode> <typedIdent>
+            return new StoDeclChangeMode(consume(Terminals.CHANGEMODE), typedIdent());
+        } else if (currentTerminal == Terminals.IDENT) {
+            // stoDecl ::= <typedIdent>
+            return new StoDeclTypedIdent(typedIdent());
+        } else {
+            throw new GrammarError(Terminals.STODECL, currentTerminal);
+        }
+    }
+
     /*
-    funDeclNTS ::= LOCAL cpsStoNTS
-    funDeclNTS ::= ε
+    <funDecl> ::= fun <ident> <paramList> returns <stoDecl> [local cpsStoDecl] do <cpsCmd> endfun
+    [local cpsStoDecl] = funDeclNTS()
     */
+    private IFunDecl funDecl() throws GrammarError {
+        if (currentTerminal == Terminals.FUN) {
+            return new FunDecl(consume(Terminals.FUN), consume(Terminals.IDENT), parameterList(), consume(Terminals.RETURNS),
+                stoDecl(), funDeclNTS(), consume(Terminals.DO), cpsCmd(), consume(Terminals.ENDFUN));
+        } else {
+            throw new GrammarError(Terminals.FUNDECL, currentTerminal);
+        }
+    }
+
+    /* funDeclNTS ::= local cpsStoNTS | ε */
     private IFunDeclNTS funDeclNTS() throws GrammarError {
         if (currentTerminal == Terminals.LOCAL) {
-            // funDeclNTS := LOCAL <cpsStoDecl>
+            // funDeclNTS := local <cpsStoDecl>
             return new FunDeclNTS(consume(Terminals.LOCAL), cpsStoDecl());
         } else if (currentTerminal == Terminals.DO) {
             // funDeclNTS := ε
@@ -224,39 +234,201 @@ public class Parser implements IParser {
         }
     }
 
-    /* funDecl ::= FUN IDENT parameterList RETURNS stoDecl funDeclNTS DO cpsCmd ENDFUN */
-    private IFunDecl funDecl() throws GrammarError {
-        if (currentTerminal == Terminals.FUN) {
-            // funDecl ::= FUN IDENT <parameterList> RETURNS <stoDecl> <funDeclNTS> DO <cpsCmd> ENDFUN
-            return new FunDecl(consume(Terminals.FUN), consume(Terminals.IDENT), parameterList(), consume(Terminals.RETURNS),
-                stoDecl(), funDeclNTS(), consume(Terminals.DO), cpsCmd(), consume(Terminals.ENDFUN));
+    /*
+    <procDecl> ::= proc <ident> <paramList> [local cpsStoDecl] do <cpsCmd> endproc
+    [local cpsStoDecl] = procDeclNTS()
+    */
+    private IProcDecl procDecl() throws GrammarError {
+        if (currentTerminal == Terminals.PROC) {
+            return new ProcDecl(consume(Terminals.PROC), consume(Terminals.IDENT), parameterList(), procDeclNTS(),
+                consume(Terminals.DO), cpsCmd(), consume(Terminals.ENDPROC));
         } else {
-            throw new GrammarError(Terminals.FUNDECL, currentTerminal);
+            throw new GrammarError(Terminals.PROCDECL, currentTerminal);
         }
     }
 
-    /* term1 ::= term2 term1NTS */
+    /* procDeclNTS ::= local <cpsStoDecl> | ε */
+    private IProcDeclNTS procDeclNTS() throws GrammarError {
+        if (currentTerminal == Terminals.LOCAL) {
+            // procDeclNTS ::= local <cpsStoDecl>
+            return new ProcDeclNTS(consume(Terminals.LOCAL), cpsStoDecl());
+        } else if (currentTerminal == Terminals.DO) {
+            // procDeclNTS ::= ε
+            return new IEpsilon.ProcDeclNTS();
+        } else {
+            throw new GrammarError(Terminals.PROCDECLNTS, currentTerminal);
+        }
+    }
+
+    /*
+    <cpsDecl> ::= <decl> {';' <decl>}
+    {';' <decl>} = cpsDeclNTS()
+    */
+    private ICpsDecl cpsDecl() throws GrammarError {
+        if (currentTerminal == Terminals.PROC || currentTerminal == Terminals.FUN ||
+            currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.IDENT) {
+            return new CpsDecl(decl(), cpsDeclNTS());
+        } else {
+            throw new GrammarError(Terminals.CPSDECL, currentTerminal);
+        }
+    }
+
+    /* cpsDeclNTS ::= ';' <decl> cpsDeclNTS | ε */
+    private ICpsDeclNTS cpsDeclNTS() throws GrammarError {
+        if (currentTerminal == Terminals.SEMICOLON) {
+            // cpsDeclNTS ::= ';' <decl> cpsDeclNTS
+            return new CpsDeclNTS(consume(Terminals.SEMICOLON), decl(), cpsDeclNTS());
+        } else if (currentTerminal == Terminals.DO) {
+            // cpsDeclNTS ::= ε
+            return new IEpsilon.CpsDeclNTS();
+        } else {
+            throw new GrammarError(Terminals.CPSDECLNTS, currentTerminal);
+        }
+    }
+
+    /*
+    <cpsStoDecl> ::= <stoDecl> {';' <stoDecl>}
+    {';' <stoDecl>} = cpsStoDeclNTS
+    */
+    private ICpsStoDecl cpsStoDecl() throws GrammarError {
+        if (currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.IDENT) {
+            return new CpsStoDecl(stoDecl(), cpsStoDeclNTS());
+        } else {
+            throw new GrammarError(Terminals.CPSSTODECL, currentTerminal);
+        }
+    }
+
+    /* cpsStoDeclNTS ::= ';' <stoDecl> cpsStoDeclNTS | ε */
+    private ICpsStoDeclNTS cpsStoDeclNTS() throws GrammarError {
+        if (currentTerminal == Terminals.SEMICOLON) {
+            // cpsStoDeclNTS ::= ';' <stoDecl> cpsStoDeclNTS
+            return new CpsStoDeclNTS(consume(Terminals.SEMICOLON), stoDecl(), cpsStoDeclNTS());
+        } else if (currentTerminal == Terminals.DO) {
+            // cpsStoDeclNTS ::= ε
+            return new IEpsilon.CpsStoDeclNTS();
+        } else {
+            throw new GrammarError(Terminals.CPSSTODECLNTS, currentTerminal);
+        }
+    }
+
+    /* <cmd> ::=    skip | <expr> ':=' <expr> | if <expr> then <cpsCmd> [else <cpsCmd>] endif | while <expr> do <cpsCmd> endwhile
+                    | call <ident> <exprList> | debugin <expr> | debugout <expr>
+
+    [else <cpsCmd>] = ifElseNTS()
+    */
+    private ICmd cmd() throws GrammarError {
+        if (currentTerminal == Terminals.SKIP) {
+            // <cmd> ::= skip
+            return new CmdSkip(consume(Terminals.SKIP));
+        } else if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
+            || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL) {
+            // <cmd> ::= <expr> ':=' <expr>
+            IExpression N_expr1 = expression();
+            IExpression N_expr2 = expression();
+            return new CmdExpression(N_expr1, consume(Terminals.BECOMES), N_expr2);
+        } else if (currentTerminal == Terminals.IF) {
+            // <cmd> ::= if <expr> then <cpsCmd> [else <cpsCmd>] endif
+            return new CmdIfThen(consume(Terminals.IF), expression(), consume(Terminals.THEN), cpsCmd(), ifElseNTS(), consume(Terminals.ENDIF));
+        } else if (currentTerminal == Terminals.WHILE) {
+            // <cmd> ::= while <expr> do <cpsCmd> endwhile
+            return new CmdWhileDo(consume(Terminals.WHILE), expression(), consume(Terminals.DO), cpsCmd(), consume(Terminals.ENDWHILE));
+        } else if (currentTerminal == Terminals.CALL) {
+            // <cmd> ::= call <ident> <exprList>
+            return new CmdCallIdentExpressionList(consume(Terminals.CALL), consume(Terminals.IDENT), expressionList());
+        } else if (currentTerminal == Terminals.DEBUGIN) {
+            // <cmd> ::= debugin <expr>
+            return new CmdDebugIn(consume(Terminals.DEBUGIN), expression());
+        } else if (currentTerminal == Terminals.DEBUGOUT) {
+            // <cmd> ::= debugout <expr>
+            return new CmdDebugOut(consume(Terminals.DEBUGOUT), expression());
+        } else {
+            throw new GrammarError(Terminals.CMD, currentTerminal);
+        }
+    }
+
+    /*
+    <cpsCmd> ::= <cmd> {';' <cmd>}
+    {';' <cmd>} = cpsCmdNTS()
+    */
+    private ICpsCmd cpsCmd() throws GrammarError {
+        if (currentTerminal == Terminals.DEBUGOUT || currentTerminal == Terminals.DEBUGIN || currentTerminal == Terminals.CALL
+            || currentTerminal == Terminals.WHILE || currentTerminal == Terminals.IF || currentTerminal == Terminals.LPAREN
+            || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR || currentTerminal == Terminals.IDENT
+            || currentTerminal == Terminals.LITERAL || currentTerminal == Terminals.SKIP) {
+            return new CpsCmd(cmd(), cpsCmdNTS());
+        } else {
+            throw new GrammarError(Terminals.CPSCMD, currentTerminal);
+        }
+    }
+
+    /* cpsCmdNTS ::= SEMICOLON cmd cpsCmdNTS | ε */
+    private ICpsCmdNTS cpsCmdNTS() throws GrammarError {
+        if (currentTerminal == Terminals.SEMICOLON) {
+            // cpsCmdNTS ::= ';' <cmd> cpsCmdNTS
+            return new CpsCmdNTS(consume(Terminals.SEMICOLON), cmd(), cpsCmdNTS());
+        } else if (currentTerminal == Terminals.ENDWHILE || currentTerminal == Terminals.ENDIF || currentTerminal == Terminals.ELSE
+            || currentTerminal == Terminals.ENDPROC || currentTerminal == Terminals.ENDFUN || currentTerminal == Terminals.ENDPROGRAM) {
+            // cpsCmdNTS ::= ε
+            return new IEpsilon.CpsCmdNTS();
+        } else {
+            throw new GrammarError(Terminals.CPSCMDNTS, currentTerminal);
+        }
+    }
+
+    /*
+    <expr> ::= <term1> ({'/\?' <term1>} | {'\/?' <term1>})
+    ({'/\?' <term1>} | {'\/?' <term1>}) = expressionNTS()
+    */
+    // TO DO: Clarify if LBRACKET is needed!
+    private IExpression expression() throws GrammarError {
+        if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.LBRACKET || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
+            || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL) {
+            return new Expression(term1(), expressionNTS());
+        } else {
+            throw new GrammarError(Terminals.EXPR, currentTerminal);
+        }
+    }
+
+    /* exprNTS ::= BOOLOPR term1 exprNTS | ε */
+    // TO DO: Clarify if COLON is needed!
+    private IExpressionNTS expressionNTS() throws GrammarError {
+        if (currentTerminal == Terminals.BOOLOPR) {
+            return new ExpressionNTS(consume(Terminals.BOOLOPR), term1(), expressionNTS());
+        } else if (currentTerminal == Terminals.COMMA || currentTerminal == Terminals.RPAREN || currentTerminal == Terminals.COLON
+            || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDWHILE
+            || currentTerminal == Terminals.ENDIF || currentTerminal == Terminals.ELSE || currentTerminal == Terminals.ENDPROC
+            || currentTerminal == Terminals.ENDFUN || currentTerminal == Terminals.ENDPROGRAM || currentTerminal == Terminals.SEMICOLON
+            || currentTerminal == Terminals.BECOMES) {
+            // expressionNTS ::= ε
+            return new IEpsilon.ExpressionNTS();
+        } else {
+            throw new GrammarError(Terminals.EXPRNTS, currentTerminal);
+        }
+    }
+
+    /*
+    <term1> ::= <term2> [<relopr> <term2>]
+    [<relopr> <term2>] = term1NTS()
+    */
+    // TO DO: Clarify if LBRACKET is needed!
     private ITerm1 term1() throws GrammarError {
         if(currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
             || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL || currentTerminal == Terminals.LBRACKET){
-            // term1 ::= <term2> <term1NTS>
             return new Term1(term2(), term1NTS());
         } else {
             throw new GrammarError(Terminals.TERM1, currentTerminal);
         }
     }
 
-    /*
-    term1NTS ::= RELOPR term2 term1NTS
-    term1NTS ::= ε
-    */
+    /* term1NTS ::= <relopr> <term2> term1NTS | ε */
+    // TO DO: Clarify if COLON is needed!
     private ITerm1NTS term1NTS() throws GrammarError {
         if (currentTerminal == Terminals.RELOPR) {
-            // term1NTS ::= RELOPR <term2> <term1NTS>
+            // term1NTS ::= <relopr> <term2> term1NTS
             return new Term1NTS(consume(Terminals.RELOPR), term2(), term1NTS());
         } else if (currentTerminal == Terminals.COMMA || currentTerminal == Terminals.RPAREN || currentTerminal == Terminals.COLON
-            || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDPROC
-            || currentTerminal == Terminals.ENDWHILE || currentTerminal == Terminals.ENDIF || currentTerminal == Terminals.ELSE
+            || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDWHILE
+            || currentTerminal == Terminals.ENDIF || currentTerminal == Terminals.ELSE || currentTerminal == Terminals.ENDPROC
             || currentTerminal == Terminals.ENDFUN || currentTerminal == Terminals.ENDPROGRAM || currentTerminal == Terminals.SEMICOLON
             || currentTerminal == Terminals.BECOMES || currentTerminal == Terminals.BOOLOPR) {
             // term1NTS ::= ε
@@ -266,28 +438,29 @@ public class Parser implements IParser {
         }
     }
 
-    /* term2 ::= term3 term2NTS */
+    /*
+    <term2> ::= <term3> {<addopr> <term3>}
+    {<addopr> <term3>} = term2NTS()
+    */
+    // TO DO: Clarify if LBRACKET is needed!
     private ITerm2 term2() throws GrammarError {
         if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
             || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL || currentTerminal == Terminals.LBRACKET) {
-            // term2 ::= <term3> <term2NTS>
             return new Term2(term3(), term2NTS());
         } else {
             throw new GrammarError(Terminals.TERM2, currentTerminal);
         }
     }
 
-    /*
-    term2NTS ::= ADDOPR term3 term2NTS
-    term2NTS ::= ε
-    */
+    /* term2NTS ::= <addopr> <term3> term2NTS | ε */
+    // TO DO: Clarify if COLON is needed!
     private ITerm2NTS term2NTS() throws GrammarError {
         if (currentTerminal == Terminals.ADDOPR) {
-            // term2NTS ::= ADDOPR <term3> <term2NTS>
+            // term2NTS ::= <addopr> <term3> term2NTS
             return new Term2NTS(consume(Terminals.ADDOPR), term3(), term2NTS());
         } else if (currentTerminal == Terminals.COMMA || currentTerminal == Terminals.RPAREN || currentTerminal == Terminals.COLON
-            || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDPROC
-            || currentTerminal == Terminals.ENDWHILE || currentTerminal == Terminals.ENDIF || currentTerminal == Terminals.ELSE
+            || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDWHILE
+            || currentTerminal == Terminals.ENDIF || currentTerminal == Terminals.ELSE || currentTerminal == Terminals.ENDPROC
             || currentTerminal == Terminals.ENDFUN || currentTerminal == Terminals.ENDPROGRAM || currentTerminal == Terminals.SEMICOLON
             || currentTerminal == Terminals.BECOMES || currentTerminal == Terminals.BOOLOPR || currentTerminal == Terminals.RELOPR) {
             // term2NTS ::= ε
@@ -425,37 +598,6 @@ public class Parser implements IParser {
         }
     }
 
-    /* expression ::= term1 expressionNTS */
-    private IExpression expression() throws GrammarError {
-        if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
-            || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL || currentTerminal == Terminals.LBRACKET) {
-            // expression ::= <term1> <exprNTS>
-            return new Expression(term1(), expressionNTS());
-        } else {
-            throw new GrammarError(Terminals.EXPR, currentTerminal);
-        }
-    }
-
-    /*
-    expressionNTS ::= BOOLOPR term1 expressionNTS
-    expressionNTS ::= ε
-     */
-    private IExpressionNTS expressionNTS() throws GrammarError {
-        if (currentTerminal == Terminals.BOOLOPR) {
-            // expressionNTS ::= BOOLOPR <term1> <expressionNTS>
-            return new ExpressionNTS(consume(Terminals.BOOLOPR), term1(), expressionNTS());
-        } else if (currentTerminal == Terminals.COMMA || currentTerminal == Terminals.RPAREN || currentTerminal == Terminals.COLON
-            || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDPROC
-            || currentTerminal == Terminals.ENDWHILE || currentTerminal == Terminals.ENDIF || currentTerminal == Terminals.ELSE
-            || currentTerminal == Terminals.ENDFUN || currentTerminal == Terminals.ENDPROGRAM || currentTerminal == Terminals.SEMICOLON
-            || currentTerminal == Terminals.BECOMES) {
-            // expressionNTS ::= ε
-            return new IEpsilon.ExpressionNTS();
-        } else {
-            throw new GrammarError(Terminals.EXPRNTS, currentTerminal);
-        }
-    }
-
     /*
     expressionListNTS ::= COMMA expression expressionListNTS
     expressionListNTS ::= ε
@@ -512,176 +654,6 @@ public class Parser implements IParser {
             return new IEpsilon.IfElseNTS();
         } else {
             throw new GrammarError(Terminals.IFELSENTS, currentTerminal);
-        }
-    }
-
-    /*
-    cmd ::= SKIP
-    cmd ::= expression BECOMES expression
-    cmd ::= IF expression THEN cpsCmd ifElseNTS ENDIF
-    cmd ::= WHILE expression DO cpsCmd ENDWHILE
-    cmd ::= CALL IDENT expressionList
-    cmd ::= DEBUGIN expression
-    cmd ::= DEBUGOUT expression
-    */
-    private ICmd cmd() throws GrammarError {
-        if (currentTerminal == Terminals.SKIP) {
-            // cmd ::= SKIP
-            return new CmdSkip(consume(Terminals.SKIP));
-        } else if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
-            || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL) {
-            // cmd ::= <expression> BECOMES <expr>
-            IExpression N_expr1 = expression();
-            IExpression N_expr2 = expression();
-            return new CmdExpression(N_expr1, consume(Terminals.BECOMES), N_expr2);
-        } else if (currentTerminal == Terminals.IF) {
-            // cmd ::= IF <expression> THEN <cpsCmd> <ifElseNTS> ENDIF
-            return new CmdIfThen(consume(Terminals.IF), expression(), consume(Terminals.THEN), cpsCmd(), ifElseNTS(), consume(Terminals.ENDIF));
-        } else if (currentTerminal == Terminals.WHILE) {
-            // cmd ::= WHILE <expression> DO <cpsCmd> ENDWHILE
-            return new CmdWhileDo(consume(Terminals.WHILE), expression(), consume(Terminals.DO), cpsCmd(), consume(Terminals.ENDWHILE));
-        } else if (currentTerminal == Terminals.CALL) {
-            // cmd ::= CALL IDENT <expressionList>
-            return new CmdCallIdentExpressionList(consume(Terminals.CALL), consume(Terminals.IDENT), expressionList());
-        } else if (currentTerminal == Terminals.DEBUGIN) {
-            // cmd ::= DEBUGIN <expression>
-            return new CmdDebugIn(consume(Terminals.DEBUGIN), expression());
-        } else if (currentTerminal == Terminals.DEBUGOUT) {
-            // cmd ::= DEBUGOUT <expression>
-            return new CmdDebugOut(consume(Terminals.DEBUGOUT), expression());
-        } else {
-            throw new GrammarError(Terminals.CMD, currentTerminal);
-        }
-    }
-
-    /*
-    cpsCmdNTS ::= SEMICOLON cmd cpsCmdNTS
-    cpsCmdNTS ::= ε
-    */
-    private ICpsCmdNTS cpsCmdNTS() throws GrammarError {
-        if (currentTerminal == Terminals.SEMICOLON) {
-            // cpsCmdNTS ::= SEMICOLON <cmd> <cpsCmdNTS>
-            return new CpsCmdNTS(consume(Terminals.SEMICOLON), cmd(), cpsCmdNTS());
-        } else if (currentTerminal == Terminals.ENDPROC || currentTerminal == Terminals.ENDWHILE || currentTerminal == Terminals.ENDIF
-            || currentTerminal == Terminals.ELSE || currentTerminal == Terminals.ENDFUN || currentTerminal == Terminals.ENDPROGRAM) {
-            // cpsCmdNTS ::= ε
-            return new IEpsilon.CpsCmdNTS();
-        } else {
-            throw new GrammarError(Terminals.CPSCMDNTS, currentTerminal);
-        }
-    }
-
-    /* cpsCmd ::= cmd cpsCmdNTS */
-    private ICpsCmd cpsCmd() throws GrammarError {
-        if (currentTerminal == Terminals.DEBUGOUT || currentTerminal == Terminals.DEBUGIN || currentTerminal == Terminals.CALL
-            || currentTerminal == Terminals.WHILE || currentTerminal == Terminals.IF || currentTerminal == Terminals.LPAREN
-            || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
-            || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL
-            || currentTerminal == Terminals.SKIP) {
-            // cpsCMD ::= <cmd> <cpsCmdNTS>
-            return new CpsCmd(cmd(), cpsCmdNTS());
-        } else {
-            throw new GrammarError(Terminals.CPSCMD, currentTerminal);
-        }
-    }
-
-    /*
-    cpsStoDeclNTS ::= SEMICOLON stoDecl cpsStoDeclNTS
-    cpsStoDeclNTS ::= ε
-    */
-    private ICpsStoDeclNTS cpsStoDeclNTS() throws GrammarError {
-        if (currentTerminal == Terminals.SEMICOLON) {
-            // cpsStoDeclNTS ::= SEMICOLON <stoDecl> <cpsStoDeclNTS>
-            return new CpsStoDeclNTS(consume(Terminals.SEMICOLON), stoDecl(), cpsStoDeclNTS());
-        } else if (currentTerminal == Terminals.DO) {
-            // cpsStoDeclNTS ::= ε
-            return new IEpsilon.CpsStoDeclNTS();
-        } else {
-            throw new GrammarError(Terminals.CPSSTODECLNTS, currentTerminal);
-        }
-    }
-
-    /* cpsStoDecl ::= stoDecl cpsStoDeclNTS */
-    private ICpsStoDecl cpsStoDecl() throws GrammarError {
-        if (currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.IDENT) {
-            // cpsStoDecl ::= <stoDecl> <cpsStoDeclNTS>
-            return new CpsStoDecl(stoDecl(), cpsStoDeclNTS());
-        } else {
-            throw new GrammarError(Terminals.CPSSTODECL, currentTerminal);
-        }
-    }
-
-    /*
-    procDeclNTS ::= LOCAL cpsStoDecl
-    procDeclNTS ::= ε
-    */
-    private IProcDeclNTS procDeclNTS() throws GrammarError {
-        if (currentTerminal == Terminals.LOCAL) {
-            // procDeclNTS ::= LOCAL <cpsStoDecl>
-            return new ProcDeclNTS(consume(Terminals.LOCAL), cpsStoDecl());
-        } else if (currentTerminal == Terminals.DO) {
-            // procDeclNTS ::= ε
-            return new IEpsilon.ProcDeclNTS();
-        } else {
-            throw new GrammarError(Terminals.PROCDECLNTS, currentTerminal);
-        }
-    }
-
-    /* procDecl ::= PROC IDENT parameterList procDeclNTS DO cpsCmd ENDPROC */
-    private IProcDecl procDecl() throws GrammarError {
-        if (currentTerminal == Terminals.PROC) {
-            // procDecl ::= PROC IDENT <parameterList> <procDeclNTS> DO <cpsCmd> ENDPROC
-            return new ProcDecl(consume(Terminals.PROC), consume(Terminals.IDENT), parameterList(), procDeclNTS(),
-                consume(Terminals.DO), cpsCmd(), consume(Terminals.ENDPROC));
-        } else {
-            throw new GrammarError(Terminals.PROCDECL, currentTerminal);
-        }
-    }
-
-    /*
-    decl ::= stoDecl
-    decl ::= funDecl
-    decl ::= procDecl
-     */
-    private IDecl decl() throws GrammarError {
-        if (currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.IDENT) {
-            // decl ::= <stoDecl>
-            return new DeclStoDecl(stoDecl());
-        } else if (currentTerminal == Terminals.FUN) {
-            // decl ::= <funDecl>
-            return new DeclFunDecl(funDecl());
-        } else if (currentTerminal == Terminals.PROC) {
-            // decl ::= <procDecl>
-            return new DeclProcDecl(procDecl());
-        } else {
-            throw new GrammarError(Terminals.DECL, currentTerminal);
-        }
-    }
-
-    /*
-    cpsDeclNTS ::= SEMICOLON decl cpsDeclNTS
-    cpsDeclNTS ::= ε
-    */
-    private ICpsDeclNTS cpsDeclNTS() throws GrammarError {
-        if (currentTerminal == Terminals.SEMICOLON) {
-            // cpsDeclNTS ::= SEMICOLON <decl> <cpsDeclNTS>
-            return new CpsDeclNTS(consume(Terminals.SEMICOLON), decl(), cpsDeclNTS());
-        } else if (currentTerminal == Terminals.DO) {
-            // cpsDeclNTS ::= ε
-            return new IEpsilon.CpsDeclNTS();
-        } else {
-            throw new GrammarError(Terminals.CPSDECLNTS, currentTerminal);
-        }
-    }
-
-    /* cpsDecl ::= decl cpsDeclNTS */
-    private ICpsDecl cpsDecl() throws GrammarError {
-        if (currentTerminal == Terminals.PROC || currentTerminal == Terminals.FUN ||
-            currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.IDENT) {
-            // cpsDecl ::= <decl> <cpsDeclNTS>
-            return new CpsDecl(decl(), cpsDeclNTS());
-        } else {
-            throw new GrammarError(Terminals.CPSDECL, currentTerminal);
         }
     }
 

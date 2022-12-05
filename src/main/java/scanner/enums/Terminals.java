@@ -22,7 +22,7 @@
         MECHMODE("mechMode"),
 
         // Keywords
-        BECOMES("becomes"),
+        BECOMES(":="),
         CALL("call"),
         CASE("case"),
         CHANGEMODENTS("changeModeNTS"),
@@ -45,7 +45,7 @@
         ENDSWITCH("endswitch"),
         ENDWHILE("endwhile"),
         ELSE("else"),
-        ELSEIF("elseif"),
+        ELSEIF("elseIf"),
         EXPR("expr"),
         EXPRNTS("exprNTS"),
         EXPRLIST("exprList"),
