@@ -346,6 +346,19 @@ public class Parser implements IParser {
         }
     }
 
+    /* ifElseNTS ::= else <cpsCmd> | ε */
+    private IIfElseNTS ifElseNTS() throws GrammarError {
+        if (currentTerminal == Terminals.ELSE) {
+            // ifElseNTS ::= else <cpsCmd>
+            return new IfElseNTS(consume(Terminals.ELSE), cpsCmd());
+        } else if (currentTerminal == Terminals.ENDIF) {
+            // ifElseNTS ::= ε
+            return new IEpsilon.IfElseNTS();
+        } else {
+            throw new GrammarError(Terminals.IFELSENTS, currentTerminal);
+        }
+    }
+
     /*
     <cpsCmd> ::= <cmd> {';' <cmd>}
     {';' <cmd>} = cpsCmdNTS()
@@ -470,28 +483,29 @@ public class Parser implements IParser {
         }
     }
 
-    /* term3 ::= term4 term3NTS */
+    /*
+    <term3> ::= <term4> {<multopr> <term4>}
+    {<multopr> <term4>} = term3NTS()
+    */
+    // TO DO: Clarify if LBRACKET is needed!
     private ITerm3 term3() throws GrammarError {
         if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.MULTOPR || currentTerminal == Terminals.NOTOPR
             || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL || currentTerminal == Terminals.LBRACKET) {
-            // term3 ::= <term4> <term3NTS>
             return new Term3(term4(), term3NTS());
         } else {
             throw new GrammarError(Terminals.TERM3, currentTerminal);
         }
     }
 
-    /*
-    term3NTS ::= MULTOPR term4 term3NTS
-    term3NTS ::= ε
-    */
+    /* term3NTS ::= <multopr> <term4> term3NTS | ε */
+    // TO DO: Clarify if COLON is needed!
     private ITerm3NTS term3NTS() throws GrammarError {
         if (currentTerminal == Terminals.MULTOPR) {
-            // term3NTS ::= MULTOPR <term4> <term3NTS>
+            // term3NTS ::= <multopr> <term4> term3NTS
             return new Term3NTS(consume(Terminals.MULTOPR), term4(), term3NTS());
         } else if (currentTerminal == Terminals.COMMA || currentTerminal == Terminals.RPAREN || currentTerminal == Terminals.COLON
-            || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDPROC
-            || currentTerminal == Terminals.ENDWHILE || currentTerminal == Terminals.ENDIF || currentTerminal == Terminals.ELSE
+            || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDWHILE
+            || currentTerminal == Terminals.ENDIF || currentTerminal == Terminals.ELSE || currentTerminal == Terminals.ENDPROC
             || currentTerminal == Terminals.ENDFUN || currentTerminal == Terminals.ENDPROGRAM || currentTerminal == Terminals.SEMICOLON
             || currentTerminal == Terminals.BECOMES || currentTerminal == Terminals.BOOLOPR || currentTerminal == Terminals.RELOPR) {
             // term3NTS ::= ε
@@ -501,32 +515,33 @@ public class Parser implements IParser {
         }
     }
 
-    /* term4 ::= factor term4NTS */
+    /*
+    <term4> ::= <factor> {<custopr> <factor>}
+    {<custopr> <factor>} = term4NTS()
+    */
+    // TO DO: Clarify if LBRACKET is needed!
     private ITerm4 term4() throws GrammarError {
         if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
             || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL || currentTerminal == Terminals.LBRACKET) {
-            // term4 ::= <factor> <term3NTS>
             return new Term4(factor(), term4NTS());
         } else {
             throw new GrammarError(Terminals.TERM4, currentTerminal);
         }
     }
 
-    /*
-    term4NTS ::= CUSTOPR factor term3NTS
-    term4NTS ::= ε
-    */
+    /* term4NTS ::= CUSTOPR factor term3NTS | ε */
+    // TO DO: Clarify if COLON is needed!
     private ITerm4NTS term4NTS() throws GrammarError {
         if (currentTerminal == Terminals.CUSTOPR) {
-            // term3NTS ::= MULTOPR <factor> <term3NTS>
+            // term4NTS ::= <custopr> <factor> term4NTS
             return new Term4NTS(consume(Terminals.CUSTOPR), factor(), term4NTS());
         } else if (currentTerminal == Terminals.COMMA || currentTerminal == Terminals.RPAREN || currentTerminal == Terminals.COLON
-            || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDPROC
-            || currentTerminal == Terminals.ENDWHILE || currentTerminal == Terminals.ENDIF || currentTerminal == Terminals.ELSE
+            || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDWHILE
+            || currentTerminal == Terminals.ENDIF || currentTerminal == Terminals.ELSE || currentTerminal == Terminals.ENDPROC
             || currentTerminal == Terminals.ENDFUN || currentTerminal == Terminals.ENDPROGRAM || currentTerminal == Terminals.SEMICOLON
             || currentTerminal == Terminals.BECOMES || currentTerminal == Terminals.BOOLOPR || currentTerminal == Terminals.RELOPR
             || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.MULTOPR) {
-            // term3NTS ::= ε
+            // term4NTS ::= ε
             return new IEpsilon.Term4NTS();
         } else {
             throw new GrammarError(Terminals.TERM4NTS, currentTerminal);
@@ -534,56 +549,35 @@ public class Parser implements IParser {
     }
 
     /*
-    monadicOpr ::= NOT
-    monadicOpr ::= ADDOPR
-    */
-    private IMonadicOpr monadicOpr() throws GrammarError {
-        if (currentTerminal == Terminals.NOTOPR) {
-            // monadicOpr ::= NOT
-            return new MonadicOprNot(consume(Terminals.NOTOPR));
-        } else if (currentTerminal == Terminals.ADDOPR) {
-            // monadicOpr ::= ADDOPR
-            return new MonadicOprAddOpr(consume(Terminals.ADDOPR));
-        } else {
-            throw new GrammarError(Terminals.MONADICOPR, currentTerminal);
-        }
-    }
-
-    /*
-    factor ::= LITERAL
-    factor ::= IDENT factorNTS
-    factor ::= monadicOpr factor
-    factor ::= LPAREN expression RPAREN
+    <factor> ::= <literal> | <ident> [init | <exprList>] | <monopr> <factor> | '(' <expr> ')'
+    [init | <exprList>] = factorNTS()
     */
     private IFactor factor() throws GrammarError {
         if (currentTerminal == Terminals.LITERAL) {
-            // factor ::= LITERAL
+            // <factor> ::= <literal>
             return new FactorLiteral(consume(Terminals.LITERAL));
         } else if (currentTerminal == Terminals.IDENT) {
-            // factor ::= IDENT <factorNTS>
+            // <factor> ::= <ident> [init | <exprList>]
             return new FactorIdent(consume(Terminals.IDENT), factorNTS());
         } else if (currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR) {
-            // factor ::= <monadicOpr> <factor>
+            // <factor> ::= <monopr> <factor>
             return new FactorMonadicOpr(monadicOpr(), factor());
         } else if (currentTerminal == Terminals.LPAREN) {
-            // factor ::= LPAREN <expression> RPAREN
+            // <factor> ::= '(' <expr> ')'
             return new FactorLParen(consume(Terminals.LPAREN), expression(), consume(Terminals.RPAREN));
         } else {
             throw new GrammarError(Terminals.FACTOR, currentTerminal);
         }
     }
 
-    /*
-    factorNTS ::= INIT
-    factorNTS ::= expressionList
-    factorNTS ::= ε
-    */
+    /* factorNTS ::= init | <exprList> | ε */
+    // TO DO: Clarify if COLON is needed!
     private IFactorNTS factorNTS() throws GrammarError {
         if (currentTerminal == Terminals.INIT) {
-            // factorNTS ::= INIT
+            // factorNTS ::= init
             return new FactorNTSInit(consume(Terminals.INIT));
         } else if (currentTerminal == Terminals.LPAREN) {
-            // factorNTS ::= <expressionList>
+            // factorNTS ::= <exprList>
             return new FactorNTSExpressionList(expressionList());
         } else if (currentTerminal == Terminals.COMMA || currentTerminal == Terminals.RPAREN || currentTerminal == Terminals.COLON
             || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDPROC
@@ -599,9 +593,33 @@ public class Parser implements IParser {
     }
 
     /*
-    expressionListNTS ::= COMMA expression expressionListNTS
-    expressionListNTS ::= ε
+    <exprList> ::= '(' [<expr> {',' <expr>}] ')'
+    '(' [<expr> {',' <expr>}] ')' = exprListLParenNTS
     */
+    private IExpressionList expressionList() throws GrammarError {
+        if (currentTerminal == Terminals.LPAREN) {
+            return new ExpressionList(consume(Terminals.LPAREN), expressionListLParenNTS(), consume(Terminals.RPAREN));
+        } else {
+            throw new GrammarError(Terminals.EXPRLIST, currentTerminal);
+        }
+    }
+
+    /* exprListLParenNTS ::= <expr> exprListNTS | ε */
+    // TO DO: Clarify if LBRACKET is needed!
+    private IExpressionListLParenNTS expressionListLParenNTS() throws GrammarError {
+        if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
+            || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL || currentTerminal == Terminals.LBRACKET) {
+            // exprListLParenNTS ::= <expr> exprListNTS
+            return new ExpressionListLParenNTS(expression(), expressionListNTS());
+        } else if (currentTerminal == Terminals.RPAREN) {
+            // exprListLParenNTS ::= ε
+            return new IEpsilon.ExpressionListLParenNTS();
+        } else {
+            throw new GrammarError(Terminals.EXPRLISTLPARENNTS, currentTerminal);
+        }
+    }
+
+    /* exprListNTS ::= ',' <expr> exprListNTS | ε */
     private IExpressionListNTS expressionListNTS() throws GrammarError {
         if (currentTerminal == Terminals.COMMA) {
             // expressionListNTS ::= COMMA <expression> <expressionListNTS>
@@ -614,46 +632,16 @@ public class Parser implements IParser {
         }
     }
 
-    /*
-    expressionListLparenNTS ::= expression expressionListNTS
-    expressionListLparenNTS ::= ε
-    */
-    private IExpressionListLParenNTS expressionListLParenNTS() throws GrammarError {
-        if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
-            || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL || currentTerminal == Terminals.LBRACKET) {
-            // expressionListLparenNTS ::= <expression> <expressionListNTS>
-            return new ExpressionListLParenNTS(expression(), expressionListNTS());
-        } else if (currentTerminal == Terminals.RPAREN) {
-            // expressionListLparenNTS ::= ε
-            return new IEpsilon.ExpressionListLParenNTS();
+    /* monadicOpr ::= '~' | <addopr> */
+    private IMonadicOpr monadicOpr() throws GrammarError {
+        if (currentTerminal == Terminals.NOTOPR) {
+            // monadicOpr ::= '~'
+            return new MonadicOprNot(consume(Terminals.NOTOPR));
+        } else if (currentTerminal == Terminals.ADDOPR) {
+            // monadicOpr ::= <addopr>
+            return new MonadicOprAddOpr(consume(Terminals.ADDOPR));
         } else {
-            throw new GrammarError(Terminals.EXPRLISTLPARENNTS, currentTerminal);
-        }
-    }
-
-    /* expressionList ::= LPAREN expressionListLparenNTS RPAREN */
-    private IExpressionList expressionList() throws GrammarError {
-        if (currentTerminal == Terminals.LPAREN) {
-            // expressionList ::= LPAREN <expressionListLparenNTS> RPAREN
-            return new ExpressionList(consume(Terminals.LPAREN), expressionListLParenNTS(), consume(Terminals.RPAREN));
-        } else {
-            throw new GrammarError(Terminals.EXPRLIST, currentTerminal);
-        }
-    }
-
-    /*
-    ifElseNTS ::= ELSE cpsCmd
-    ifElseNTS ::= ε
-    */
-    private IIfElseNTS ifElseNTS() throws GrammarError {
-        if (currentTerminal == Terminals.ELSE) {
-            // ifElseNTS ::= ELSE <cpsCmd>
-            return new IfElseNTS(consume(Terminals.ELSE), cpsCmd());
-        } else if (currentTerminal == Terminals.ENDIF) {
-            // ifElseNTS ::= ε
-            return new IEpsilon.IfElseNTS();
-        } else {
-            throw new GrammarError(Terminals.IFELSENTS, currentTerminal);
+            throw new GrammarError(Terminals.MONADICOPR, currentTerminal);
         }
     }
 
