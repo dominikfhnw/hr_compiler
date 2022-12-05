@@ -42,14 +42,14 @@ import concreteSyntaxTree.expressions.ExpressionList;
 import concreteSyntaxTree.expressions.FactorIdent;
 import concreteSyntaxTree.expressions.FactorLParen;
 import concreteSyntaxTree.expressions.FactorLiteral;
-import concreteSyntaxTree.expressions.FactorMonadicOpr;
+import concreteSyntaxTree.expressions.FactorMonOpr;
 import concreteSyntaxTree.expressions.Term1;
 import concreteSyntaxTree.expressions.Term2;
 import concreteSyntaxTree.expressions.Term3;
 import concreteSyntaxTree.expressions.Term4;
 import concreteSyntaxTree.interfaces.*;
-import concreteSyntaxTree.operators.MonadicOprAddOpr;
-import concreteSyntaxTree.operators.MonadicOprNot;
+import concreteSyntaxTree.operators.MonOprAddOpr;
+import concreteSyntaxTree.operators.MonOprNot;
 import concreteSyntaxTree.parameterLists.Parameter;
 import concreteSyntaxTree.parameterLists.ParameterList;
 import concreteSyntaxTree.parameterLists.TypedIdent;
@@ -61,7 +61,7 @@ import scanner.interfaces.IToken;
 
 public class Parser implements IParser {
 
-    private ITokenList tokenList;
+    private final ITokenList tokenList;
     private Base currentToken;
     private Terminals currentTerminal;
 
@@ -323,9 +323,7 @@ public class Parser implements IParser {
         } else if (currentTerminal == Terminals.LPAREN || currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR
             || currentTerminal == Terminals.IDENT || currentTerminal == Terminals.LITERAL) {
             // <cmd> ::= <expr> ':=' <expr>
-            IExpression N_expr1 = expression();
-            IExpression N_expr2 = expression();
-            return new CmdExpression(N_expr1, consume(Terminals.BECOMES), N_expr2);
+            return new CmdExpression(expression(), consume(Terminals.BECOMES), expression());
         } else if (currentTerminal == Terminals.IF) {
             // <cmd> ::= if <expr> then <cpsCmd> [else <cpsCmd>] endif
             return new CmdIfThen(consume(Terminals.IF), expression(), consume(Terminals.THEN), cpsCmd(), ifElseNTS(), consume(Terminals.ENDIF));
@@ -561,7 +559,7 @@ public class Parser implements IParser {
             return new FactorIdent(consume(Terminals.IDENT), factorNTS());
         } else if (currentTerminal == Terminals.ADDOPR || currentTerminal == Terminals.NOTOPR) {
             // <factor> ::= <monopr> <factor>
-            return new FactorMonadicOpr(monadicOpr(), factor());
+            return new FactorMonOpr(monOpr(), factor());
         } else if (currentTerminal == Terminals.LPAREN) {
             // <factor> ::= '(' <expr> ')'
             return new FactorLParen(consume(Terminals.LPAREN), expression(), consume(Terminals.RPAREN));
@@ -622,7 +620,7 @@ public class Parser implements IParser {
     /* exprListNTS ::= ',' <expr> exprListNTS | ε */
     private IExpressionListNTS expressionListNTS() throws GrammarError {
         if (currentTerminal == Terminals.COMMA) {
-            // expressionListNTS ::= COMMA <expression> <expressionListNTS>
+            // expressionListNTS ::= ',' <expr> exprListNTS
             return new ExpressionListNTS(consume(Terminals.COMMA), expression(), expressionListNTS());
         } else if (currentTerminal == Terminals.RPAREN) {
             // expressionListNTS ::= ε
@@ -632,14 +630,14 @@ public class Parser implements IParser {
         }
     }
 
-    /* monadicOpr ::= '~' | <addopr> */
-    private IMonadicOpr monadicOpr() throws GrammarError {
+    /* <monopr> ::= '~' | <addopr> */
+    private IMonOpr monOpr() throws GrammarError {
         if (currentTerminal == Terminals.NOTOPR) {
-            // monadicOpr ::= '~'
-            return new MonadicOprNot(consume(Terminals.NOTOPR));
+            // <monopr> ::= '~'
+            return new MonOprNot(consume(Terminals.NOTOPR));
         } else if (currentTerminal == Terminals.ADDOPR) {
-            // monadicOpr ::= <addopr>
-            return new MonadicOprAddOpr(consume(Terminals.ADDOPR));
+            // <monopr> ::= <addopr>
+            return new MonOprAddOpr(consume(Terminals.ADDOPR));
         } else {
             throw new GrammarError(Terminals.MONADICOPR, currentTerminal);
         }
