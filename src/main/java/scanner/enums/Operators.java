@@ -6,22 +6,22 @@ import java.util.Arrays;
 
 public enum Operators implements IToken {
 
-    AND("/\\"), //
-    CAND("/\\?"), //
-    COR("\\/?"), //
-    DIV_T("divT"), //
-    EQ("=="), //
-    GE(">="), //
-    GT(">"), //
-    LE("<="), //
-    LT("<"), //
-    MINUS("-"), //
-    MOD_T("modT"), //
-    NE("/="), //
+    AND("/\\"),
+    CAND("/\\?"),
+    COR("\\/?"),
+    DIV_T("divT"),
+    EQ("=="),
+    GE(">="),
+    GT(">"),
+    LE("<="),
+    LT("<"),
+    MINUS("-"),
+    MOD_T("modT"),
+    NE("/="),
     NOT("~"),
-    OR("\\/"), //
-    PLUS("+"), //
-    TIMES("*"); //
+    OR("\\/"),
+    PLUS("+"),
+    TIMES("*");
 
     final String stringValue;
     char charValue;
