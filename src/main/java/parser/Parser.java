@@ -528,7 +528,7 @@ public class Parser implements IParser {
         }
     }
 
-    /* term4NTS ::= CUSTOPR factor term3NTS | ε */
+    /* term4NTS ::= <custopr> <factor> term3NTS | ε */
     // TO DO: Clarify if COLON is needed!
     private ITerm4NTS term4NTS() throws GrammarError {
         if (currentTerminal == Terminals.CUSTOPR) {

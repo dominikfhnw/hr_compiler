@@ -8,8 +8,8 @@ import concreteSyntaxTree.interfaces.ITypedIdent;
 
 /*
 <param> ::= [<mechModeNTS>] [<changeModeNTS>] <typedIdent>
-mechModeNTS ::= mechmode | ε
-changeModeNTS ::= changemode | ε
+mechModeNTS ::= mechmode
+changeModeNTS ::= changemode
 */
 
 public class Parameter extends Production implements IParameter {
