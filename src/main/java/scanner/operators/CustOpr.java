@@ -3,7 +3,7 @@ package scanner.operators;
 import scanner.enums.Operators;
 import scanner.enums.Terminals;
 
-// still needs to be implemented
+// must be implemented
 
 public class CustOpr extends Operator {
 
