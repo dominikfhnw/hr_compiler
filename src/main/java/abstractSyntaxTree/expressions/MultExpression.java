@@ -8,6 +8,8 @@ import scanner.enums.LRValue;
 import scanner.enums.Operators;
 import scanner.enums.Types;
 
+// toString must be implemented
+
 public class MultExpression implements IExpression {
 
     Operators multOpr;
@@ -22,27 +24,34 @@ public class MultExpression implements IExpression {
 
     @Override
     public Types getType() {
-        return null;
+        return expressionLeft.getType();
     }
 
     @Override
     public LRValue getLRValue() {
-        return null;
+        return LRValue.RVALUE;
+    }
+
+    @Override
+    public void checkScope() throws NotDeclaredError, LRValueError {
+        expressionLeft.checkScope();
+        expressionRight.checkScope();
+    }
+
+    @Override
+    public void checkType() throws TypeCheckError {
+        expressionLeft.checkType();
+        expressionRight.checkType();
+        if (expressionLeft.getType() == Types.BOOL) {
+            throw new TypeCheckError(Types.INT32, expressionLeft.getType());
+        } else if (expressionLeft.getType() != expressionRight.getType()) {
+            throw new TypeCheckError(expressionLeft.getType(), expressionRight.getType());
+        }
     }
 
     @Override
     public String toString(String indent) {
         return null;
-    }
-
-    @Override
-    public void checkScope() throws NotDeclaredError, LRValueError {
-
-    }
-
-    @Override
-    public void checkType() throws TypeCheckError {
-
     }
 
 }

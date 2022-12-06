@@ -8,7 +8,7 @@ import scanner.Literal;
 import scanner.enums.LRValue;
 import scanner.enums.Types;
 
-// methods must be implemented
+// toString must be implemented
 
 public class LiteralFactor implements IFactor {
     Literal literal;
@@ -19,27 +19,27 @@ public class LiteralFactor implements IFactor {
 
     @Override
     public Types getType() {
-        return null;
+        return literal.getType();
     }
 
     @Override
     public LRValue getLRValue() {
-        return null;
+        return LRValue.RVALUE;
+    }
+
+    @Override
+    public void checkScope() throws NotDeclaredError, LRValueError {
+        //
+    }
+
+    @Override
+    public void checkType() throws TypeCheckError {
+        //
     }
 
     @Override
     public String toString(String indent) {
         return null;
-    }
-
-    @Override
-    public void checkScope() throws NotDeclaredError, LRValueError {
-
-    }
-
-    @Override
-    public void checkType() throws TypeCheckError {
-
     }
 
 }

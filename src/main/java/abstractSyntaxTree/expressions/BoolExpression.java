@@ -8,7 +8,7 @@ import scanner.enums.LRValue;
 import scanner.enums.Operators;
 import scanner.enums.Types;
 
-// methods must be implemented
+// toString must be implemented
 
 public class BoolExpression implements IExpression {
 
@@ -24,27 +24,34 @@ public class BoolExpression implements IExpression {
 
     @Override
     public Types getType() {
-        return null;
+        return expressionLeft.getType();
     }
 
     @Override
     public LRValue getLRValue() {
-        return null;
+        return LRValue.RVALUE;
+    }
+
+    @Override
+    public void checkScope() throws NotDeclaredError, LRValueError {
+        expressionLeft.checkScope();
+        expressionRight.checkScope();
+    }
+
+    @Override
+    public void checkType() throws TypeCheckError {
+        expressionLeft.checkType();
+        expressionRight.checkType();
+        if (expressionLeft.getType() != Types.BOOL) {
+            throw new TypeCheckError(Types.BOOL, expressionLeft.getType());
+        } else if (expressionLeft.getType() != expressionRight.getType()) {
+            throw new TypeCheckError(expressionLeft.getType(), expressionRight.getType());
+        }
     }
 
     @Override
     public String toString(String indent) {
         return null;
-    }
-
-    @Override
-    public void checkScope() throws NotDeclaredError, LRValueError {
-
-    }
-
-    @Override
-    public void checkType() throws TypeCheckError {
-
     }
 
 }

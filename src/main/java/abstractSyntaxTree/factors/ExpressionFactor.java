@@ -8,7 +8,7 @@ import errors.TypeCheckError;
 import scanner.enums.LRValue;
 import scanner.enums.Types;
 
-// methods must be implemented
+// toString must be implemented
 
 public class ExpressionFactor implements IFactor {
 
@@ -20,27 +20,27 @@ public class ExpressionFactor implements IFactor {
 
     @Override
     public Types getType() {
-        return null;
+        return expression.getType();
     }
 
     @Override
     public LRValue getLRValue() {
-        return null;
+        return LRValue.RVALUE;
+    }
+
+    @Override
+    public void checkScope() throws NotDeclaredError, LRValueError {
+        expression.checkScope();
+    }
+
+    @Override
+    public void checkType() throws TypeCheckError {
+        expression.checkType();
     }
 
     @Override
     public String toString(String indent) {
         return null;
-    }
-
-    @Override
-    public void checkScope() throws NotDeclaredError, LRValueError {
-
-    }
-
-    @Override
-    public void checkType() throws TypeCheckError {
-
     }
 
 }
