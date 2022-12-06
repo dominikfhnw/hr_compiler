@@ -1,5 +1,6 @@
 package parser;
 
+import abstractSyntaxTree.AbstractSyntaxTree;
 import concreteSyntaxTree.*;
 import concreteSyntaxTree.nts.ChangeModeNTS;
 import concreteSyntaxTree.nts.CpsCmdNTS;
@@ -48,8 +49,11 @@ import concreteSyntaxTree.expressions.Term2;
 import concreteSyntaxTree.expressions.Term3;
 import concreteSyntaxTree.expressions.Term4;
 import concreteSyntaxTree.interfaces.*;
+import concreteSyntaxTree.operators.AddOpr;
 import concreteSyntaxTree.operators.MonOprAddOpr;
 import concreteSyntaxTree.operators.MonOprNot;
+import concreteSyntaxTree.operators.MultOpr;
+import concreteSyntaxTree.operators.RelOpr;
 import concreteSyntaxTree.parameterLists.Parameter;
 import concreteSyntaxTree.parameterLists.ParameterList;
 import concreteSyntaxTree.parameterLists.TypedIdent;
@@ -85,6 +89,21 @@ public class Parser implements IParser {
             return consumedTerminal;
         } else {
             throw new GrammarError("Expected " + expectedTerminal + " but found " + currentToken.getTerminal());
+        }
+    }
+
+    public AbstractSyntaxTree parse() throws GrammarError {
+        IProgram program = program();
+        consume(Terminals.SENTINEL);
+        return new AbstractSyntaxTree(program);
+    }
+
+    /* <type> ::= bool | int32 */
+    private IType type() throws GrammarError {
+        if (this.currentTerminal == Terminals.TYPE) {
+            return new Type(consume(Terminals.TYPE));
+        } else {
+            throw new GrammarError(Terminals.TYPE, currentTerminal);
         }
     }
 
@@ -629,6 +648,24 @@ public class Parser implements IParser {
         } else {
             throw new GrammarError(Terminals.EXPRLISTNTS, currentTerminal);
         }
+    }
+
+    /* <relopr> ::= '=' | '/=' | '<' | '>' | '<=' | '>=' */
+    private IRelOpr relOpr() throws GrammarError {
+        return new RelOpr(consume(Terminals.RELOPR));
+    }
+
+    /* <addopr> ::= '+' | '-' */
+    private IAddOpr addOpr() throws GrammarError {
+        return new AddOpr(consume(Terminals.ADDOPR));
+    }
+
+    /*
+    <multopr> ::= '*' | <divopr>
+    <divopr> ::= 'divT' | 'modT'
+    */
+    private IMultOpr multOpr() throws GrammarError {
+        return new MultOpr(consume(Terminals.MULTOPR));
     }
 
     /* <monopr> ::= '~' | <addopr> */
