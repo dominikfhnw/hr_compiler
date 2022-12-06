@@ -2,7 +2,7 @@ package scanner;
 
 import errors.TypeError;
 import scanner.enums.Terminals;
-import scanner.Type.Types;
+import scanner.enums.Types;
 
 public class Literal extends Base {
 

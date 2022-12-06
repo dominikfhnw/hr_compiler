@@ -1,6 +1,6 @@
 package concreteSyntaxTree.interfaces;
 
-import scanner.Type;
+import scanner.modesAndTypes.Type;
 
 public interface IType extends IProduction {
 

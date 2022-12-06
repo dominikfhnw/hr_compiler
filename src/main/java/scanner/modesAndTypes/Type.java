@@ -21,4 +21,5 @@ public class Type extends Base {
     public String toString() {
         return "(" + super.toString() + "," + getType().toString() + ")";
     }
+
 }

@@ -14,8 +14,8 @@ public class Type extends Production implements IType {
     }
 
     @Override
-    public scanner.Type toAbstractSyntax() {
-        return (scanner.Type) T_type;
+    public scanner.modesAndTypes.Type toAbstractSyntax() {
+        return (scanner.modesAndTypes.Type) T_type;
     }
 
 }
