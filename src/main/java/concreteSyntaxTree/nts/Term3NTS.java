@@ -8,7 +8,7 @@ import concreteSyntaxTree.interfaces.ITerm4;
 import scanner.interfaces.IToken;
 import scanner.operators.Operator;
 
-// term3NTS ::= MULTOPR term4 term3NTS
+/* term3NTS ::= {<multopr> <term4>} */
 
 public class Term3NTS extends Production implements ITerm3NTS{
 

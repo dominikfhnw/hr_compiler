@@ -13,10 +13,10 @@ public enum OprChar implements IToken {
     SLASH("/"),
     QUEST("?"),
     HASHTAG("#"),
-    TIMES("*"),
+    ASTERISK("*"),
     PLUS("+"),
     MINUS("-"),
-    NOT("~"),
+    TILDE("~"),
     AT("@"),
     GT(">"),
     LT("<"),
@@ -26,7 +26,7 @@ public enum OprChar implements IToken {
     DOLLAR("$"),
     CIRCUMFLEX("^");
 
-    String stringValue;
+    final String stringValue;
     char charValue;
 
     OprChar(String stringValue) {

@@ -6,7 +6,10 @@ import concreteSyntaxTree.interfaces.IExpressionListLParenNTS;
 import concreteSyntaxTree.interfaces.IExpressionListNTS;
 import java.util.ArrayList;
 
-// expressionListLParenNTS ::= expression expressionListNTS
+/*
+exprListLParenNTS ::= [<expr> {',' <expr>}]
+{',' <expr>} = exprListNTS
+*/
 
 public class ExpressionListLParenNTS extends Production implements IExpressionListLParenNTS {
     final IExpression N_expression;

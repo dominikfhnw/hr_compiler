@@ -6,7 +6,11 @@ import concreteSyntaxTree.interfaces.IMechModeNTS;
 import concreteSyntaxTree.interfaces.IParameter;
 import concreteSyntaxTree.interfaces.ITypedIdent;
 
-// param ::= mechModeNTS changeModeNTS typedIdent
+/*
+<param> ::= [<mechModeNTS>] [<changeModeNTS>] <typedIdent>
+mechModeNTS ::= mechmode | ε
+changeModeNTS ::= changemode | ε
+*/
 
 public class Parameter extends Production implements IParameter {
     final IMechModeNTS N_mechModeNTS;

@@ -6,7 +6,10 @@ import concreteSyntaxTree.interfaces.IFactorNTS;
 import scanner.Ident;
 import scanner.interfaces.IToken;
 
-// factor ::= IDENT factorNTS
+/*
+<factor> ::= <ident> [init | <exprList>]
+[init | <exprList>] = factorNTS
+*/
 
 public class FactorIdent extends Production implements IFactor {
 

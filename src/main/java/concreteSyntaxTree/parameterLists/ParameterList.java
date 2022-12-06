@@ -7,7 +7,10 @@ import concreteSyntaxTree.interfaces.IParameterListNTS;
 import scanner.interfaces.IToken;
 import java.util.ArrayList;
 
-// paramList ::= LPAREN paramListNTS RPAREN
+/*
+<paramList> ::= '(' [<param> {',' <param>}] ')'
+[<param> {',' <param>}] = parameterListNTS
+*/
 
 public class ParameterList extends Production implements IParameterList {
 

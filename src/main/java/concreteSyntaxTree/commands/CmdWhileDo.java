@@ -6,7 +6,7 @@ import concreteSyntaxTree.interfaces.ICpsCmd;
 import concreteSyntaxTree.interfaces.IExpression;
 import scanner.interfaces.IToken;
 
-// cmd ::= WHILE expr DO cpsCmd ENDWHILE
+/* <cmd> ::= while <expr> do <cpsCmd> endwhile */
 
 public class CmdWhileDo extends Production implements ICmd {
     final IToken T_while;

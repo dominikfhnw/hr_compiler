@@ -5,7 +5,7 @@ import concreteSyntaxTree.interfaces.IMonOpr;
 import scanner.interfaces.IToken;
 import scanner.operators.Operator;
 
-// monadicOpr ::= NOT
+/* <monopr> ::= '~' */
 
 public class MonOprNot extends Production implements IMonOpr {
     final IToken T_notOpr;

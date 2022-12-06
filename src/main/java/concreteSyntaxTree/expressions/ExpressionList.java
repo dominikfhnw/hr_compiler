@@ -7,7 +7,10 @@ import concreteSyntaxTree.interfaces.IExpressionListLParenNTS;
 import scanner.interfaces.IToken;
 import java.util.ArrayList;
 
-// expressionList ::= LPAREN expressionListLParenNTS RPAREN
+/*
+<exprList> ::= '(' [<expr> {',' <expr>}] ')'
+'(' [<expr> {',' <expr>}] ')' = exprListLParenNTS
+*/
 
 public class ExpressionList extends Production implements IExpressionList {
     final IToken T_lParen;

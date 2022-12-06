@@ -7,7 +7,7 @@ import concreteSyntaxTree.interfaces.ITypedIdent;
 import scanner.interfaces.IToken;
 import scanner.modesAndTypes.ChangeMode;
 
-// stoDecl ::= CHANGEMODE typedIdent
+/* stoDecl ::= <changemode> <typedIdent> */
 
 public class StoDeclChangeMode extends Production implements IStoDecl {
 

@@ -4,7 +4,7 @@ import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.IDecl;
 import concreteSyntaxTree.interfaces.IProcDecl;
 
-// decl ::= procDecl
+/* // decl ::= <procDecl> */
 
 public class DeclProcDecl extends Production implements IDecl {
 

@@ -5,7 +5,10 @@ import concreteSyntaxTree.interfaces.ITerm3;
 import concreteSyntaxTree.interfaces.ITerm3NTS;
 import concreteSyntaxTree.interfaces.ITerm4;
 
-// term3 ::= term4 term3NTS
+/*
+<term3> ::= <term4> {<multopr> <term4>}
+{<multopr> <term4>} = term3NTS
+*/
 
 public class Term3 extends Production implements ITerm3 {
 

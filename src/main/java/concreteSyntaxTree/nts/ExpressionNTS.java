@@ -8,7 +8,7 @@ import concreteSyntaxTree.interfaces.ITerm1;
 import scanner.interfaces.IToken;
 import scanner.operators.Operator;
 
-// expressionNTS ::= BOOLOPR term1 expressionNTS
+/* exprNTS ::= BOOLOPR term1 exprNTS */
 
 public class ExpressionNTS extends Production implements IExpressionNTS {
     final IToken T_boolOpr;

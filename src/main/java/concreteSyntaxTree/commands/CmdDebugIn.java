@@ -6,7 +6,7 @@ import concreteSyntaxTree.interfaces.ICmd;
 import concreteSyntaxTree.interfaces.IExpression;
 import scanner.interfaces.IToken;
 
-// cmd ::= DEBUGIN expr
+/* <cmd> ::= debugin <expr> */
 
 public class CmdDebugIn extends Production implements ICmd {
     final IToken T_debugIn;

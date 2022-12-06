@@ -8,7 +8,10 @@ import concreteSyntaxTree.interfaces.IExpression;
 import concreteSyntaxTree.interfaces.IIfElseNTS;
 import scanner.interfaces.IToken;
 
-// cmd ::= IF expr THEN cpsCmd ifelseNTS ENDIF
+/*
+<cmd> ::= if <expr> then <cpsCmd> [else <cpsCmd>] endif
+[else <cpsCmd>] = ifElseNTS
+*/
 
 public class CmdIfThen extends Production implements ICmd {
     final IToken T_if;

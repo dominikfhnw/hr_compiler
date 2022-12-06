@@ -5,7 +5,10 @@ import concreteSyntaxTree.interfaces.ICpsDecl;
 import concreteSyntaxTree.interfaces.ICpsDeclNTS;
 import java.util.ArrayList;
 
-// cpsDecl ::= decl cpsDeclNTS
+/*
+<cpsDecl> ::= <decl> {';' <decl>}
+{';' <decl>} = cpsDeclNTS
+*/
 
 public class CpsDecl extends Production implements ICpsDecl {
     final IDecl N_decl;

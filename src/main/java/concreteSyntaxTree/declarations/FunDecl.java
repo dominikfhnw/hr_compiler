@@ -10,7 +10,10 @@ import concreteSyntaxTree.interfaces.IStoDecl;
 import scanner.Ident;
 import scanner.interfaces.IToken;
 
-// funDecl ::= FUN IDENT paramList RETURNS stoDecl funDeclNTS DO cpsCmd ENDFUN
+/*
+<funDecl> ::= fun <ident> <paramList> returns <stoDecl> [local cpsStoDecl] do <cpsCmd> endfun
+[local cpsStoDecl] = funDeclNTS
+*/
 
 public class FunDecl extends Production implements IFunDecl {
 

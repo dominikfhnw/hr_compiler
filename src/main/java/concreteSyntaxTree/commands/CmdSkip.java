@@ -4,7 +4,7 @@ import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.ICmd;
 import scanner.interfaces.IToken;
 
-// cmd ::= SKIP
+/* <cmd> ::= skip */
 
 public class CmdSkip extends Production implements ICmd {
 

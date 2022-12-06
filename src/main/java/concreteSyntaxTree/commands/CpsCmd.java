@@ -6,7 +6,10 @@ import concreteSyntaxTree.interfaces.ICpsCmd;
 import concreteSyntaxTree.interfaces.ICpsCmdNTS;
 import java.util.ArrayList;
 
-// cpsCmd ::= cmd cpsCmdNTS
+/*
+<cpsCmd> ::= <cmd> {';' <cmd>}
+{';' <cmd>} = cpsCmdNTS
+*/
 
 public class CpsCmd extends Production implements ICpsCmd {
     final ICmd N_cmd;

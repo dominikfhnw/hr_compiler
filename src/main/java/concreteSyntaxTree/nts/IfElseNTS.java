@@ -6,7 +6,7 @@ import abstractSyntaxTree.commands.CpsCmd;
 import concreteSyntaxTree.interfaces.IIfElseNTS;
 import scanner.interfaces.IToken;
 
-// ifElseNTS ::= ELSE cpsCmd
+/* ifElseNTS ::= else <cpsCmd> */
 
 public class IfElseNTS extends Production implements IIfElseNTS {
     final IToken T_else;

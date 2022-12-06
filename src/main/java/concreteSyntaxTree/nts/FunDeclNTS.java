@@ -7,7 +7,12 @@ import concreteSyntaxTree.interfaces.IFunDeclNTS;
 import scanner.interfaces.IToken;
 import java.util.ArrayList;
 
-// funDeclNTS ::= LOCAL cpsStoNTS
+/*
+funDeclNTS ::= local cpsStoNTS
+cpsStoNTS = <cpsStoDecl>
+<cpsStoDecl> ::= <stoDecl> {';' <stoDecl>}
+{';' <stoDecl>} = cpsStoDeclNTS
+*/
 
 public class FunDeclNTS extends Production implements IFunDeclNTS {
     final IToken T_local;

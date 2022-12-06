@@ -7,7 +7,10 @@ import concreteSyntaxTree.interfaces.IParameterListNTS;
 import concreteSyntaxTree.interfaces.IParameterNTS;
 import java.util.ArrayList;
 
-// parameterListNTS ::= parameter parameterNTS
+/*
+paramListNTS ::= [<param> {',' <param>}]
+{',' <param>} = paramNTS
+*/
 
 public class ParameterListNTS extends Production implements IParameterListNTS {
     final IParameter N_parameter;

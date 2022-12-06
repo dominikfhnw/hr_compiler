@@ -6,7 +6,7 @@ import concreteSyntaxTree.interfaces.IDecl;
 import scanner.interfaces.IToken;
 import java.util.ArrayList;
 
-// cpsDeclNTS ::= SEMICOLON decl cpsDeclNTS
+/* cpsDeclNTS ::= {';' <decl>} */
 
 public class CpsDeclNTS extends Production implements ICpsDeclNTS {
     final IToken T_semicolon;

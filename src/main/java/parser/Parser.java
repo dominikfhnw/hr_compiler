@@ -148,7 +148,7 @@ public class Parser implements IParser {
         }
     }
 
-    /* paramListNTS ::= param paramNTS | ε */
+    /* paramListNTS ::= <param> paramNTS | ε */
     private IParameterListNTS parameterListNTS() throws GrammarError {
         if (currentTerminal == Terminals.CHANGEMODE || currentTerminal == Terminals.MECHMODE || currentTerminal == Terminals.IDENT) {
             // paramListNTS ::= <param> <paramNTS>
@@ -372,7 +372,7 @@ public class Parser implements IParser {
         }
     }
 
-    /* cpsCmdNTS ::= SEMICOLON cmd cpsCmdNTS | ε */
+    /* cpsCmdNTS ::= ';' <cmd> cpsCmdNTS | ε */
     private ICpsCmdNTS cpsCmdNTS() throws GrammarError {
         if (currentTerminal == Terminals.SEMICOLON) {
             // cpsCmdNTS ::= ';' <cmd> cpsCmdNTS
@@ -404,6 +404,7 @@ public class Parser implements IParser {
     // TO DO: Clarify if COLON is needed!
     private IExpressionNTS expressionNTS() throws GrammarError {
         if (currentTerminal == Terminals.BOOLOPR) {
+            // exprNTS ::= BOOLOPR term1 exprNTS
             return new ExpressionNTS(consume(Terminals.BOOLOPR), term1(), expressionNTS());
         } else if (currentTerminal == Terminals.COMMA || currentTerminal == Terminals.RPAREN || currentTerminal == Terminals.COLON
             || currentTerminal == Terminals.DO || currentTerminal == Terminals.THEN || currentTerminal == Terminals.ENDWHILE
@@ -592,7 +593,7 @@ public class Parser implements IParser {
 
     /*
     <exprList> ::= '(' [<expr> {',' <expr>}] ')'
-    '(' [<expr> {',' <expr>}] ')' = exprListLParenNTS
+    [<expr> {',' <expr>}] = exprListLParenNTS()
     */
     private IExpressionList expressionList() throws GrammarError {
         if (currentTerminal == Terminals.LPAREN) {
@@ -639,7 +640,7 @@ public class Parser implements IParser {
             // <monopr> ::= <addopr>
             return new MonOprAddOpr(consume(Terminals.ADDOPR));
         } else {
-            throw new GrammarError(Terminals.MONADICOPR, currentTerminal);
+            throw new GrammarError(Terminals.MONOPR, currentTerminal);
         }
     }
 

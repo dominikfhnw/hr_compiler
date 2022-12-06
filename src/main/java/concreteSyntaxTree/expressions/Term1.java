@@ -5,7 +5,11 @@ import concreteSyntaxTree.interfaces.ITerm1;
 import concreteSyntaxTree.interfaces.ITerm1NTS;
 import concreteSyntaxTree.interfaces.ITerm2;
 
-// term1 ::= term2 term1NTS
+/*
+<term1> ::= <term2> [<relopr> <term2>]
+[<relopr> <term2>] = term1NTS
+*/
+
 public class Term1 extends Production implements ITerm1 {
 
     final ITerm2 N_term2;

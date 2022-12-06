@@ -7,7 +7,7 @@ import concreteSyntaxTree.interfaces.IExpressionList;
 import concreteSyntaxTree.interfaces.IFactorNTS;
 import scanner.Ident;
 
-// factorNTS ::= expressionList
+/* factorNTS ::= <exprList> */
 
 public class FactorNTSExpressionList extends Production implements IFactorNTS {
 

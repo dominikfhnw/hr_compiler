@@ -5,7 +5,7 @@ import concreteSyntaxTree.interfaces.IMonOpr;
 import scanner.interfaces.IToken;
 import scanner.operators.Operator;
 
-// monadicOpr ::= ADDOPR
+/* <monopr> ::= <addopr> */
 
 public class MonOprAddOpr extends Production implements IMonOpr {
     final IToken T_addOpr;

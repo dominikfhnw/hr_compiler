@@ -5,7 +5,7 @@ import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.IStoDecl;
 import concreteSyntaxTree.interfaces.ITypedIdent;
 
-// stoDecl ::= typedIdent
+/* stoDecl ::= <typedIdent> */
 
 public class StoDeclTypedIdent extends Production implements IStoDecl {
 

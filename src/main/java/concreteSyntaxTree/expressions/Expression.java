@@ -4,7 +4,10 @@ import concreteSyntaxTree.interfaces.IExpression;
 import concreteSyntaxTree.interfaces.IExpressionNTS;
 import concreteSyntaxTree.interfaces.ITerm1;
 
-// expression ::= term1 exprNTS
+/*
+<expr> ::= <term1> ({'/\?' <term1>} | {'\/?' <term1>})
+({'/\?' <term1>} | {'\/?' <term1>}) = expressionNTS
+*/
 
 public class Expression extends Production implements IExpression {
 

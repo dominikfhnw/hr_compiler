@@ -6,7 +6,7 @@ import concreteSyntaxTree.interfaces.IFactor;
 import scanner.interfaces.IToken;
 import scanner.Literal;
 
-// factor ::= LITERAL
+/* <factor> ::= <literal> */
 
 public class FactorLiteral extends Production implements IFactor {
 

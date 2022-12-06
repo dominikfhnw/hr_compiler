@@ -38,11 +38,6 @@ public class MultExpression implements IExpression {
     }
 
     @Override
-    public void doTypeCast(Types type) {
-
-    }
-
-    @Override
     public String toString(String indent) {
         return null;
     }

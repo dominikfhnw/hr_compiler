@@ -8,7 +8,7 @@ import concreteSyntaxTree.interfaces.ITerm3;
 import scanner.interfaces.IToken;
 import scanner.operators.Operator;
 
-// term2NTS ::= ADDOPR term3 term2NTS
+/* term2NTS ::= {<addopr> <term3>} */
 
 public class Term2NTS extends Production implements ITerm2NTS {
 

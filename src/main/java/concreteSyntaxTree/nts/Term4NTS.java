@@ -8,7 +8,7 @@ import concreteSyntaxTree.interfaces.ITerm4NTS;
 import scanner.interfaces.IToken;
 import scanner.operators.Operator;
 
-// term4NTS ::= CUSTOPR factor term4NTS
+/* term4NTS ::= {<custopr> <factor>} */
 
 public class Term4NTS extends Production implements ITerm4NTS {
 

@@ -1,6 +1,6 @@
 package concreteSyntaxTree.nts;
 
-// mechModeNTS ::= MECHMODE
+/* mechModeNTS ::= mechmode */
 
 import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.IMechModeNTS;

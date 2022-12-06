@@ -7,6 +7,5 @@ public interface IExpression extends IAbstractSyntaxTreeNode{
 
     Types getType();
     LRValue getLRValue();
-    void doTypeCast(Types type);
 
 }

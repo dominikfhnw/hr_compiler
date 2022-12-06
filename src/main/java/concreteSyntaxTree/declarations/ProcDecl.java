@@ -9,7 +9,10 @@ import concreteSyntaxTree.interfaces.IProcDeclNTS;
 import scanner.Ident;
 import scanner.interfaces.IToken;
 
-// procDecl ::= PROC IDENT parameterList procDeclNTS DO cpsCmd ENDPROC
+/*
+<procDecl> ::= proc <ident> <paramList> [local cpsStoDecl] do <cpsCmd> endproc
+[local cpsStoDecl] = procDeclNTS
+*/
 
 public class ProcDecl extends Production implements IProcDecl {
     final IToken T_proc;

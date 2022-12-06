@@ -6,7 +6,7 @@ import concreteSyntaxTree.interfaces.IExpressionListNTS;
 import scanner.interfaces.IToken;
 import java.util.ArrayList;
 
-// expressionListNTS ::= COMMA expression expressionListNTS
+/* exprListNTS ::= {',' <expr>} */
 
 public class ExpressionListNTS extends Production implements IExpressionListNTS {
     final IToken T_comma;

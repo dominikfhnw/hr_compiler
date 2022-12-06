@@ -4,7 +4,8 @@ import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.IDecl;
 import concreteSyntaxTree.interfaces.IFunDecl;
 
-// decl ::= funDecl
+/* decl ::= <funDecl> */
+
 public class DeclFunDecl extends Production implements IDecl {
 
    final IFunDecl N_funDecl;

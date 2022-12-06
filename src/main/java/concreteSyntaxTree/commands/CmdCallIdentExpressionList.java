@@ -7,7 +7,7 @@ import concreteSyntaxTree.interfaces.IExpressionList;
 import scanner.Ident;
 import scanner.interfaces.IToken;
 
-// cmd ::= CALL IDENT exprList
+/* <cmd> ::= call <ident> <exprList> */
 
 public class CmdCallIdentExpressionList extends Production implements ICmd {
     final IToken T_call;

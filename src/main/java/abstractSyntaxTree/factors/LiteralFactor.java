@@ -32,11 +32,6 @@ public class LiteralFactor implements IFactor {
     }
 
     @Override
-    public void doTypeCast(Types type) {
-
-    }
-
-    @Override
     public String toString(String indent) {
         return null;
     }

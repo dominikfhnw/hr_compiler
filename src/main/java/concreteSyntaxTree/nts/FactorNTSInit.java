@@ -6,7 +6,7 @@ import concreteSyntaxTree.interfaces.IFactorNTS;
 import scanner.Ident;
 import scanner.interfaces.IToken;
 
-// factorNTS ::= INIT
+/* factorNTS ::= init */
 
 public class FactorNTSInit extends Production implements IFactorNTS {
 

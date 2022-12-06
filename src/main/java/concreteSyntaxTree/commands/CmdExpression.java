@@ -6,7 +6,7 @@ import concreteSyntaxTree.interfaces.ICmd;
 import concreteSyntaxTree.interfaces.IExpression;
 import scanner.interfaces.IToken;
 
-// cmd ::= expr BECOMES expr
+/* <cmd> ::= <expr> ':=' <expr> */
 
 public class CmdExpression extends Production implements ICmd {
 

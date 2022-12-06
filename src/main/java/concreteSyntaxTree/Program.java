@@ -5,7 +5,7 @@ import concreteSyntaxTree.interfaces.IProgram;
 import scanner.Ident;
 import scanner.interfaces.IToken;
 
-// program ::= PROGRAM IDENT globalNTS DO cpsCmd ENDPROGRAM
+/* <program> ::= program <ident> do <cpsCmd> endprogram */
 
 public class Program extends Production implements IProgram {
 

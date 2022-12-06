@@ -6,7 +6,7 @@ import concreteSyntaxTree.interfaces.ICpsCmdNTS;
 import scanner.interfaces.IToken;
 import java.util.ArrayList;
 
-// cpsCmdNTS ::= SEMICOLON cmd cpsCmdNTS
+/* cpsCmdNTS ::= {';' <cmd>} */
 
 public class CpsCmdNTS extends Production implements ICpsCmdNTS {
     final IToken T_semicolon;

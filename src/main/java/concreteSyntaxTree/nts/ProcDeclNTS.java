@@ -7,7 +7,7 @@ import concreteSyntaxTree.interfaces.IProcDeclNTS;
 import scanner.interfaces.IToken;
 import java.util.ArrayList;
 
-// procDeclNTS ::= LOCAL cpsStoDecl
+/* procDeclNTS ::= local <cpsStoDecl> */
 
 public class ProcDeclNTS extends Production implements IProcDeclNTS {
     final IToken T_local;

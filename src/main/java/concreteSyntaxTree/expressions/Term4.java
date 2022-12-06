@@ -2,7 +2,10 @@ package concreteSyntaxTree.expressions;
 import concreteSyntaxTree.Production;
 import concreteSyntaxTree.interfaces.*;
 
-// term4 ::= factor term4NTS
+/*
+<term4> ::= <factor> {<custopr> <factor>}
+{<custopr> <factor>} = term4NTS
+*/
 
 public class Term4 extends Production implements ITerm4 {
 
