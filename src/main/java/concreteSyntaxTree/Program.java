@@ -1,6 +1,6 @@
 package concreteSyntaxTree;
 
-import concreteSyntaxTree.interfaces.ICpsCmd;
+import concreteSyntaxTree.interfaces.commands.ICpsCmd;
 import concreteSyntaxTree.interfaces.IProgram;
 import scanner.Ident;
 import scanner.interfaces.IToken;

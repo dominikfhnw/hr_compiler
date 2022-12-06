@@ -3,7 +3,7 @@ package concreteSyntaxTree.nts;
 /* mechModeNTS ::= mechmode */
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IMechModeNTS;
+import concreteSyntaxTree.interfaces.nts.IMechModeNTS;
 import scanner.enums.MechModes;
 import scanner.interfaces.IToken;
 import scanner.modesAndTypes.MechMode;

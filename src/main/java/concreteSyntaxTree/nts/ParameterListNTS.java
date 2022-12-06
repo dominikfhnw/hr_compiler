@@ -2,9 +2,9 @@ package concreteSyntaxTree.nts;
 
 import abstractSyntaxTree.parameterLists.Parameter;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IParameter;
-import concreteSyntaxTree.interfaces.IParameterListNTS;
-import concreteSyntaxTree.interfaces.IParameterNTS;
+import concreteSyntaxTree.interfaces.parameterLists.IParameter;
+import concreteSyntaxTree.interfaces.nts.IParameterListNTS;
+import concreteSyntaxTree.interfaces.nts.IParameterNTS;
 import java.util.ArrayList;
 
 /*

@@ -2,8 +2,8 @@ package concreteSyntaxTree.expressions;
 
 import abstractSyntaxTree.factors.MonFactor;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IFactor;
-import concreteSyntaxTree.interfaces.IMonOpr;
+import concreteSyntaxTree.interfaces.expressions.IFactor;
+import concreteSyntaxTree.interfaces.operators.IMonOpr;
 
 /* <factor> ::= <monopr> <factor> */
 

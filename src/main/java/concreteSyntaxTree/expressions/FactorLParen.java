@@ -2,8 +2,8 @@ package concreteSyntaxTree.expressions;
 
 import abstractSyntaxTree.factors.ExpressionFactor;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IExpression;
-import concreteSyntaxTree.interfaces.IFactor;
+import concreteSyntaxTree.interfaces.expressions.IExpression;
+import concreteSyntaxTree.interfaces.expressions.IFactor;
 import scanner.interfaces.IToken;
 
 /* <factor> ::= '(' <expr> ')' */

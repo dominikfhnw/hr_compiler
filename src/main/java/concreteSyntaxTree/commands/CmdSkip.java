@@ -1,7 +1,7 @@
 package concreteSyntaxTree.commands;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.ICmd;
+import concreteSyntaxTree.interfaces.commands.ICmd;
 import scanner.interfaces.IToken;
 
 /* <cmd> ::= skip */

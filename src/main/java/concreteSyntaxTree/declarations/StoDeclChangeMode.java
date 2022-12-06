@@ -2,8 +2,8 @@ package concreteSyntaxTree.declarations;
 
 import abstractSyntaxTree.declarations.StoDecl;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IStoDecl;
-import concreteSyntaxTree.interfaces.ITypedIdent;
+import concreteSyntaxTree.interfaces.declarations.IStoDecl;
+import concreteSyntaxTree.interfaces.parameterLists.ITypedIdent;
 import scanner.interfaces.IToken;
 import scanner.modesAndTypes.ChangeMode;
 

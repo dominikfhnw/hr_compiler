@@ -1,9 +1,9 @@
 package concreteSyntaxTree.expressions;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.ITerm3;
-import concreteSyntaxTree.interfaces.ITerm3NTS;
-import concreteSyntaxTree.interfaces.ITerm4;
+import concreteSyntaxTree.interfaces.expressions.ITerm3;
+import concreteSyntaxTree.interfaces.nts.ITerm3NTS;
+import concreteSyntaxTree.interfaces.expressions.ITerm4;
 
 /*
 <term3> ::= <term4> {<multopr> <term4>}

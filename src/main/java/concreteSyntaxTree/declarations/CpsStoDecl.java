@@ -2,9 +2,9 @@ package concreteSyntaxTree.declarations;
 
 import abstractSyntaxTree.declarations.StoDecl;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.ICpsStoDecl;
-import concreteSyntaxTree.interfaces.ICpsStoDeclNTS;
-import concreteSyntaxTree.interfaces.IStoDecl;
+import concreteSyntaxTree.interfaces.declarations.ICpsStoDecl;
+import concreteSyntaxTree.interfaces.nts.ICpsStoDeclNTS;
+import concreteSyntaxTree.interfaces.declarations.IStoDecl;
 import java.util.ArrayList;
 
  /*

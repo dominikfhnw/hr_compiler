@@ -2,7 +2,7 @@ package concreteSyntaxTree.nts;
 
 import abstractSyntaxTree.interfaces.IFactor;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IFactorNTS;
+import concreteSyntaxTree.interfaces.nts.IFactorNTS;
 import scanner.Ident;
 import scanner.interfaces.IToken;
 

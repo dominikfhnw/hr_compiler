@@ -3,8 +3,8 @@ package concreteSyntaxTree.nts;
 import abstractSyntaxTree.expressions.BoolExpression;
 import abstractSyntaxTree.interfaces.IExpression;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IExpressionNTS;
-import concreteSyntaxTree.interfaces.ITerm1;
+import concreteSyntaxTree.interfaces.nts.IExpressionNTS;
+import concreteSyntaxTree.interfaces.expressions.ITerm1;
 import scanner.interfaces.IToken;
 import scanner.operators.Operator;
 

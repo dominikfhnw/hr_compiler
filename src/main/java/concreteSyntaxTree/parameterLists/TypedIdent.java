@@ -2,7 +2,7 @@ package concreteSyntaxTree.parameterLists;
 
 import abstractSyntaxTree.parameterLists.TypeIdent;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.ITypedIdent;
+import concreteSyntaxTree.interfaces.parameterLists.ITypedIdent;
 import scanner.Ident;
 import scanner.modesAndTypes.Type;
 import scanner.interfaces.IToken;

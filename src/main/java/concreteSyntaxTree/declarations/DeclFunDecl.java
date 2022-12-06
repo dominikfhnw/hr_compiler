@@ -1,8 +1,8 @@
 package concreteSyntaxTree.declarations;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IDecl;
-import concreteSyntaxTree.interfaces.IFunDecl;
+import concreteSyntaxTree.interfaces.declarations.IDecl;
+import concreteSyntaxTree.interfaces.declarations.IFunDecl;
 
 /* decl ::= <funDecl> */
 

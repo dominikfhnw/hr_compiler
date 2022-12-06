@@ -1,9 +1,9 @@
 package concreteSyntaxTree.commands;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.ICmd;
-import concreteSyntaxTree.interfaces.ICpsCmd;
-import concreteSyntaxTree.interfaces.ICpsCmdNTS;
+import concreteSyntaxTree.interfaces.commands.ICmd;
+import concreteSyntaxTree.interfaces.commands.ICpsCmd;
+import concreteSyntaxTree.interfaces.nts.ICpsCmdNTS;
 import java.util.ArrayList;
 
 /*

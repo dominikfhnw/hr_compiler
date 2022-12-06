@@ -2,10 +2,10 @@ package concreteSyntaxTree.commands;
 
 import abstractSyntaxTree.commands.IfCmd;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.ICmd;
-import concreteSyntaxTree.interfaces.ICpsCmd;
-import concreteSyntaxTree.interfaces.IExpression;
-import concreteSyntaxTree.interfaces.IIfElseNTS;
+import concreteSyntaxTree.interfaces.commands.ICmd;
+import concreteSyntaxTree.interfaces.commands.ICpsCmd;
+import concreteSyntaxTree.interfaces.expressions.IExpression;
+import concreteSyntaxTree.interfaces.nts.IIfElseNTS;
 import scanner.interfaces.IToken;
 
 /*

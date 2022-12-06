@@ -1,10 +1,10 @@
 package concreteSyntaxTree.parameterLists;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IChangeModeNTS;
-import concreteSyntaxTree.interfaces.IMechModeNTS;
-import concreteSyntaxTree.interfaces.IParameter;
-import concreteSyntaxTree.interfaces.ITypedIdent;
+import concreteSyntaxTree.interfaces.nts.IChangeModeNTS;
+import concreteSyntaxTree.interfaces.nts.IMechModeNTS;
+import concreteSyntaxTree.interfaces.parameterLists.IParameter;
+import concreteSyntaxTree.interfaces.parameterLists.ITypedIdent;
 
 /*
 <param> ::= [<mechModeNTS>] [<changeModeNTS>] <typedIdent>

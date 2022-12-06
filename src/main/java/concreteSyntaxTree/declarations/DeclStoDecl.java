@@ -1,8 +1,8 @@
 package concreteSyntaxTree.declarations;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IDecl;
-import concreteSyntaxTree.interfaces.IStoDecl;
+import concreteSyntaxTree.interfaces.declarations.IDecl;
+import concreteSyntaxTree.interfaces.declarations.IStoDecl;
 
 /* decl ::= <stoDecl> */
 

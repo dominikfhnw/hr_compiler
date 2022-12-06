@@ -2,8 +2,8 @@ package concreteSyntaxTree.commands;
 
 import abstractSyntaxTree.commands.ProcCallCmd;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.ICmd;
-import concreteSyntaxTree.interfaces.IExpressionList;
+import concreteSyntaxTree.interfaces.commands.ICmd;
+import concreteSyntaxTree.interfaces.expressions.IExpressionList;
 import scanner.Ident;
 import scanner.interfaces.IToken;
 

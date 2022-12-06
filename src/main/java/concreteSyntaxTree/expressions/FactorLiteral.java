@@ -2,7 +2,7 @@ package concreteSyntaxTree.expressions;
 
 import abstractSyntaxTree.factors.LiteralFactor;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IFactor;
+import concreteSyntaxTree.interfaces.expressions.IFactor;
 import scanner.interfaces.IToken;
 import scanner.Literal;
 

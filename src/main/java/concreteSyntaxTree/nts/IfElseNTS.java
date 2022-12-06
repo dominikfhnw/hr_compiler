@@ -1,9 +1,9 @@
 package concreteSyntaxTree.nts;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.ICpsCmd;
+import concreteSyntaxTree.interfaces.commands.ICpsCmd;
 import abstractSyntaxTree.commands.CpsCmd;
-import concreteSyntaxTree.interfaces.IIfElseNTS;
+import concreteSyntaxTree.interfaces.nts.IIfElseNTS;
 import scanner.interfaces.IToken;
 
 /* ifElseNTS ::= else <cpsCmd> */

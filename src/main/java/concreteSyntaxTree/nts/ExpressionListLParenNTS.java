@@ -1,9 +1,9 @@
 package concreteSyntaxTree.nts;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IExpression;
-import concreteSyntaxTree.interfaces.IExpressionListLParenNTS;
-import concreteSyntaxTree.interfaces.IExpressionListNTS;
+import concreteSyntaxTree.interfaces.expressions.IExpression;
+import concreteSyntaxTree.interfaces.nts.IExpressionListLParenNTS;
+import concreteSyntaxTree.interfaces.nts.IExpressionListNTS;
 import java.util.ArrayList;
 
 /*

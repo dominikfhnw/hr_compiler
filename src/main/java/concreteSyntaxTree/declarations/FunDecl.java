@@ -2,11 +2,11 @@ package concreteSyntaxTree.declarations;
 
 import abstractSyntaxTree.interfaces.IDecl;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.ICpsCmd;
-import concreteSyntaxTree.interfaces.IFunDecl;
-import concreteSyntaxTree.interfaces.IFunDeclNTS;
-import concreteSyntaxTree.interfaces.IParameterList;
-import concreteSyntaxTree.interfaces.IStoDecl;
+import concreteSyntaxTree.interfaces.commands.ICpsCmd;
+import concreteSyntaxTree.interfaces.declarations.IFunDecl;
+import concreteSyntaxTree.interfaces.nts.IFunDeclNTS;
+import concreteSyntaxTree.interfaces.parameterLists.IParameterList;
+import concreteSyntaxTree.interfaces.declarations.IStoDecl;
 import scanner.Ident;
 import scanner.interfaces.IToken;
 

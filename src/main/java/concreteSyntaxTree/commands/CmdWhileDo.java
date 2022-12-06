@@ -1,9 +1,9 @@
 package concreteSyntaxTree.commands;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.ICmd;
-import concreteSyntaxTree.interfaces.ICpsCmd;
-import concreteSyntaxTree.interfaces.IExpression;
+import concreteSyntaxTree.interfaces.commands.ICmd;
+import concreteSyntaxTree.interfaces.commands.ICpsCmd;
+import concreteSyntaxTree.interfaces.expressions.IExpression;
 import scanner.interfaces.IToken;
 
 /* <cmd> ::= while <expr> do <cpsCmd> endwhile */

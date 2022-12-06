@@ -1,8 +1,8 @@
 package concreteSyntaxTree.declarations;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IDecl;
-import concreteSyntaxTree.interfaces.ICpsDecl;
-import concreteSyntaxTree.interfaces.ICpsDeclNTS;
+import concreteSyntaxTree.interfaces.declarations.IDecl;
+import concreteSyntaxTree.interfaces.declarations.ICpsDecl;
+import concreteSyntaxTree.interfaces.nts.ICpsDeclNTS;
 import java.util.ArrayList;
 
 /*

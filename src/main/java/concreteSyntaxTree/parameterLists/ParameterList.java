@@ -2,8 +2,8 @@ package concreteSyntaxTree.parameterLists;
 
 import abstractSyntaxTree.parameterLists.Parameter;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IParameterList;
-import concreteSyntaxTree.interfaces.IParameterListNTS;
+import concreteSyntaxTree.interfaces.parameterLists.IParameterList;
+import concreteSyntaxTree.interfaces.nts.IParameterListNTS;
 import scanner.interfaces.IToken;
 import java.util.ArrayList;
 

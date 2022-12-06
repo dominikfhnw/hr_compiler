@@ -1,6 +1,8 @@
 package concreteSyntaxTree.expressions;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.*;
+import concreteSyntaxTree.interfaces.expressions.IFactor;
+import concreteSyntaxTree.interfaces.expressions.ITerm4;
+import concreteSyntaxTree.interfaces.nts.ITerm4NTS;
 
 /*
 <term4> ::= <factor> {<custopr> <factor>}

@@ -2,8 +2,8 @@ package concreteSyntaxTree.commands;
 
 import abstractSyntaxTree.commands.AssignCmd;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.ICmd;
-import concreteSyntaxTree.interfaces.IExpression;
+import concreteSyntaxTree.interfaces.commands.ICmd;
+import concreteSyntaxTree.interfaces.expressions.IExpression;
 import scanner.interfaces.IToken;
 
 /* <cmd> ::= <expr> ':=' <expr> */

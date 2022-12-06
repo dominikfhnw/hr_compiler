@@ -1,8 +1,8 @@
 package concreteSyntaxTree.expressions;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IExpression;
-import concreteSyntaxTree.interfaces.IExpressionNTS;
-import concreteSyntaxTree.interfaces.ITerm1;
+import concreteSyntaxTree.interfaces.expressions.IExpression;
+import concreteSyntaxTree.interfaces.nts.IExpressionNTS;
+import concreteSyntaxTree.interfaces.expressions.ITerm1;
 
 /*
 <expr> ::= <term1> ({'/\?' <term1>} | {'\/?' <term1>})

@@ -2,8 +2,8 @@ package concreteSyntaxTree.nts;
 
 import abstractSyntaxTree.declarations.StoDecl;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.ICpsStoDecl;
-import concreteSyntaxTree.interfaces.IProcDeclNTS;
+import concreteSyntaxTree.interfaces.declarations.ICpsStoDecl;
+import concreteSyntaxTree.interfaces.nts.IProcDeclNTS;
 import scanner.interfaces.IToken;
 import java.util.ArrayList;
 

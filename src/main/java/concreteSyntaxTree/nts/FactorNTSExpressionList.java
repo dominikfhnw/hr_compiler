@@ -3,8 +3,8 @@ package concreteSyntaxTree.nts;
 import abstractSyntaxTree.factors.FunCallFactor;
 import abstractSyntaxTree.interfaces.IFactor;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IExpressionList;
-import concreteSyntaxTree.interfaces.IFactorNTS;
+import concreteSyntaxTree.interfaces.expressions.IExpressionList;
+import concreteSyntaxTree.interfaces.nts.IFactorNTS;
 import scanner.Ident;
 
 /* factorNTS ::= <exprList> */

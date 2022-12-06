@@ -1,7 +1,7 @@
 package concreteSyntaxTree.operators;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IAddOpr;
+import concreteSyntaxTree.interfaces.operators.IAddOpr;
 import scanner.interfaces.IToken;
 import scanner.operators.Operator;
 

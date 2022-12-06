@@ -2,8 +2,8 @@ package concreteSyntaxTree.expressions;
 
 import abstractSyntaxTree.interfaces.IExpression;
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IExpressionList;
-import concreteSyntaxTree.interfaces.IExpressionListLParenNTS;
+import concreteSyntaxTree.interfaces.expressions.IExpressionList;
+import concreteSyntaxTree.interfaces.nts.IExpressionListLParenNTS;
 import scanner.interfaces.IToken;
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package concreteSyntaxTree.nts;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.IChangeModeNTS;
+import concreteSyntaxTree.interfaces.nts.IChangeModeNTS;
 import scanner.enums.ChangeModes;
 import scanner.interfaces.IToken;
 import scanner.modesAndTypes.ChangeMode;

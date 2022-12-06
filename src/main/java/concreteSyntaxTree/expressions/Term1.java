@@ -1,9 +1,9 @@
 package concreteSyntaxTree.expressions;
 
 import concreteSyntaxTree.Production;
-import concreteSyntaxTree.interfaces.ITerm1;
-import concreteSyntaxTree.interfaces.ITerm1NTS;
-import concreteSyntaxTree.interfaces.ITerm2;
+import concreteSyntaxTree.interfaces.expressions.ITerm1;
+import concreteSyntaxTree.interfaces.nts.ITerm1NTS;
+import concreteSyntaxTree.interfaces.expressions.ITerm2;
 
 /*
 <term1> ::= <term2> [<relopr> <term2>]
