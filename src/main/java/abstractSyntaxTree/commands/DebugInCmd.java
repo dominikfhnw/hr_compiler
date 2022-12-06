@@ -18,11 +18,6 @@ public class DebugInCmd implements ICmd {
     }
 
     @Override
-    public String toString(String indent) {
-        return null;
-    }
-
-    @Override
     public void checkScope() throws NotDeclaredError, LRValueError {
         expression.checkScope();
         if (expression.getLRValue() != LRValue.LVALUE)
@@ -33,4 +28,10 @@ public class DebugInCmd implements ICmd {
     public void checkType() throws TypeCheckError {
         expression.checkType();
     }
+
+    @Override
+    public String toString(String indent) {
+        return null;
+    }
+
 }

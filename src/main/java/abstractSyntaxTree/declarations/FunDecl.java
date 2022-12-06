@@ -3,13 +3,14 @@ package abstractSyntaxTree.declarations;
 import abstractSyntaxTree.commands.CpsCmd;
 import abstractSyntaxTree.interfaces.IDecl;
 import abstractSyntaxTree.parameterLists.Parameter;
+import errors.LRValueError;
 import errors.NotDeclaredError;
 import errors.TypeCheckError;
 import scanner.Ident;
 import scanner.enums.Types;
 import java.util.ArrayList;
 
-// methods must be implemented
+// toString must be implemented
 
 public class FunDecl implements IDecl {
 
@@ -36,22 +37,23 @@ public class FunDecl implements IDecl {
     }
 
     @Override
-    public String toString(String indent) {
-        return null;
-    }
-
-    @Override
-    public void checkScope() throws NotDeclaredError {
-
+    public void checkScope() throws NotDeclaredError, LRValueError {
+        cpsCmd.checkScope();
     }
 
     @Override
     public void checkType() throws TypeCheckError {
-
+        cpsCmd.checkType();
     }
 
     @Override
     public String getIdentString() {
+        return ident.getIdent();
+    }
+
+    @Override
+    public String toString(String indent) {
         return null;
     }
+
 }

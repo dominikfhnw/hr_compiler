@@ -10,18 +10,17 @@ import errors.TypeCheckError;
 public class AbstractSyntaxTreeNode implements IAbstractSyntaxTreeNode {
 
     @Override
-    public String toString(String indent) {
-        return null;
-    }
-
-    @Override
     public void checkScope() throws NotDeclaredError, LRValueError {
 
     }
 
     @Override
     public void checkType() throws TypeCheckError {
+    }
 
+    @Override
+    public String toString(String indent) {
+        return null;
     }
 
 }

@@ -22,11 +22,6 @@ public class IfCmd implements ICmd {
     }
 
     @Override
-    public String toString(String indent) {
-        return null;
-    }
-
-    @Override
     public void checkScope() throws NotDeclaredError, LRValueError {
         expression.checkScope();
         ifCpsCmd.checkScope();
@@ -40,6 +35,11 @@ public class IfCmd implements ICmd {
         elseCpsCmd.checkType();
         if (expression.getType() != Types.BOOL)
             throw new TypeCheckError(Types.BOOL, expression.getType());
+    }
+
+    @Override
+    public String toString(String indent) {
+        return null;
     }
 
 }

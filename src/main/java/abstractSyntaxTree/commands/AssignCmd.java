@@ -8,6 +8,7 @@ import errors.TypeCheckError;
 import scanner.enums.LRValue;
 
 // toString must be implemented
+
 public class AssignCmd implements ICmd {
 
     IExpression expressionLeft;
@@ -16,11 +17,6 @@ public class AssignCmd implements ICmd {
     public AssignCmd(IExpression expressionLeft, IExpression expressionRight) {
         this.expressionLeft = expressionLeft;
         this.expressionRight = expressionRight;
-    }
-
-    @Override
-    public String toString(String indent) {
-        return null;
     }
 
     @Override
@@ -39,6 +35,11 @@ public class AssignCmd implements ICmd {
         if (expressionLeft.getType() != expressionRight.getType()) {
             throw new TypeCheckError(expressionLeft.getType(), expressionRight.getType());
         }
+    }
+
+    @Override
+    public String toString(String indent) {
+        return null;
     }
 
 }

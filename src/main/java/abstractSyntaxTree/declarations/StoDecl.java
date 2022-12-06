@@ -6,7 +6,7 @@ import errors.NotDeclaredError;
 import errors.TypeCheckError;
 import scanner.enums.ChangeModes;
 
-// methods must be implemented
+// toString must be implemented
 
 public class StoDecl implements IDecl {
 
@@ -16,7 +16,7 @@ public class StoDecl implements IDecl {
     public StoDecl(ChangeModes changeMode, TypeIdent typeIdent) {
         this.changeMode = changeMode;
         this.typeIdent = typeIdent;
-        // set constant boolean value on the typeIdent to true
+        // set constant boolean value on typeIdent to TRUE
         if (changeMode == ChangeModes.CONST)
             this.typeIdent.setConst();
     }
@@ -30,22 +30,22 @@ public class StoDecl implements IDecl {
     }
 
     @Override
-    public String toString(String indent) {
-        return null;
+    public String getIdentString() {
+        return typeIdent.getValue();
     }
 
     @Override
     public void checkScope() throws NotDeclaredError {
-
+        //
     }
 
     @Override
     public void checkType() throws TypeCheckError {
-
+        //
     }
 
     @Override
-    public String getIdentString() {
+    public String toString(String indent) {
         return null;
     }
 

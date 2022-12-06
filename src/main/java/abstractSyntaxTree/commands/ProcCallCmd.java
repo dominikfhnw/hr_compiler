@@ -21,18 +21,17 @@ public class ProcCallCmd implements ICmd {
     }
 
     @Override
-    public String toString(String indent) {
-        return null;
-    }
-
-    @Override
     public void checkScope() throws NotDeclaredError, LRValueError {
-
     }
 
     @Override
     public void checkType() throws TypeCheckError {
-
     }
+
+    @Override
+    public String toString(String indent) {
+        return null;
+    }
+
 
 }

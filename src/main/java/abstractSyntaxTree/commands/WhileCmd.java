@@ -20,11 +20,6 @@ public class WhileCmd implements ICmd {
     }
 
     @Override
-    public String toString(String indent) {
-        return null;
-    }
-
-    @Override
     public void checkScope() throws NotDeclaredError, LRValueError {
         expression.checkScope();
         cpsCmd.checkScope();
@@ -36,6 +31,11 @@ public class WhileCmd implements ICmd {
         cpsCmd.checkType();
         if (expression.getType() != Types.BOOL)
             throw new TypeCheckError(Types.BOOL, expression.getType());
+    }
+
+    @Override
+    public String toString(String indent) {
+        return null;
     }
 
 }

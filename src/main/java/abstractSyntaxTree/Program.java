@@ -3,7 +3,7 @@ package abstractSyntaxTree;
 import abstractSyntaxTree.commands.CpsCmd;
 import scanner.Ident;
 
-// methods must be implemented
+// further methods must be implemented
 
 public class Program extends AbstractSyntaxTreeNode {
 

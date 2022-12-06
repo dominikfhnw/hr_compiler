@@ -16,11 +16,6 @@ public class CpsCmd implements ICmd {
     }
 
     @Override
-    public String toString(String indent) {
-        return null;
-    }
-
-    @Override
     public void checkScope() throws NotDeclaredError, LRValueError {
         for (ICmd cmd : commands) {
             cmd.checkScope();
@@ -32,6 +27,11 @@ public class CpsCmd implements ICmd {
         for (ICmd cmd : commands) {
             cmd.checkType();
         }
+    }
+
+    @Override
+    public String toString(String indent) {
+        return null;
     }
 
 }

@@ -1,9 +1,12 @@
 package abstractSyntaxTree.parameterLists;
 
+import abstractSyntaxTree.AbstractSyntaxTreeNode;
 import scanner.Ident;
 import scanner.enums.Types;
 
-public class TypeIdent {
+// toString must be implemented
+
+public class TypeIdent extends AbstractSyntaxTreeNode {
 
     Ident ident;
     Types type;
@@ -18,6 +21,10 @@ public class TypeIdent {
         return ident;
     }
 
+    public String getValue() {
+        return ident.getIdent();
+    }
+
     public Types getType() {
         return type;
     }
@@ -28,6 +35,11 @@ public class TypeIdent {
 
     public boolean getConst() {
         return isConst;
+    }
+
+    @Override
+    public String toString(String indent) {
+        return null;
     }
 
 }

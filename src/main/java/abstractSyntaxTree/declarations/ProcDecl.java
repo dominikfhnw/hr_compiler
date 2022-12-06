@@ -3,12 +3,13 @@ package abstractSyntaxTree.declarations;
 import abstractSyntaxTree.commands.CpsCmd;
 import abstractSyntaxTree.parameterLists.Parameter;
 import abstractSyntaxTree.interfaces.IDecl;
+import errors.LRValueError;
 import errors.NotDeclaredError;
 import errors.TypeCheckError;
 import scanner.Ident;
 import java.util.ArrayList;
 
-// methods must be implemented
+// toString must be implemented
 
 public class ProcDecl implements IDecl {
 
@@ -16,7 +17,6 @@ public class ProcDecl implements IDecl {
     CpsCmd cpsCmd;
     ArrayList<Parameter> parameters;
     ArrayList<StoDecl> stoDecls;
-    boolean initCheckDone = false;
 
     public ProcDecl(Ident ident, ArrayList<Parameter> parameters, ArrayList<StoDecl> stoDecls, CpsCmd cpsCmd) {
         this.ident = ident;
@@ -24,23 +24,29 @@ public class ProcDecl implements IDecl {
         this.stoDecls = stoDecls;
         this.cpsCmd = cpsCmd;
     }
+
+    public ArrayList<Parameter> getParameters() {
+        return parameters;
+    }
+
+    @Override
+    public void checkScope() throws NotDeclaredError, LRValueError {
+        cpsCmd.checkScope();
+    }
+
+    @Override
+    public void checkType() throws TypeCheckError {
+        cpsCmd.checkType();
+    }
+
+    @Override
+    public String getIdentString() {
+        return ident.getIdent();
+    }
+
     @Override
     public String toString(String indent) {
         return null;
     }
 
-    @Override
-    public void checkScope() throws NotDeclaredError {
-
-    }
-
-    @Override
-    public void checkType() throws TypeCheckError {
-
-    }
-
-    @Override
-    public String getIdentString() {
-        return null;
-    }
 }
