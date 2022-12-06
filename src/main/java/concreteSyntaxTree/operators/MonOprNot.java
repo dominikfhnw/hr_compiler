@@ -10,7 +10,7 @@ import scanner.operators.Operator;
 public class MonOprNot extends Production implements IMonOpr {
     final IToken T_notOpr;
 
-    public MonOprNot(IToken T_notOpr) {
+    public MonOprNot(final IToken T_notOpr) {
         this.T_notOpr = T_notOpr;
     }
 

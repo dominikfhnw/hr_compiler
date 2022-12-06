@@ -10,7 +10,7 @@ import scanner.operators.Operator;
 public class MonOprAddOpr extends Production implements IMonOpr {
     final IToken T_addOpr;
 
-    public MonOprAddOpr(IToken T_addOpr) {
+    public MonOprAddOpr(final IToken T_addOpr) {
         this.T_addOpr = T_addOpr;
     }
 

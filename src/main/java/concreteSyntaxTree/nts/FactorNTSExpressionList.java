@@ -13,7 +13,7 @@ public class FactorNTSExpressionList extends Production implements IFactorNTS {
 
     final IExpressionList N_expressionList;
 
-    public FactorNTSExpressionList(IExpressionList N_expressionList) {
+    public FactorNTSExpressionList(final IExpressionList N_expressionList) {
         this.N_expressionList = N_expressionList;
     }
 

@@ -16,7 +16,7 @@ public class ParameterListNTS extends Production implements IParameterListNTS {
     final IParameter N_parameter;
     final IParameterNTS N_parameterNTS;
 
-    public ParameterListNTS(IParameter N_parameter, IParameterNTS N_parameterNTS) {
+    public ParameterListNTS(final IParameter N_parameter, final IParameterNTS N_parameterNTS) {
         this.N_parameter = N_parameter;
         this.N_parameterNTS = N_parameterNTS;
     }

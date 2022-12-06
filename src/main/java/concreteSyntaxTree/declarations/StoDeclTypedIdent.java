@@ -11,7 +11,7 @@ public class StoDeclTypedIdent extends Production implements IStoDecl {
 
     final ITypedIdent N_typedIdent;
 
-    public StoDeclTypedIdent(ITypedIdent N_typedIdent) {
+    public StoDeclTypedIdent(final ITypedIdent N_typedIdent) {
         this.N_typedIdent = N_typedIdent;
     }
 

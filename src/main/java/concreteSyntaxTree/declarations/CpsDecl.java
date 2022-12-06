@@ -14,7 +14,7 @@ public class CpsDecl extends Production implements ICpsDecl {
     final IDecl N_decl;
     final ICpsDeclNTS N_cpsDeclNTS;
 
-    public CpsDecl(IDecl N_decl, ICpsDeclNTS N_cpsDeclNTS) {
+    public CpsDecl(final IDecl N_decl, final ICpsDeclNTS N_cpsDeclNTS) {
         this.N_decl = N_decl;
         this.N_cpsDeclNTS = N_cpsDeclNTS;
     }

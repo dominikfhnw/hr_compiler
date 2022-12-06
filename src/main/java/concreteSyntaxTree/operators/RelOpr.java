@@ -11,7 +11,7 @@ public class RelOpr extends Production implements IRelOpr {
 
     final IToken T_relOpr;
 
-    public RelOpr(IToken T_relOpr) {
+    public RelOpr(final IToken T_relOpr) {
         this.T_relOpr = T_relOpr;
     }
 

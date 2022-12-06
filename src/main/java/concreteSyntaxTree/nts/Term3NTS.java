@@ -16,7 +16,7 @@ public class Term3NTS extends Production implements ITerm3NTS{
     final ITerm4 N_term4;
     final ITerm3NTS N_term3NTS;
 
-    public Term3NTS(IToken T_addOpr, ITerm4 N_term4, ITerm3NTS N_term3NTS) {
+    public Term3NTS(final IToken T_addOpr, final ITerm4 N_term4, final ITerm3NTS N_term3NTS) {
         this.T_multOpr = T_addOpr;
         this.N_term4 = N_term4;
         this.N_term3NTS = N_term3NTS;

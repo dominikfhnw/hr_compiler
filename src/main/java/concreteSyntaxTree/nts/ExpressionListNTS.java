@@ -13,7 +13,7 @@ public class ExpressionListNTS extends Production implements IExpressionListNTS 
     final IExpression N_expression;
     final IExpressionListNTS N_expressionListNTS;
 
-    public ExpressionListNTS(IToken T_comma, IExpression N_expression, IExpressionListNTS N_expressionListNTS) {
+    public ExpressionListNTS(final IToken T_comma, final IExpression N_expression, final IExpressionListNTS N_expressionListNTS) {
         this.T_comma = T_comma;
         this.N_expression = N_expression;
         this.N_expressionListNTS = N_expressionListNTS;

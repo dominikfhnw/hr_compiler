@@ -15,7 +15,7 @@ public class Term3 extends Production implements ITerm3 {
     final ITerm4 N_term4;
     final ITerm3NTS N_term3NTS;
 
-    public Term3(ITerm4 N_term4, ITerm3NTS N_term3NTS) {
+    public Term3(final ITerm4 N_term4, final ITerm3NTS N_term3NTS) {
         this.N_term4 = N_term4;
         this.N_term3NTS = N_term3NTS;
     }

@@ -27,7 +27,7 @@ public class FunDecl extends Production implements IFunDecl {
     final ICpsCmd N_cpsCmd;
     final IToken T_endFun;
 
-    public FunDecl(IToken T_fun, IToken T_ident, IParameterList N_parameterList, IToken T_returns, IStoDecl N_stoDecl, IFunDeclNTS N_funDeclNTS, IToken T_do, ICpsCmd N_cpsCmd, IToken T_endFun) {
+    public FunDecl(final IToken T_fun, final IToken T_ident, final IParameterList N_parameterList, final IToken T_returns, final IStoDecl N_stoDecl, final IFunDeclNTS N_funDeclNTS, final IToken T_do, final ICpsCmd N_cpsCmd, final IToken T_endFun) {
         this.T_fun = T_fun;
         this.T_ident = T_ident;
         this.N_parameterList = N_parameterList;

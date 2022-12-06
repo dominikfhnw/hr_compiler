@@ -14,7 +14,7 @@ public class MultOpr extends Production implements IMultOpr {
 
     final IToken T_multOpr;
 
-    public MultOpr(IToken T_multOpr) {
+    public MultOpr(final IToken T_multOpr) {
         this.T_multOpr = T_multOpr;
     }
 

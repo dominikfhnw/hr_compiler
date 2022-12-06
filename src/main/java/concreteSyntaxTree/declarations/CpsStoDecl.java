@@ -16,7 +16,7 @@ public class CpsStoDecl extends Production implements ICpsStoDecl {
     final IStoDecl N_stoDecl;
     final ICpsStoDeclNTS N_cpsStoDeclNTS;
 
-    public CpsStoDecl(IStoDecl N_stoDecl, ICpsStoDeclNTS N_cpsStoDeclNTS) {
+    public CpsStoDecl(final IStoDecl N_stoDecl, final ICpsStoDeclNTS N_cpsStoDeclNTS) {
         this.N_stoDecl = N_stoDecl;
         this.N_cpsStoDeclNTS = N_cpsStoDeclNTS;
     }

@@ -21,7 +21,7 @@ public class CmdIfThen extends Production implements ICmd {
     final IIfElseNTS N_ifElseNTS;
     final IToken T_endIf;
 
-    public CmdIfThen(IToken T_if, IExpression N_expression, IToken T_then, ICpsCmd N_cpsCmd, IIfElseNTS N_ifElseNTS, IToken T_endIf) {
+    public CmdIfThen(final IToken T_if, IExpression N_expression, final IToken T_then, ICpsCmd N_cpsCmd, final IIfElseNTS N_ifElseNTS, IToken T_endIf) {
         this.T_if = T_if;
         this.N_expression = N_expression;
         this.T_then = T_then;

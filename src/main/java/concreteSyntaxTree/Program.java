@@ -15,7 +15,7 @@ public class Program extends Production implements IProgram {
     final ICpsCmd N_cpsCmd;
     final IToken T_endprogram;
 
-    public Program(IToken T_program, IToken T_ident, IToken T_do, ICpsCmd N_cpsCmd, IToken T_endprogram) {
+    public Program(final IToken T_program, final IToken T_ident, final IToken T_do, final ICpsCmd N_cpsCmd, final IToken T_endprogram) {
 
         this.T_program = T_program;
         this.T_ident = T_ident;

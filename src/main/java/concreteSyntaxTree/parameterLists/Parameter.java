@@ -17,7 +17,7 @@ public class Parameter extends Production implements IParameter {
     final IChangeModeNTS N_changeModeNTS;
     final ITypedIdent N_typedIdent;
 
-    public Parameter(IMechModeNTS N_mechModeNTS, IChangeModeNTS N_changeModeNTS, ITypedIdent N_typedIdent) {
+    public Parameter(final IMechModeNTS N_mechModeNTS, final IChangeModeNTS N_changeModeNTS, final ITypedIdent N_typedIdent) {
         this.N_changeModeNTS = N_changeModeNTS;
         this.N_mechModeNTS = N_mechModeNTS;
         this.N_typedIdent = N_typedIdent;

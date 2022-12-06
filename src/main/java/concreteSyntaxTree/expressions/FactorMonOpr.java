@@ -11,7 +11,7 @@ public class FactorMonOpr extends Production implements IFactor {
     final IMonOpr N_monOpr;
     final IFactor N_mfactor;
 
-    public FactorMonOpr(IMonOpr N_monadicOpr, IFactor N_mfactor) {
+    public FactorMonOpr(final IMonOpr N_monadicOpr, final IFactor N_mfactor) {
         this.N_monOpr = N_monadicOpr;
         this.N_mfactor = N_mfactor;
     }

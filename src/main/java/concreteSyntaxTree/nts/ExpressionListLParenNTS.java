@@ -15,7 +15,7 @@ public class ExpressionListLParenNTS extends Production implements IExpressionLi
     final IExpression N_expression;
     final IExpressionListNTS N_expressionListNTS;
 
-    public ExpressionListLParenNTS(IExpression N_expression, IExpressionListNTS N_expressionListNTS) {
+    public ExpressionListLParenNTS(final IExpression N_expression, final IExpressionListNTS N_expressionListNTS) {
         this.N_expression = N_expression;
         this.N_expressionListNTS = N_expressionListNTS;
     }

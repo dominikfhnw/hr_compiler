@@ -11,7 +11,7 @@ import scanner.modesAndTypes.MechMode;
 public class MechModeNTS extends Production implements IMechModeNTS {
     final IToken T_mechMode;
 
-    public MechModeNTS(IToken T_mechMode) {
+    public MechModeNTS(final IToken T_mechMode) {
         this.T_mechMode = T_mechMode;
     }
 

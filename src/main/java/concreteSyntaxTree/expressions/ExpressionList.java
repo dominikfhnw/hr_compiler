@@ -17,7 +17,7 @@ public class ExpressionList extends Production implements IExpressionList {
     final IExpressionListLParenNTS N_expressionListLParenNTS;
     final IToken T_rParen;
 
-    public ExpressionList(IToken T_lParen, IExpressionListLParenNTS N_exprListLparenNTS, IToken T_rParen) {
+    public ExpressionList(final IToken T_lParen, final IExpressionListLParenNTS N_exprListLparenNTS, final IToken T_rParen) {
         this.T_lParen = T_lParen;
         this.T_rParen = T_rParen;
         this.N_expressionListLParenNTS = N_exprListLparenNTS;

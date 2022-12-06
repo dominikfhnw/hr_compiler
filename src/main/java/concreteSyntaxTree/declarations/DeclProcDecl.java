@@ -10,7 +10,7 @@ public class DeclProcDecl extends Production implements IDecl {
 
     final IProcDecl N_procDecl;
 
-    public DeclProcDecl(IProcDecl N_procDecl) {
+    public DeclProcDecl(final IProcDecl N_procDecl) {
         this.N_procDecl = N_procDecl;
     }
 

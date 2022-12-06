@@ -9,7 +9,7 @@ import concreteSyntaxTree.interfaces.IStoDecl;
 public class DeclStoDecl extends Production implements IDecl {
     final IStoDecl N_stoDecl;
 
-    public DeclStoDecl(IStoDecl N_stoDecl) {
+    public DeclStoDecl(final IStoDecl N_stoDecl) {
         this.N_stoDecl = N_stoDecl;
     }
 

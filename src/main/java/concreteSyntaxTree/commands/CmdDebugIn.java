@@ -12,7 +12,7 @@ public class CmdDebugIn extends Production implements ICmd {
     final IToken T_debugIn;
     final IExpression N_expression;
 
-    public CmdDebugIn(IToken T_debugIn, IExpression N_expression) {
+    public CmdDebugIn(final IToken T_debugIn, final IExpression N_expression) {
         this.T_debugIn = T_debugIn;
         this.N_expression = N_expression;
     }

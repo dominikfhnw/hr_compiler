@@ -9,7 +9,7 @@ public class Type extends Production implements IType {
 
     final IToken T_type;
 
-    public Type(IToken T_type) {
+    public Type(final IToken T_type) {
         this.T_type = T_type;
     }
 

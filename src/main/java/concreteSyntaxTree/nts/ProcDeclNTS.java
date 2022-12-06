@@ -13,7 +13,7 @@ public class ProcDeclNTS extends Production implements IProcDeclNTS {
     final IToken T_local;
     final ICpsStoDecl N_cpsStoDecl;
 
-    public ProcDeclNTS(IToken T_local, ICpsStoDecl N_cpsStoDecl) {
+    public ProcDeclNTS(final IToken T_local, final ICpsStoDecl N_cpsStoDecl) {
         this.T_local = T_local;
         this.N_cpsStoDecl = N_cpsStoDecl;
     }

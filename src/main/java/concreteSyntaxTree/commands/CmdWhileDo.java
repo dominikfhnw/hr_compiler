@@ -15,7 +15,7 @@ public class CmdWhileDo extends Production implements ICmd {
     final ICpsCmd N_cpsCmd;
     final IToken T_endWhile;
 
-    public CmdWhileDo(IToken T_while, IExpression N_expression, IToken T_do, ICpsCmd N_cpsCmd, IToken T_endWhile) {
+    public CmdWhileDo(final IToken T_while, final IExpression N_expression, final IToken T_do, final ICpsCmd N_cpsCmd, final IToken T_endWhile) {
         this.T_while = T_while;
         this.N_expression = N_expression;
         this.T_do = T_do;

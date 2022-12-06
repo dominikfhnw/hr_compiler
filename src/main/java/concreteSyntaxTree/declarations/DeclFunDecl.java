@@ -10,7 +10,7 @@ public class DeclFunDecl extends Production implements IDecl {
 
    final IFunDecl N_funDecl;
 
-   public DeclFunDecl(IFunDecl N_funDecl) {
+   public DeclFunDecl(final IFunDecl N_funDecl) {
        this.N_funDecl = N_funDecl;
    }
 

@@ -14,7 +14,7 @@ public class StoDeclChangeMode extends Production implements IStoDecl {
     final IToken T_changeMode;
     final ITypedIdent N_typedIdent;
 
-    public StoDeclChangeMode(IToken T_changeMode, ITypedIdent N_typedIdent) {
+    public StoDeclChangeMode(final IToken T_changeMode, final ITypedIdent N_typedIdent) {
         this.T_changeMode = T_changeMode;
         this.N_typedIdent = N_typedIdent;
     }

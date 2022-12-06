@@ -14,7 +14,7 @@ public class TypedIdent extends Production implements ITypedIdent {
     final IToken T_colon;
     final IToken T_type;
 
-    public TypedIdent(IToken T_ident, IToken T_colon, IToken T_type) {
+    public TypedIdent(final IToken T_ident, final IToken T_colon, final IToken T_type) {
         this.T_ident = T_ident;
         this.T_colon = T_colon;
         this.T_type = T_type;

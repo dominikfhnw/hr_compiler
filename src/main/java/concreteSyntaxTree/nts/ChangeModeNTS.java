@@ -11,7 +11,7 @@ import scanner.modesAndTypes.ChangeMode;
 public class ChangeModeNTS extends Production implements IChangeModeNTS {
     final IToken T_changeModeNTS;
 
-    public ChangeModeNTS(IToken T_changeModeNTS) {
+    public ChangeModeNTS(final IToken T_changeModeNTS) {
         this.T_changeModeNTS = T_changeModeNTS;
     }
 

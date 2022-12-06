@@ -10,7 +10,7 @@ public class CmdSkip extends Production implements ICmd {
 
     final IToken T_skip;
 
-    public CmdSkip(IToken T_skip) {
+    public CmdSkip(final IToken T_skip) {
         this.T_skip = T_skip;
     }
 

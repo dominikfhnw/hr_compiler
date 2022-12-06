@@ -11,7 +11,7 @@ public class AddOpr extends Production implements IAddOpr {
 
     final IToken T_addOpr;
 
-    public AddOpr(IToken T_addOpr) {
+    public AddOpr(final IToken T_addOpr) {
         this.T_addOpr = T_addOpr;
     }
 

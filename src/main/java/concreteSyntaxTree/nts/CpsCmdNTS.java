@@ -13,7 +13,7 @@ public class CpsCmdNTS extends Production implements ICpsCmdNTS {
     final ICmd N_cmd;
     final ICpsCmdNTS N_cpsCmdNTS;
 
-    public CpsCmdNTS(IToken T_semicolon, ICmd N_cmd, ICpsCmdNTS N_cpsCmdNTS) {
+    public CpsCmdNTS(final IToken T_semicolon, final ICmd N_cmd, final ICpsCmdNTS N_cpsCmdNTS) {
         this.T_semicolon = T_semicolon;
         this.N_cmd = N_cmd;
         this.N_cpsCmdNTS = N_cpsCmdNTS;

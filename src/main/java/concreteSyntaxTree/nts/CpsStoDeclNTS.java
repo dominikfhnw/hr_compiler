@@ -14,7 +14,7 @@ public class CpsStoDeclNTS extends Production implements ICpsStoDeclNTS {
     final IStoDecl N_stoDecl;
     final ICpsStoDeclNTS N_cpsStoDeclNTS;
 
-    public CpsStoDeclNTS(IToken T_semicolon, IStoDecl N_stoDecl, ICpsStoDeclNTS N_cpsStoDeclNTS) {
+    public CpsStoDeclNTS(final IToken T_semicolon, final IStoDecl N_stoDecl, final ICpsStoDeclNTS N_cpsStoDeclNTS) {
         this.T_semicolon = T_semicolon;
         this.N_stoDecl = N_stoDecl;
         this.N_cpsStoDeclNTS = N_cpsStoDeclNTS;

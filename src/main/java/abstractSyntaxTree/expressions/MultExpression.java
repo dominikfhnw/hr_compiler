@@ -22,7 +22,6 @@ public class MultExpression implements IExpression {
         this.multOpr = multOpr;
         this.expressionLeft = expressionLeft;
         this.expressionRight = expressionRight;
-
     }
 
     // needs to be implemented
