@@ -1,19 +1,14 @@
 package abstractSyntaxTree.commands;
 
-import abstractSyntaxTree.declarations.ProcDecl;
 import abstractSyntaxTree.interfaces.ICmd;
 import abstractSyntaxTree.interfaces.IExpression;
-import abstractSyntaxTree.parameterLists.TypeIdent;
-import errors.AlreadyInitializedError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
-import errors.NotInitializedError;
 import errors.TypeCheckError;
 import scanner.Ident;
-
 import java.util.ArrayList;
 
-// needs to be implemented
+// // methods must be implemented
 
 public class ProcCallCmd implements ICmd {
 
@@ -40,13 +35,4 @@ public class ProcCallCmd implements ICmd {
 
     }
 
-    @Override
-    public void checkInit() throws NotInitializedError, AlreadyInitializedError {
-
-    }
-
-    @Override
-    public void setInit(TypeIdent ident) {
-
-    }
 }

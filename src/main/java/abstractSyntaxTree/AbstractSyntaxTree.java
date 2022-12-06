@@ -3,7 +3,7 @@ package abstractSyntaxTree;
 import concreteSyntaxTree.interfaces.IProgram;
 import errors.TypeCheckError;
 
-// needs to be implemented
+// further methods must be implemented
 
 public class AbstractSyntaxTree {
 

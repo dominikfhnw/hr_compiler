@@ -1,31 +1,27 @@
 package abstractSyntaxTree.factors;
 
 import abstractSyntaxTree.interfaces.IFactor;
-import abstractSyntaxTree.parameterLists.TypeIdent;
-import errors.AlreadyInitializedError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
-import errors.NotInitializedError;
 import errors.TypeCheckError;
 import scanner.enums.LRValue;
 import scanner.enums.Types;
 import scanner.operators.Operator;
 
-// needs to be implemented
+// methods must be implemented
 
 public class MonFactor implements IFactor {
 
-    Operator monadicOpr;
+    Operator monOpr;
     IFactor factor;
-    Types castType;
 
     public MonFactor(Operator monadicOpr, IFactor factor) {
-        this.monadicOpr = monadicOpr;
+        this.monOpr = monadicOpr;
         this.factor = factor;
     }
 
     public MonFactor(Operator monadicOpr) {
-        this.monadicOpr = monadicOpr;
+        this.monOpr = monadicOpr;
     }
 
     @Override
@@ -53,13 +49,4 @@ public class MonFactor implements IFactor {
 
     }
 
-    @Override
-    public void checkInit() throws NotInitializedError, AlreadyInitializedError {
-
-    }
-
-    @Override
-    public void setInit(TypeIdent ident) {
-
-    }
 }

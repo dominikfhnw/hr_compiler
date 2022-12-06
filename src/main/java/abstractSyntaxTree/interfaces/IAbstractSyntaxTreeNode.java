@@ -14,8 +14,4 @@ public interface IAbstractSyntaxTreeNode {
 
     void checkType() throws TypeCheckError;
 
-    void checkInit() throws NotInitializedError, AlreadyInitializedError;
-
-    void setInit(TypeIdent ident);
-
 }

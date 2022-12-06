@@ -1,30 +1,26 @@
 package abstractSyntaxTree.expressions;
 
 import abstractSyntaxTree.interfaces.IExpression;
-import abstractSyntaxTree.parameterLists.TypeIdent;
-import errors.AlreadyInitializedError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
-import errors.NotInitializedError;
 import errors.TypeCheckError;
 import scanner.enums.LRValue;
 import scanner.enums.Operators;
 import scanner.enums.Types;
+
+// methods must be implemented
 
 public class CustExpression implements IExpression {
 
     Operators custOpr;
     IExpression expressionLeft;
     IExpression expressionRight;
-    Types castType;
 
     public CustExpression(Operators custOpr, IExpression expressionLeft, IExpression expressionRight) {
         this.custOpr = custOpr;
         this.expressionLeft = expressionLeft;
         this.expressionRight = expressionRight;
     }
-
-    // needs to be implemented
 
     @Override
     public Types getType() {
@@ -51,13 +47,4 @@ public class CustExpression implements IExpression {
 
     }
 
-    @Override
-    public void checkInit() throws NotInitializedError, AlreadyInitializedError {
-
-    }
-
-    @Override
-    public void setInit(TypeIdent ident) {
-
-    }
 }

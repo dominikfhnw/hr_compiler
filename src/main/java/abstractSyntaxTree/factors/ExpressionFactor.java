@@ -2,21 +2,17 @@ package abstractSyntaxTree.factors;
 
 import abstractSyntaxTree.interfaces.IExpression;
 import abstractSyntaxTree.interfaces.IFactor;
-import abstractSyntaxTree.parameterLists.TypeIdent;
-import errors.AlreadyInitializedError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
-import errors.NotInitializedError;
 import errors.TypeCheckError;
 import scanner.enums.LRValue;
 import scanner.enums.Types;
 
-// needs to be implemented
+// methods must be implemented
 
 public class ExpressionFactor implements IFactor {
 
     IExpression expression;
-    Types castType;
 
     public ExpressionFactor(IExpression expression) {
         this.expression = expression;
@@ -47,13 +43,4 @@ public class ExpressionFactor implements IFactor {
 
     }
 
-    @Override
-    public void checkInit() throws NotInitializedError, AlreadyInitializedError {
-
-    }
-
-    @Override
-    public void setInit(TypeIdent ident) {
-
-    }
 }

@@ -1,16 +1,12 @@
 package abstractSyntaxTree.commands;
 
 import abstractSyntaxTree.interfaces.ICmd;
-import abstractSyntaxTree.parameterLists.TypeIdent;
-import errors.AlreadyInitializedError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
-import errors.NotInitializedError;
 import errors.TypeCheckError;
-
 import java.util.ArrayList;
 
-// needs to be implemented
+// toString must be implemented
 
 public class CpsCmd implements ICmd {
     ArrayList<ICmd> commands;
@@ -38,13 +34,4 @@ public class CpsCmd implements ICmd {
         }
     }
 
-    @Override
-    public void checkInit() throws NotInitializedError, AlreadyInitializedError {
-
-    }
-
-    @Override
-    public void setInit(TypeIdent ident) {
-
-    }
 }

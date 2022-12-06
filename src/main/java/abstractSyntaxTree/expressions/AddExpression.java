@@ -1,22 +1,20 @@
 package abstractSyntaxTree.expressions;
 
 import abstractSyntaxTree.interfaces.IExpression;
-import abstractSyntaxTree.parameterLists.TypeIdent;
-import errors.AlreadyInitializedError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
-import errors.NotInitializedError;
 import errors.TypeCheckError;
 import scanner.enums.LRValue;
 import scanner.enums.Operators;
 import scanner.enums.Types;
+
+// methods must be implemented
 
 public class AddExpression implements IExpression {
 
     Operators addOpr;
     IExpression expressionLeft;
     IExpression expressionRight;
-    Types castType;
 
     public AddExpression(Operators addOpr, IExpression expressionLeft, IExpression expressionRight) {
         this.addOpr = addOpr;
@@ -24,8 +22,6 @@ public class AddExpression implements IExpression {
         this.expressionRight = expressionRight;
 
     }
-
-    // needs to be implemented
 
     @Override
     public Types getType() {
@@ -52,13 +48,4 @@ public class AddExpression implements IExpression {
 
     }
 
-    @Override
-    public void checkInit() throws NotInitializedError, AlreadyInitializedError {
-
-    }
-
-    @Override
-    public void setInit(TypeIdent ident) {
-
-    }
 }

@@ -2,15 +2,12 @@ package abstractSyntaxTree.commands;
 
 import abstractSyntaxTree.interfaces.ICmd;
 import abstractSyntaxTree.interfaces.IExpression;
-import abstractSyntaxTree.parameterLists.TypeIdent;
-import errors.AlreadyInitializedError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
-import errors.NotInitializedError;
 import errors.TypeCheckError;
 import scanner.enums.Types;
 
-// needs to be implemented
+// toString must be implemented
 
 public class WhileCmd implements ICmd {
 
@@ -41,13 +38,4 @@ public class WhileCmd implements ICmd {
             throw new TypeCheckError(Types.BOOL, expression.getType());
     }
 
-    @Override
-    public void checkInit() throws NotInitializedError, AlreadyInitializedError {
-
-    }
-
-    @Override
-    public void setInit(TypeIdent ident) {
-
-    }
 }

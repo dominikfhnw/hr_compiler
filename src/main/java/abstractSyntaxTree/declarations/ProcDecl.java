@@ -2,16 +2,13 @@ package abstractSyntaxTree.declarations;
 
 import abstractSyntaxTree.commands.CpsCmd;
 import abstractSyntaxTree.parameterLists.Parameter;
-import abstractSyntaxTree.parameterLists.TypeIdent;
 import abstractSyntaxTree.interfaces.IDecl;
-import errors.AlreadyInitializedError;
 import errors.NotDeclaredError;
-import errors.NotInitializedError;
 import errors.TypeCheckError;
 import scanner.Ident;
 import java.util.ArrayList;
 
-// needs to be implemented
+// methods must be implemented
 
 public class ProcDecl implements IDecl {
 
@@ -39,16 +36,6 @@ public class ProcDecl implements IDecl {
 
     @Override
     public void checkType() throws TypeCheckError {
-
-    }
-
-    @Override
-    public void checkInit() throws NotInitializedError, AlreadyInitializedError {
-
-    }
-
-    @Override
-    public void setInit(TypeIdent ident) {
 
     }
 

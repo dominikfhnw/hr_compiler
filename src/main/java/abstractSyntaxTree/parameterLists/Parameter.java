@@ -4,7 +4,7 @@ import scanner.enums.ChangeModes;
 import scanner.enums.LRValue;
 import scanner.enums.MechModes;
 
-// needs to be implemented
+// further methods must be implemented
 
 public class Parameter {
 
@@ -17,7 +17,6 @@ public class Parameter {
         this.mechMode = mechMode != null ? mechMode : MechModes.COPY;
         this.changeMode = changeMode != null ? changeMode : ChangeModes.CONST;
         this.typeIdent = typeIdent;
-        this.typeIdent.setInit();
         if (changeMode == ChangeModes.CONST){
             this.typeIdent.setConst();
         }

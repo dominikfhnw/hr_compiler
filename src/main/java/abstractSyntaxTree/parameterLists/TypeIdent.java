@@ -3,14 +3,11 @@ package abstractSyntaxTree.parameterLists;
 import scanner.Ident;
 import scanner.enums.Types;
 
-// needs to be implemented
-
 public class TypeIdent {
 
     Ident ident;
     Types type;
     boolean isConst;
-    boolean isInit;
 
     public TypeIdent(Ident ident, Types type) {
         this.ident = ident;
@@ -25,14 +22,6 @@ public class TypeIdent {
         return type;
     }
 
-    public void setInit() {
-        this.isInit = true;
-    }
-
-    public boolean getInit() {
-        return isInit;
-    }
-
     public void setConst() {
         this.isConst = true;
     }
@@ -40,6 +29,5 @@ public class TypeIdent {
     public boolean getConst() {
         return isConst;
     }
-
 
 }

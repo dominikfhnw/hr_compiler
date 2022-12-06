@@ -2,16 +2,12 @@ package abstractSyntaxTree.commands;
 
 import abstractSyntaxTree.interfaces.ICmd;
 import abstractSyntaxTree.interfaces.IExpression;
-import abstractSyntaxTree.parameterLists.TypeIdent;
-import errors.AlreadyInitializedError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
-import errors.NotInitializedError;
 import errors.TypeCheckError;
 import scanner.enums.LRValue;
 
-// needs to be implemented
-
+// toString must be implemented
 public class AssignCmd implements ICmd {
 
     IExpression expressionLeft;
@@ -45,13 +41,4 @@ public class AssignCmd implements ICmd {
         }
     }
 
-    @Override
-    public void checkInit() throws NotInitializedError, AlreadyInitializedError {
-
-    }
-
-    @Override
-    public void setInit(TypeIdent ident) {
-
-    }
 }

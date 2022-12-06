@@ -2,14 +2,11 @@ package abstractSyntaxTree.commands;
 
 import abstractSyntaxTree.interfaces.ICmd;
 import abstractSyntaxTree.interfaces.IExpression;
-import abstractSyntaxTree.parameterLists.TypeIdent;
-import errors.AlreadyInitializedError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
-import errors.NotInitializedError;
 import errors.TypeCheckError;
 
-// needs to be implemented
+// toString must be implemented
 
 public class DebugOutCmd implements ICmd {
 
@@ -34,13 +31,4 @@ public class DebugOutCmd implements ICmd {
         expression.checkType();
     }
 
-    @Override
-    public void checkInit() throws NotInitializedError, AlreadyInitializedError {
-
-    }
-
-    @Override
-    public void setInit(TypeIdent ident) {
-
-    }
 }
