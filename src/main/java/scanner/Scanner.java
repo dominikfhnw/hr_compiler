@@ -61,7 +61,7 @@ public class Scanner {
                         i = i - 1;
                         debug("IDENT " + "\t" + "\t" + lexAccu);
                         if(Terminals.isKeyword(String.valueOf(lexAccu))){
-                            IToken token = Terminals.valueOf(String.valueOf(lexAccu));
+                            IToken token = Terminals.valueOfString(String.valueOf(lexAccu));
                             list.add(token);
                         } else if (Operators.isKeyword(String.valueOf(lexAccu))){
                             IToken token = Operators.valueOf(String.valueOf(lexAccu));
@@ -88,7 +88,7 @@ public class Scanner {
                     if (isSpecial(c) && Operators.isSubsequentSymbol(c, symAccu) ){
                     state = 0;
                     symAccu.append(c);
-                    IToken token = Terminals.valueOf(String.valueOf(symAccu));
+                    IToken token = Terminals.valueOfString(String.valueOf(symAccu));
                     list.add(token);
                     } else {
                         state = 0;

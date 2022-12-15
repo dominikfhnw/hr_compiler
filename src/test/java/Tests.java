@@ -1,5 +1,6 @@
 import errors.LexicalError;
 import org.junit.Test;
+import scanner.ITokenList;
 import scanner.Scanner;
 import scanner.enums.Operators;
 import scanner.enums.Terminals;
@@ -13,12 +14,15 @@ public class Tests {
 
     @Test
     public void testScanner() {
-        String file = "src/main/resources/grossmutter.txt";
+        String file = "src/main/resources/Add17.iml";
         Path filePath = Path.of(file);
         System.out.println(filePath.toAbsolutePath());
         try {
             String content = Files.readString(filePath);
-            Scanner.scan(content);
+            ITokenList i;
+            i = Scanner.scan(content);
+            System.out.println("SCANNER FINISHED");
+            System.out.println(i);
         } catch (IOException | LexicalError e) {
             e.printStackTrace();
         }

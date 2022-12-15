@@ -142,6 +142,15 @@
             return Arrays.stream(Terminals.values()).anyMatch(terminals -> terminals.getLexeme().equals(lexeme));
         }
 
+        public static Terminals valueOfString(String s) {
+            for (Terminals t : values()) {
+                if (t.stringValue.equals(s)) {
+                    return t;
+                }
+            }
+            return null;
+        }
+
         @Override
         public String toString() {
             return name();
