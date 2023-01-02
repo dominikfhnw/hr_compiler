@@ -1,12 +1,16 @@
 package abstractSyntaxTree.expressions;
 
 import abstractSyntaxTree.interfaces.IExpression;
+import abstractSyntaxTree.parameterLists.TypeIdent;
+import errors.AlreadyDeclaredError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
 import errors.TypeCheckError;
 import scanner.enums.LRValue;
 import scanner.enums.Operators;
 import scanner.enums.Types;
+
+import java.util.HashMap;
 
 // toString must be implemented
 
@@ -53,6 +57,11 @@ public class AddExpression implements IExpression {
     @Override
     public String toString(String indent) {
         return null;
+    }
+
+    @Override
+    public void storeNamespace(HashMap<String, TypeIdent> localStoresNamespace) throws AlreadyDeclaredError {
+        // TODO: implement
     }
 
 }

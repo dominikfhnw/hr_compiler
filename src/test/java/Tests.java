@@ -14,7 +14,8 @@ public class Tests {
 
     @Test
     public void testScanner() {
-        String file = "src/main/resources/Add17.iml";
+        //String file = "src/main/resources/Add17.iml";
+        String file = "src/main/resources/grossmutter.txt";
         Path filePath = Path.of(file);
         System.out.println(filePath.toAbsolutePath());
         try {

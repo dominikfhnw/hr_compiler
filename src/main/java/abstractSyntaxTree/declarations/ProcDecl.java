@@ -3,11 +3,14 @@ package abstractSyntaxTree.declarations;
 import abstractSyntaxTree.commands.CpsCmd;
 import abstractSyntaxTree.parameterLists.Parameter;
 import abstractSyntaxTree.interfaces.IDecl;
+import abstractSyntaxTree.parameterLists.TypeIdent;
+import errors.AlreadyDeclaredError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
 import errors.TypeCheckError;
 import scanner.Ident;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // toString must be implemented
 
@@ -47,6 +50,11 @@ public class ProcDecl implements IDecl {
     @Override
     public String toString(String indent) {
         return null;
+    }
+
+    @Override
+    public void storeNamespace(HashMap<String, TypeIdent> localStoresNamespace) throws AlreadyDeclaredError {
+        // TODO: implement
     }
 
 }

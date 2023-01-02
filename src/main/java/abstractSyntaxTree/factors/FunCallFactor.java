@@ -1,6 +1,8 @@
 package abstractSyntaxTree.factors;
 
 import abstractSyntaxTree.interfaces.IExpression;
+import abstractSyntaxTree.parameterLists.TypeIdent;
+import errors.AlreadyDeclaredError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
 import errors.TypeCheckError;
@@ -8,6 +10,7 @@ import scanner.Ident;
 import scanner.enums.LRValue;
 import scanner.enums.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // methods must be implemented
 
@@ -41,6 +44,11 @@ public class FunCallFactor extends IdentFactor {
     @Override
     public String toString(String indent) {
         return null;
+    }
+
+    @Override
+    public void storeNamespace(HashMap<String, TypeIdent> localStoresNamespace) throws AlreadyDeclaredError {
+
     }
 
 }

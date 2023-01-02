@@ -2,9 +2,12 @@ package abstractSyntaxTree.declarations;
 
 import abstractSyntaxTree.parameterLists.TypeIdent;
 import abstractSyntaxTree.interfaces.IDecl;
+import errors.AlreadyDeclaredError;
 import errors.NotDeclaredError;
 import errors.TypeCheckError;
 import scanner.enums.ChangeModes;
+
+import java.util.HashMap;
 
 // toString must be implemented
 
@@ -47,6 +50,11 @@ public class StoDecl implements IDecl {
     @Override
     public String toString(String indent) {
         return null;
+    }
+
+    @Override
+    public void storeNamespace(HashMap<String, TypeIdent> localStoresNamespace) throws AlreadyDeclaredError {
+        // TODO: implement
     }
 
 }
