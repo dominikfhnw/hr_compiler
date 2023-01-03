@@ -5,17 +5,16 @@ import virtualMachine.VirtualMachine;
 
 public interface IInstructions {
 
-    // executable form of instructions
+    // Ausführbare Form von Instruktionen
     interface IExecInstr extends IInstr {
         void execute() throws ExecutionError;
     }
 
-    // non-executable form of instructions
+    // Nicht-ausführbare Form von Instruktionen
     interface IInstr {
         IExecInstr toExecInstr(VirtualMachine vm);
     }
 
-    // stop instruction
     class Stop implements IInstr {
         public String toString() {
             return "Stop";
@@ -26,7 +25,6 @@ public interface IInstructions {
         }
     }
 
-    // monadic instruction
     class NegInt implements IInstr {
         public String toString() {
             return "NegInt";
@@ -148,7 +146,6 @@ public interface IInstructions {
         }
     }
 
-    // jump instruction
     class UncondJump implements IInstr {
         protected int jumpAddr;
 
@@ -165,7 +162,22 @@ public interface IInstructions {
         }
     }
 
-    // input and output instructions
+    class CondJump implements IInstr {
+        protected int jumpAddr;
+
+        public CondJump(int jumpAddr) {
+            this.jumpAddr = jumpAddr;
+        }
+
+        public String toString() {
+            return "CondJump(" + jumpAddr + ")";
+        }
+
+        public IExecInstr toExecInstr(VirtualMachine vm) {
+            return vm.new CondJumpExec(jumpAddr);
+        }
+    }
+
     class InputBool implements IInstr {
         protected String indicator;
 
@@ -198,7 +210,6 @@ public interface IInstructions {
         }
     }
 
-    // load immediate value
     class LoadImInt implements IInstr {
         protected long value;
 
@@ -215,7 +226,6 @@ public interface IInstructions {
         }
     }
 
-    // load address relative to frame pointer
     class LoadAddrRel implements IInstr {
         protected int relAddress;
 
@@ -232,7 +242,6 @@ public interface IInstructions {
         }
     }
 
-    // load instruction with address on stack
     class Deref implements IInstr {
         public String toString() {
             return "Deref";
@@ -243,7 +252,6 @@ public interface IInstructions {
         }
     }
 
-    // store instruction with address on stack
     class Store implements IInstr {
         public String toString() {
             return "Store";
@@ -254,7 +262,6 @@ public interface IInstructions {
         }
     }
 
-    // stack instruction
     class Dup implements IInstr {
         public String toString() {
             return "Dup";
@@ -265,7 +272,6 @@ public interface IInstructions {
         }
     }
 
-    // routine operations
     class AllocBlock implements IInstr {
         protected int size;
 
@@ -279,22 +285,6 @@ public interface IInstructions {
 
         public IExecInstr toExecInstr(VirtualMachine vm) {
             return vm.new AllocBlockExec(size);
-        }
-    }
-
-    class AllocStack implements IInstr {
-        protected int maxSize;
-
-        public AllocStack(int maxSize) {
-            this.maxSize = maxSize;
-        }
-
-        public String toString() {
-            return "AllocStack(" + maxSize + ")";
-        }
-
-        public IExecInstr toExecInstr(VirtualMachine vm) {
-            return vm.new AllocStackExec(maxSize);
         }
     }
 
