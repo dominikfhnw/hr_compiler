@@ -82,7 +82,7 @@ public class Data {
     static IntData intDivTrunc(IBaseData a, IBaseData b) throws IVirtualMachine.ExecutionError {
         try {
             return intNew(intGet(a) / intGet(b));
-        } catch (ArithmeticException e) {
+        } catch (ArithmeticException exception) {
             throw new VirtualMachine.ExecutionError("Integer division by zero.");
         }
     }
@@ -90,7 +90,7 @@ public class Data {
     static IntData intModTrunc(IBaseData a, IBaseData b) throws IVirtualMachine.ExecutionError {
         try {
             return intNew(intGet(a) % intGet(b));
-        } catch (ArithmeticException e) {
+        } catch (ArithmeticException exception) {
             throw new VirtualMachine.ExecutionError("Integer remainder by zero.");
         }
     }
@@ -120,7 +120,6 @@ public class Data {
     }
 
     // bool data
-    // booleans -> integers
     static IntData boolNew(boolean b) {
         return intNew(b ? 1 : 0);
     }
