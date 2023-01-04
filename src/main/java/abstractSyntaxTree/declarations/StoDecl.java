@@ -6,10 +6,8 @@ import errors.AlreadyDeclaredError;
 import errors.NotDeclaredError;
 import errors.TypeCheckError;
 import scanner.enums.ChangeModes;
-
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
 import java.util.HashMap;
-
-// toString must be implemented
 
 public class StoDecl implements IDecl {
 
@@ -45,6 +43,11 @@ public class StoDecl implements IDecl {
     @Override
     public void checkType() throws TypeCheckError {
         //
+    }
+
+    @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly) throws CodeTooSmallError {
+        // TODO: implement
     }
 
     @Override

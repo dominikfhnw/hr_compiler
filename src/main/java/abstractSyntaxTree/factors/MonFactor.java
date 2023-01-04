@@ -10,10 +10,8 @@ import scanner.enums.LRValue;
 import scanner.enums.Operators;
 import scanner.enums.Types;
 import scanner.operators.Operator;
-
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
 import java.util.HashMap;
-
-// toString must be implemented
 
 public class MonFactor implements IFactor {
 
@@ -52,6 +50,11 @@ public class MonFactor implements IFactor {
         } else if ((monOpr.getOperator().equals(Operators.PLUS) || monOpr.getOperator().equals(Operators.MINUS)) && factor.getType() != Types.INT32) {
             throw new TypeCheckError(Types.INT32, factor.getType());
         }
+    }
+
+    @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly) throws CodeTooSmallError {
+        // TODO: implement
     }
 
     @Override

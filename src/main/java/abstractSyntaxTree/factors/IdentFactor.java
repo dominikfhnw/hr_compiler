@@ -5,5 +5,5 @@ import scanner.Ident;
 
 public abstract class IdentFactor implements IFactor {
 
-    Ident ident;
+    protected Ident ident;
 }

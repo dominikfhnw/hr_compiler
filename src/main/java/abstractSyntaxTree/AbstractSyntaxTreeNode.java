@@ -6,33 +6,23 @@ import errors.AlreadyDeclaredError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
 import errors.TypeCheckError;
+import virtualMachine.CodeArray;
+import virtualMachine.interfaces.ICodeArray;
 
 import java.util.HashMap;
 
-public class AbstractSyntaxTreeNode implements IAbstractSyntaxTreeNode {
+public abstract class AbstractSyntaxTreeNode implements IAbstractSyntaxTreeNode {
 
     // Namespaces
     static HashMap<String, TypeIdent> globalVarNamespace = new HashMap<>();
     static HashMap<String, TypeIdent> localVarNamespace = new HashMap<>();
 
-    @Override
-    public void checkScope() throws NotDeclaredError, LRValueError {
-        // do nothing
-    }
+    // Adresses
+    static HashMap<String, Integer> globalVarAdresses = new HashMap<>();
+    static HashMap<String, Integer> globalRoutAdresses = new HashMap<>();
 
-    @Override
-    public void checkType() throws TypeCheckError {
-        // do nothing
-    }
-
-    @Override
-    public String toString(String indent) {
-        return null;
-    }
-
-    @Override
-    public void storeNamespace(HashMap<String, TypeIdent> localStoresNamespace) throws AlreadyDeclaredError {
-        // do nothing
-    }
+    // Code-array
+    protected static int codeArrayPointer = 0;
+    protected static ICodeArray codeArray = new CodeArray(1024);
 
 }

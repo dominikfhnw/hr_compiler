@@ -8,10 +8,8 @@ import errors.TypeCheckError;
 import scanner.Ident;
 import scanner.enums.LRValue;
 import scanner.enums.Types;
-
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
 import java.util.HashMap;
-
-// methods must be implemented
 
 public class InitFactor extends IdentFactor {
 
@@ -38,6 +36,11 @@ public class InitFactor extends IdentFactor {
 
     @Override
     public void checkType() throws TypeCheckError {
+    }
+
+    @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly) throws CodeTooSmallError {
+            // TODO: implement
     }
 
     @Override

@@ -9,10 +9,9 @@ import errors.TypeCheckError;
 import scanner.enums.LRValue;
 import scanner.enums.Operators;
 import scanner.enums.Types;
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
 
 import java.util.HashMap;
-
-// toString must be implemented
 
 public class RelExpression implements IExpression {
 
@@ -51,6 +50,11 @@ public class RelExpression implements IExpression {
         } else if (expressionLeft.getType() != expressionRight.getType()) {
             throw new TypeCheckError(expressionLeft.getType(), expressionRight.getType());
         }
+    }
+
+    @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly) throws CodeTooSmallError {
+        // TODO: Implement
     }
 
     @Override

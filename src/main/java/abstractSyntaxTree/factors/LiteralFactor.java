@@ -9,10 +9,8 @@ import errors.TypeCheckError;
 import scanner.Literal;
 import scanner.enums.LRValue;
 import scanner.enums.Types;
-
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
 import java.util.HashMap;
-
-// toString must be implemented
 
 public class LiteralFactor implements IFactor {
     Literal literal;
@@ -39,6 +37,11 @@ public class LiteralFactor implements IFactor {
     @Override
     public void checkType() throws TypeCheckError {
         //
+    }
+
+    @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly) throws CodeTooSmallError {
+      // TODO: implement
     }
 
     @Override

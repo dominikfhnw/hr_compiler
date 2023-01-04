@@ -10,8 +10,7 @@ import errors.TypeCheckError;
 import scanner.Ident;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-// // methods must be implemented
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
 
 public class ProcCallCmd implements ICmd {
 
@@ -29,6 +28,11 @@ public class ProcCallCmd implements ICmd {
 
     @Override
     public void checkType() throws TypeCheckError {
+    }
+
+    @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly) throws CodeTooSmallError {
+        // TODO: Implement
     }
 
     @Override

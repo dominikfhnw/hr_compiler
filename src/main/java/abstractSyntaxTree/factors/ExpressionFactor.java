@@ -1,5 +1,6 @@
 package abstractSyntaxTree.factors;
 
+import abstractSyntaxTree.AbstractSyntaxTreeNode;
 import abstractSyntaxTree.interfaces.IExpression;
 import abstractSyntaxTree.interfaces.IFactor;
 import abstractSyntaxTree.parameterLists.TypeIdent;
@@ -9,12 +10,10 @@ import errors.NotDeclaredError;
 import errors.TypeCheckError;
 import scanner.enums.LRValue;
 import scanner.enums.Types;
-
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
 import java.util.HashMap;
 
-// toString must be implemented
-
-public class ExpressionFactor implements IFactor {
+public class ExpressionFactor extends AbstractSyntaxTreeNode implements IFactor {
 
     IExpression expression;
 
@@ -43,7 +42,14 @@ public class ExpressionFactor implements IFactor {
     }
 
     @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly) throws CodeTooSmallError {
+        // Add the value on top of the stack
+        expression.addInstructionToCodeArray(localLocations, simulateOnly);
+    }
+
+    @Override
     public String toString(String indent) {
+        // TODO: implement
         return null;
     }
 

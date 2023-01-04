@@ -7,10 +7,8 @@ import errors.AlreadyDeclaredError;
 import errors.LRValueError;
 import errors.NotDeclaredError;
 import errors.TypeCheckError;
-
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
 import java.util.HashMap;
-
-// toString must be implemented
 
 public class DebugOutCmd implements ICmd {
 
@@ -28,6 +26,11 @@ public class DebugOutCmd implements ICmd {
     @Override
     public void checkType() throws TypeCheckError {
         expression.checkType();
+    }
+
+    @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly) throws CodeTooSmallError {
+        // TODO: Implement
     }
 
     @Override

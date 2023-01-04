@@ -8,10 +8,8 @@ import errors.LRValueError;
 import errors.NotDeclaredError;
 import errors.TypeCheckError;
 import scanner.enums.Types;
-
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
 import java.util.HashMap;
-
-// toString must be implemented
 
 public class WhileCmd implements ICmd {
 
@@ -35,6 +33,11 @@ public class WhileCmd implements ICmd {
         cpsCmd.checkType();
         if (expression.getType() != Types.BOOL)
             throw new TypeCheckError(Types.BOOL, expression.getType());
+    }
+
+    @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly) throws CodeTooSmallError {
+        // TODO: Implement
     }
 
     @Override

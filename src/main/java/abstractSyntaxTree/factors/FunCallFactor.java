@@ -1,5 +1,6 @@
 package abstractSyntaxTree.factors;
 
+import abstractSyntaxTree.declarations.FunDecl;
 import abstractSyntaxTree.interfaces.IExpression;
 import abstractSyntaxTree.parameterLists.TypeIdent;
 import errors.AlreadyDeclaredError;
@@ -9,10 +10,9 @@ import errors.TypeCheckError;
 import scanner.Ident;
 import scanner.enums.LRValue;
 import scanner.enums.Types;
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-// methods must be implemented
 
 public class FunCallFactor extends IdentFactor {
 
@@ -25,6 +25,7 @@ public class FunCallFactor extends IdentFactor {
 
     @Override
     public Types getType() {
+        // TODO: implement
         return null;
     }
 
@@ -34,21 +35,37 @@ public class FunCallFactor extends IdentFactor {
     }
 
     @Override
-    public void checkScope() throws NotDeclaredError, LRValueError {
-    }
-
-    @Override
-    public void checkType() throws TypeCheckError {
-    }
-
-    @Override
     public String toString(String indent) {
         return null;
     }
 
     @Override
     public void storeNamespace(HashMap<String, TypeIdent> localStoresNamespace) throws AlreadyDeclaredError {
+        // TODO: implement
+    }
+
+    @Override
+    public void checkScope() throws NotDeclaredError, LRValueError {
+        // Check namespace
+        // TODO: implement
+
+        // Check scope
+        for (IExpression expression : expressions) {
+            expression.checkScope();
+        }
 
     }
 
+    @Override
+    public void checkType() throws TypeCheckError {
+        for (IExpression expression : expressions) {
+            expression.checkType();
+        }
+    }
+
+    @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly)
+        throws CodeTooSmallError {
+            // TODO: implement
+    }
 }

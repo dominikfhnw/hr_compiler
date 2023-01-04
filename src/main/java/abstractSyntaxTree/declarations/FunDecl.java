@@ -10,10 +10,9 @@ import errors.NotDeclaredError;
 import errors.TypeCheckError;
 import scanner.Ident;
 import scanner.enums.Types;
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-// toString must be implemented
 
 public class FunDecl implements IDecl {
 
@@ -47,6 +46,11 @@ public class FunDecl implements IDecl {
     @Override
     public void checkType() throws TypeCheckError {
         cpsCmd.checkType();
+    }
+
+    @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly) throws CodeTooSmallError {
+        // TODO: implement
     }
 
     @Override

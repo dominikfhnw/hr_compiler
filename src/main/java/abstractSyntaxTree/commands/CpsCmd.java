@@ -8,8 +8,7 @@ import errors.NotDeclaredError;
 import errors.TypeCheckError;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-// toString must be implemented
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
 
 public class CpsCmd implements ICmd {
     ArrayList<ICmd> commands;
@@ -30,6 +29,11 @@ public class CpsCmd implements ICmd {
         for (ICmd cmd : commands) {
             cmd.checkType();
         }
+    }
+
+    @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly) throws CodeTooSmallError {
+        // TODO: Implement
     }
 
     @Override

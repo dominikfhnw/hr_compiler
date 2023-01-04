@@ -1,11 +1,17 @@
 package abstractSyntaxTree.parameterLists;
 
 import abstractSyntaxTree.AbstractSyntaxTreeNode;
+import errors.AlreadyDeclaredError;
+import errors.LRValueError;
+import errors.NotDeclaredError;
+import errors.TypeCheckError;
 import scanner.enums.ChangeModes;
 import scanner.enums.LRValue;
 import scanner.enums.MechModes;
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
+import virtualMachine.interfaces.IInstructions;
 
-// toString must be implemented
+import java.util.HashMap;
 
 public class Parameter extends AbstractSyntaxTreeNode {
 
@@ -42,7 +48,31 @@ public class Parameter extends AbstractSyntaxTreeNode {
 
     @Override
     public String toString(String indent) {
-       return null;
+        // TODO: implement
+        return null;
     }
 
+    @Override
+    public void storeNamespace(HashMap<String, TypeIdent> localStoresNamespace) throws AlreadyDeclaredError {
+        // TODO: implement
+    }
+
+    @Override
+    public void checkScope() throws NotDeclaredError, LRValueError {
+        // do nothing
+    }
+
+    @Override
+    public void checkType() throws TypeCheckError {
+        // do nothing
+    }
+
+    @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly)
+        throws CodeTooSmallError {
+        if (!simulateOnly) {
+            codeArray.put(codeArrayPointer, new IInstructions.AllocBlock(1));
+        }
+        codeArrayPointer++;
+    }
 }

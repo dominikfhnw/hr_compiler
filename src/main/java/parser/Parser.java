@@ -103,7 +103,7 @@ import scanner.ITokenList;
 import scanner.enums.Terminals;
 import scanner.interfaces.IToken;
 
-public class Parser implements IParser {
+public class Parser {
 
     private final ITokenList tokenList;
     private Base currentToken;

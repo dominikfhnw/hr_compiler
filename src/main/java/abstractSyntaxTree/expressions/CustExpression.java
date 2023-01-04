@@ -9,10 +9,9 @@ import errors.TypeCheckError;
 import scanner.enums.LRValue;
 import scanner.enums.Operators;
 import scanner.enums.Types;
+import virtualMachine.interfaces.ICodeArray.CodeTooSmallError;
 
 import java.util.HashMap;
-
-// methods must be implemented
 
 public class CustExpression implements IExpression {
 
@@ -54,6 +53,11 @@ public class CustExpression implements IExpression {
     @Override
     public void checkType() throws TypeCheckError {
 
+    }
+
+    @Override
+    public void addInstructionToCodeArray(HashMap<String, Integer> localLocations, boolean simulateOnly) throws CodeTooSmallError {
+        // TODO: Implement
     }
 
 }
